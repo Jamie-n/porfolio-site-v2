@@ -1,22 +1,32 @@
-import AnimatedText from "./components/AnimatedText";
-import DownArrows from "./components/DownArrows";
-import NavItem from "./components/nav/NavItem";
-import SectionHeader from "./components/SectionHeader";
+import { Content } from "next/font/google";
+import ContentContainer from "./components/ContentContainer";
+import Letter from "./components/Letter";
+import Sidebar from "./components/nav/Sidebar";
+import Section from "./components/Section";
+import LettersFromWord from "./components/LettersFromWord";
+import ProgressBar from "./components/ProgressBar";
 
 export default function Home() {
   return (
-    <div className="no-scrollbar h-screen">
-      <main className="h-full">
-        <nav className="flex flex-grow justify-center gap-5 pt-10 h-1/6">
-          <NavItem href={"#"} linkText="About" />
-          <NavItem href={"#"} linkText="Skills" />
-          <NavItem href={"#"} linkText="Experience" />
-          <NavItem href={"#"} linkText="Projects" />
-        </nav >
-        <div className="flex flex-row justify-between items-center px-24 py-48 h-4/6">
+    <main className="no-scrollbar">
+      <Sidebar />
+      <Section data="01" className="flex">
+        <ContentContainer className="flex items-center flex-grow flex-row justify-between">
+          <div className="relative hover:rotate-45 transition-all duration-1000 ease-in-out">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-red-500 w-96 h-96 rounded-full border-dashed dash" />
+            <div className="bg-red-500 w-80 h-80 rounded-full" />
+          </div>
+
           <div>
-            <h1 className="text-7xl mb-5">Jamie Neighbours</h1>
-            <h2 className="text-2xl mb-5">Software Engineer &<span className="text-red-500"> Creative Problem Solver.</span></h2>
+            <div className="flex">
+              <LettersFromWord word="JAMIE" />
+            </div>
+
+            <div className="flex">
+              <LettersFromWord word="NEIGHBOURS" />
+            </div>
+
+            <h2 className="text-sm mb-5">Software Engineer &<span className="text-red-500"> Creative Problem Solver.</span></h2>
             <div className="flex gap-3 text-7xl">
               <a href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="hover:text-red-500 transition-colors" viewBox="0 0 16 16">
@@ -31,42 +41,102 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2   border-2 border-red-500 w-72 h-72 rounded-full" />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2   border-2 border-red-500 w-80 h-80 rounded-full border-dashed dash" />
-            <div className="bg-red-500 w-64 h-64 rounded-full" />
-          </div>
-        </div>
+        </ContentContainer>
+      </Section>
 
-        <div className="h-1/6 bg-black relative px-24">
-          <a href="#about-me">
-            <DownArrows />
-          </a>
-        </div>
+      <Section data="02">
+        <ContentContainer>
 
-        <div className="bg-black min-h-screen px-24">
-          <div className="min-h-screen">
-            <SectionHeader titleText="About Me" />
-            <AnimatedText delay={100}>
-              <p className="mb-10">
-                A friendly and dedicated software engineer who demonstrates strong commitment to their employer, establishing strong relationships with their peers and embraces the value of teamwork. He possesses a remarkable ability to lear quickly and work efficiently to complete tasks, whilst never hesitating to ask for assistance when needed. Meticulous in his attention to detail, taking great pride in his work and approaching problem solving with a a well organized, rational mindset.
-              </p>
-              <p>
-                Want to see some examples of my work? Check out my <a href="https://github.com/Jamie-n" className="underline" target="_blank" rel="no-referrer">GitHub</a>.
-              </p>
-            </AnimatedText>
+          <LettersFromWord word="#ABOUT" />
+          <div className="my-5">
+            <p className="mb-10">
+              A friendly and dedicated software engineer who demonstrates strong commitment to their employer, establishing strong relationships with their peers and embraces the value of teamwork. He possesses a remarkable ability to lear quickly and work efficiently to complete tasks, whilst never hesitating to ask for assistance when needed. Meticulous in his attention to detail, taking great pride in his work and approaching problem solving with a a well organized, rational mindset.
+            </p>
+
+            <p>
+              Want to see some examples of my work? Check out my <a href="https://github.com/Jamie-n" className="underline hover:text-red-500 transition-colors" target="_blank" rel="no-referrer">GitHub</a>.
+            </p>
           </div>
-          <div className="min-h-screen">
-            <SectionHeader titleText="Skills" />
+
+          <p className="text-5xl font-bold my-5">Education</p>
+          <div className="my-5">
+            <p>2023 - 2024</p>
+            <p className="text-3xl font-bold">The University of Huddersfield</p>
+            <p className="text-xl font-bold">Software Engineering MSc</p>
           </div>
-          <div className="min-h-screen">
-            <SectionHeader titleText="Experience" />
+
+          <div className="my-5">
+            <p>2019 - 2023</p>
+            <p className="text-3xl font-bold">The University of Huddersfield</p>
+            <p className="text-xl font-bold">  Software Engineering BSc (Hons)</p>
           </div>
-          <div className="min-h-screen">
-            <SectionHeader titleText="Projects" />
+        </ContentContainer>
+      </Section>
+
+      <Section data="03">
+        <ContentContainer>
+          <LettersFromWord word="#SKILLS" />
+
+          <p className="text-5xl font-bold my-5">Languages and Frameworks</p>
+
+          <div className="flex flex-col gap-3">
+            <ProgressBar barText="PHP (Laravel)" percentage={80} />
+            <ProgressBar barText=".NET" percentage={75} />
+            <ProgressBar barText="React" percentage={75} />
+            <ProgressBar barText="HTML" percentage={75} />
+            <ProgressBar barText="CSS" percentage={75} />
+            <ProgressBar barText="Bootstrap" percentage={75} />
+            <ProgressBar barText="Javascript" percentage={60} />
+            <ProgressBar barText="Tailwind" percentage={50} />
+            <ProgressBar barText="JQuery" percentage={45} />
           </div>
-        </div>
-      </main >
-    </div >
+
+          <p className="text-5xl font-bold my-5">Testing Frameworks</p>
+          <div className="flex flex-col gap-3">
+            <ProgressBar barText="XUnit" percentage={65} />
+            <ProgressBar barText="Jest" percentage={65} />
+            <ProgressBar barText="PHP Unit" percentage={50} />
+          </div>
+
+          <p className="text-5xl font-bold my-5">Technologies</p>
+
+          <div className="flex flex-col gap-3">
+            <ProgressBar barText="Figma" percentage={85} />
+            <ProgressBar barText="Adobe Illustrator" percentage={85} />
+            <ProgressBar barText="Git" percentage={75} />
+            <ProgressBar barText="Docker" percentage={40} />
+          </div>
+        </ContentContainer>
+      </Section>
+
+      <Section data="04">
+        <ContentContainer>
+
+          <LettersFromWord word="#EXPERIENCE" />
+
+          <div className="my-5">
+            <p>2024 - Present</p>
+            <p className="text-3xl font-bold">The Curve</p>
+            <p className="text-xl font-bold">Software Engineer</p>
+          </div>
+
+          <div className="my-5">
+            <p>2020 - 2024</p>
+            <p className="text-3xl font-bold">The Health Informatics Service</p>
+            <p className="text-xl font-bold">Backend Web Developer</p>
+          </div>
+
+        </ContentContainer>
+      </Section>
+
+      <Section data="05">
+        <ContentContainer>
+
+          <LettersFromWord word="#PROJECTS" />
+
+        </ContentContainer>
+      </Section>
+    </main >
+
   );
 }

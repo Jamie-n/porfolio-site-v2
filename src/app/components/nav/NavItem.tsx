@@ -7,8 +7,10 @@ interface CustomNavLinkProps extends LinkProps {
 
 export default function NavItem({ linkText, ...rest }: CustomNavLinkProps) {
   return (
-    <Link {...rest}>
-      <span className="font-semibold hover:text-red-500 transition-colors ease-in-out">{linkText}</span>
-    </Link >
+    <div className="border-b">
+      <Link {...rest}>
+        <span className="font-bold hover:text-red-500 transition-colors ease-in-out text-2xl">{linkText}</span>
+      </Link >
+    </div>
   )
 }
