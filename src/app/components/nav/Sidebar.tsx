@@ -1,4 +1,3 @@
-import { PropsWithChildren } from "react";
 import NavItem from "./NavItem";
 
 export default function Sidebar() {
@@ -9,11 +8,11 @@ export default function Sidebar() {
         <p className="font-bold text-7xl tracking-tighter mb-5">Jamie.</p>
 
         <div className="flex flex-col gap-5 h-100">
-          <NavItem linkText="01. Home" href="#" />
-          <NavItem linkText="02. About" href="#" />
-          <NavItem linkText="03. Skills" href="#" />
-          <NavItem linkText="04. Experience" href="#" />
-          <NavItem linkText="05. Projects" href="#" />
+          <NavItem linkText="01. Home" href="/" />
+          <NavItem linkText="02. About" href="/about" />
+          <NavItem linkText="03. Skills" href="/skills" />
+          <NavItem linkText="04. Experience" href="/experience" />
+          <NavItem linkText="05. Projects" href="/projects" />
         </div>
       </div>
 

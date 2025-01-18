@@ -1,16 +1,17 @@
-import { Content } from "next/font/google";
-import ContentContainer from "./components/ContentContainer";
-import Letter from "./components/Letter";
-import Sidebar from "./components/nav/Sidebar";
-import Section from "./components/Section";
-import LettersFromWord from "./components/LettersFromWord";
-import ProgressBar from "./components/ProgressBar";
+"use client"
+
+import ContentContainer from "../components/ContentContainer";
+import Sidebar from "../components/nav/Sidebar";
+import Section from "../components/Section";
+import ProgressBar from "../components/ProgressBar";
+import ExperienceAccordion from "../components/accordion/experienceAccordion";
+import Header from "../components/Header";
 
 export default function Home() {
   return (
     <main className="no-scrollbar">
       <Sidebar />
-      <Section data="01" className="flex">
+      <Section data="01" className="flex" onIsVisible={() => window.history.replaceState(null, '', "/")}>
         <ContentContainer className="flex items-center flex-grow flex-row justify-between">
           <div className="relative hover:rotate-45 transition-all duration-1000 ease-in-out">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-red-500 w-96 h-96 rounded-full border-dashed dash" />
@@ -19,11 +20,15 @@ export default function Home() {
 
           <div>
             <div className="flex">
-              <LettersFromWord word="JAMIE" />
+              <Header variant="title">
+                JAMIE
+              </Header>
             </div>
 
             <div className="flex">
-              <LettersFromWord word="NEIGHBOURS" />
+              <Header variant="title">
+                NEIGHBOURS
+              </Header>
             </div>
 
             <h2 className="text-sm mb-5">Software Engineer &<span className="text-red-500"> Creative Problem Solver.</span></h2>
@@ -44,10 +49,13 @@ export default function Home() {
         </ContentContainer>
       </Section>
 
-      <Section data="02">
+      <Section data="02" onIsVisible={() => window.history.replaceState(null, '', "/about")}>
         <ContentContainer>
 
-          <LettersFromWord word="#ABOUT" />
+          <Header variant="title">
+            #ABOUT
+          </Header>
+
           <div className="my-5">
             <p className="mb-10">
               A friendly and dedicated software engineer who demonstrates strong commitment to their employer, establishing strong relationships with their peers and embraces the value of teamwork. He possesses a remarkable ability to lear quickly and work efficiently to complete tasks, whilst never hesitating to ask for assistance when needed. Meticulous in his attention to detail, taking great pride in his work and approaching problem solving with a a well organized, rational mindset.
@@ -59,25 +67,35 @@ export default function Home() {
           </div>
 
           <p className="text-5xl font-bold my-5">Education</p>
-          <div className="my-5">
-            <p>2023 - 2024</p>
-            <p className="text-3xl font-bold">The University of Huddersfield</p>
-            <p className="text-xl font-bold">Software Engineering MSc</p>
-          </div>
 
-          <div className="my-5">
-            <p>2019 - 2023</p>
-            <p className="text-3xl font-bold">The University of Huddersfield</p>
-            <p className="text-xl font-bold">  Software Engineering BSc (Hons)</p>
-          </div>
+          <ExperienceAccordion
+            experienceTitle="Software Engineering MSc"
+            experienceStartDate="2023"
+            experienceEndDate="2024"
+            experienceCompany="The University of Huddersfield"
+            experienceColour="bg-blue-500"
+          />
+
+          <ExperienceAccordion
+            experienceTitle=" Software Engineering BSc (Hons)"
+            experienceStartDate="2019"
+            experienceEndDate="2024"
+            experienceCompany="The University of Huddersfield"
+            experienceColour="bg-blue-500"
+          />
+
         </ContentContainer>
       </Section>
 
-      <Section data="03">
+      <Section data="03" onIsVisible={() => window.history.replaceState(null, '', "/skills")}>
         <ContentContainer>
-          <LettersFromWord word="#SKILLS" />
+          <Header variant="title">
+            #SKILLS
+          </Header>
 
-          <p className="text-5xl font-bold my-5">Languages and Frameworks</p>
+          <Header variant="subheading">
+            Languages and Frameworks
+          </Header>
 
           <div className="flex flex-col gap-3">
             <ProgressBar barText="PHP (Laravel)" percentage={80} />
@@ -91,14 +109,19 @@ export default function Home() {
             <ProgressBar barText="JQuery" percentage={45} />
           </div>
 
-          <p className="text-5xl font-bold my-5">Testing Frameworks</p>
+          <Header variant="subheading">
+            Testing Frameworks
+          </Header>
+
           <div className="flex flex-col gap-3">
             <ProgressBar barText="XUnit" percentage={65} />
             <ProgressBar barText="Jest" percentage={65} />
             <ProgressBar barText="PHP Unit" percentage={50} />
           </div>
 
-          <p className="text-5xl font-bold my-5">Technologies</p>
+          <Header variant="subheading">
+            Technologies
+          </Header>
 
           <div className="flex flex-col gap-3">
             <ProgressBar barText="Figma" percentage={85} />
@@ -109,30 +132,66 @@ export default function Home() {
         </ContentContainer>
       </Section>
 
-      <Section data="04">
+      <Section data="04" onIsVisible={() => window.history.replaceState(null, '', "/experience")}>
         <ContentContainer>
 
-          <LettersFromWord word="#EXPERIENCE" />
+          <Header variant="title">
+            #EXPERIENCE
+          </Header>
 
-          <div className="my-5">
-            <p>2024 - Present</p>
-            <p className="text-3xl font-bold">The Curve</p>
-            <p className="text-xl font-bold">Software Engineer</p>
-          </div>
+          <ExperienceAccordion
+            experienceTitle="Software Engineer"
+            experienceStartDate="2024"
+            experienceCompany="The Curve"
+            experienceColour="bg-red-500"
+          />
 
-          <div className="my-5">
-            <p>2020 - 2024</p>
-            <p className="text-3xl font-bold">The Health Informatics Service</p>
-            <p className="text-xl font-bold">Backend Web Developer</p>
-          </div>
+          <ExperienceAccordion
+            experienceTitle="Backend Web Developer"
+            experienceStartDate="2020"
+            experienceEndDate="2024"
+            experienceCompany="The Health Informatics Service"
+            experienceColour="bg-blue-500"
+          />
+
+          <ExperienceAccordion
+            experienceTitle="Freelance Application Developer"
+            experienceStartDate="2023"
+            experienceEndDate="2023"
+            experienceCompany="Apple Designs Ltd"
+            experienceColour="bg-green-500"
+          />
+
+          <ExperienceAccordion
+            experienceTitle="Shift Leader"
+            experienceStartDate="2017"
+            experienceEndDate="2019"
+            experienceCompany="JD Wetherspoon"
+            experienceColour="bg-black"
+          />
+
+          <Header variant="subheading">
+            #OTHER EXPERIENCES
+          </Header>
+
+          <ExperienceAccordion
+            experienceTitle="Media & Merchandise Secretary"
+            experienceStartDate="2023"
+            experienceEndDate="2024"
+            experienceCompany="Huddersfield University Snowsports Society"
+            experienceColour="bg-blue-300"
+          />
+
 
         </ContentContainer>
       </Section>
 
-      <Section data="05">
+      <Section data="05" onIsVisible={() => window.history.replaceState(null, '', "/projects")}>
         <ContentContainer>
 
-          <LettersFromWord word="#PROJECTS" />
+          <Header variant="title">
+            #PROJECTS
+          </Header>
 
         </ContentContainer>
       </Section>
