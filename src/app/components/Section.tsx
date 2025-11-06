@@ -1,24 +1,45 @@
 "use client"
 
-import { ComponentPropsWithoutRef, PropsWithChildren, useEffect, useRef } from "react";
-import useIsVisible from "../hooks/useIsVisible";
+import { ComponentPropsWithoutRef, PropsWithChildren, useEffect, useRef, useState } from "react";
+import useScrollSpy from "../hooks/useScrollSpy";
+import ContentContainer from "./ContentContainer";
+import Header from "./Header";
 
-export default function Section({ children, data = "01", onIsVisible, ...rest }: { data?: string, onIsVisible?: () => void } & PropsWithChildren & ComponentPropsWithoutRef<"div">) {
+interface SectionProps extends PropsWithChildren, ComponentPropsWithoutRef<"div"> {
+  href: string;
+  data?: string;
+  title?: string;
+}
 
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isVisible = useIsVisible(sectionRef);
+export default function Section({ children, data = "01", href, title, ...rest }: SectionProps) {
+  const ref = useRef<HTMLDivElement | null>(null);
 
+  // Set data-text after hydration
   useEffect(() => {
-    if (isVisible) {
-      if (onIsVisible) {
-        onIsVisible();
-      }
+    if (ref.current && data) {
+      ref.current.dataset.text = data;
     }
-  }, [isVisible, onIsVisible])
+  }, [data]);
+
+  useScrollSpy(ref, href);
 
   return (
-    <div ref={sectionRef} {...rest} className={"relative ml-80 bg-text min-h-screen my-10 " + rest.className} data-text={data}>
-      {children}
-    </div>
-  )
+    <div
+      id={href}
+      ref={ref}
+      {...rest}
+      className={`relative min-h-screen ml-80 bg-text mb-10 ${rest.className ?? ""}`.trim()}
+    >
+      <ContentContainer>
+        {
+          title && (
+            <Header variant="title">
+              #{title.toUpperCase()}
+            </Header>
+          )
+        }
+        {children}
+      </ContentContainer>
+    </div >
+  );
 }

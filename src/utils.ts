@@ -6,3 +6,26 @@ export function slugify(str: string) {
     .replace(/-+/g, '-'); // remove consecutive hyphens
   return str;
 }
+
+export function scrollToElement(el: HTMLElement, threshold = 0.5): Promise<void> {
+  return new Promise((resolve) => {
+    const checkVisibility = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const isVisible = rect.top + rect.height * threshold <= vh && rect.bottom - rect.height * threshold >= 0;
+
+      if (isVisible) {
+        resolve();
+      } else {
+        requestAnimationFrame(checkVisibility);
+      }
+    };
+
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    requestAnimationFrame(checkVisibility);
+  });
+}
+
+export function formatIndex(index: number): string {
+  return (index + 1).toString().padStart(2, "0");
+}

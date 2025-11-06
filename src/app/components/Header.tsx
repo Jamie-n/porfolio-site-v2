@@ -14,7 +14,7 @@ export default function Header({ variant, children, ...rest }: HeaderProps) {
       baseStyle.className = baseStyle.className + " font-bold text-7xl"
       break;
     case "subheading":
-      baseStyle.className = baseStyle.className + " font-bold text-5xl my-5"
+      baseStyle.className = baseStyle.className + " font-bold text-5xl my-10"
       break;
   }
 

@@ -4,16 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply text-gray-900 bg-white dark:text-white dark:bg-black;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body:is(.dark *) {
+  --background: #171717;
+  --foreground: #ffffff;
+}
+
+.dark .bg-text::after {
+  color: #696969 !important;
 }
 
 html {
@@ -26,20 +34,20 @@ body {
   font-family: "Roboto";
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
 }
 
-
-.bg-text:after {
+.bg-text::after {
   content: attr(data-text);
   position: absolute;
   right: 100px;
-  bottom: 150px;
+  bottom: 215px;
   font-weight: 400;
   font-size: 37.5rem;
   letter-spacing: -0.1em;
   color: #f1f1f1;
+  /* light mode */
   z-index: -1;
   height: 37.5rem;
 }
