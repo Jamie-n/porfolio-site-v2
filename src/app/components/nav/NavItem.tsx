@@ -7,8 +7,7 @@ interface NavItemProps extends ComponentProps<"a"> {
 }
 
 export default function NavItem({ linkText, href, ...rest }: NavItemProps) {
-
-  const pathname = usePathname()
+  const pathname = usePathname();
   const isActive = pathname == href;
 
   const handleClick = async (e: React.MouseEvent) => {
@@ -31,8 +30,15 @@ export default function NavItem({ linkText, href, ...rest }: NavItemProps) {
   return (
     <div className="border-b">
       <a {...rest} href={href} onClick={handleClick}>
-        <span className={"font-bold hover:text-red-500 transition-colors ease-in-out text-2xl " + (isActive ? " text-red-500" : "")}>{linkText}</span>
-      </a >
+        <span
+          className={
+            "font-bold hover:text-red-500 transition-colors ease-in-out text-2xl " +
+            (isActive ? " text-red-500" : "")
+          }
+        >
+          {linkText}
+        </span>
+      </a>
     </div>
-  )
+  );
 }

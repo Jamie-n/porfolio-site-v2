@@ -3,7 +3,10 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export default function useScrollSpy(ref: React.RefObject<HTMLElement | null>, href: string) {
+export default function useScrollSpy(
+  ref: React.RefObject<HTMLElement | null>,
+  href: string,
+) {
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +23,7 @@ export default function useScrollSpy(ref: React.RefObject<HTMLElement | null>, h
       {
         rootMargin: "-10% 0px -90% 0px",
         threshold: 0,
-      }
+      },
     );
 
     observer.observe(ref.current);
@@ -28,5 +31,5 @@ export default function useScrollSpy(ref: React.RefObject<HTMLElement | null>, h
     return () => {
       observer.disconnect();
     };
-  }, [href, router]);
+  }, [href, ref, router]);
 }
