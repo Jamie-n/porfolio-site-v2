@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import me from "@/assets/me.png";
+import Me from "@/assets/me.png";
 import Image from "next/image";
 
 export default function Hero() {
@@ -10,8 +10,10 @@ export default function Hero() {
         <div className="relative bg-red-500 w-80 h-80 rounded-full overflow-hidden">
           <Image
             className="w-72 h-72 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-1000 ease-in-out"
-            src={me.src}
+            src={Me.src}
             alt="Profile"
+            width={288}
+            height={288}
           />
         </div>
       </div>
