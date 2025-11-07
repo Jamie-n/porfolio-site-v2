@@ -1,6 +1,5 @@
 import { Skill, SkillLevel, SkillLevels } from "../sections/Skills";
 
-
 const levelColors: Record<SkillLevel, string> = {
   Beginner: "bg-red-800",
   Intermediate: "bg-red-700",
@@ -8,13 +7,13 @@ const levelColors: Record<SkillLevel, string> = {
   Expert: "bg-red-400",
 };
 
-
 interface SegmentedProgressBarProps {
   skill: Skill;
 }
 
-export default function SegmentedProgressBar({ skill }: SegmentedProgressBarProps) {
-  const totalSegments = SkillLevels.length;
+export default function SegmentedProgressBar({
+  skill,
+}: SegmentedProgressBarProps) {
   const filledIndex = SkillLevels.indexOf(skill.level);
 
   return (
@@ -29,15 +28,16 @@ export default function SegmentedProgressBar({ skill }: SegmentedProgressBarProp
       </div>
       <div className="flex gap-1">
         {SkillLevels.map((lvl, idx) => (
-          <div key={idx} className="flex-1 h-4 rounded relative bg-gray-300 dark:bg-gray-600">
-            {
-              idx < filledIndex && (
-                <div
-                  className={`h-4 rounded ${levelColors[lvl]}`}
-                  style={{ width: "100%" }}
-                />
-              )
-            }
+          <div
+            key={idx}
+            className="flex-1 h-4 rounded relative bg-gray-300 dark:bg-gray-600"
+          >
+            {idx < filledIndex && (
+              <div
+                className={`h-4 rounded ${levelColors[lvl]}`}
+                style={{ width: "100%" }}
+              />
+            )}
             {idx === filledIndex && (
               <div
                 className={`h-4 rounded ${levelColors[lvl]}`}

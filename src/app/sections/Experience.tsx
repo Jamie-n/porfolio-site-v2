@@ -3,7 +3,6 @@ import Header from "../components/Header";
 
 export default function Experience() {
   return (
-
     <>
       <ExperienceAccordion
         experienceTitle="Software Engineer"
@@ -36,9 +35,7 @@ export default function Experience() {
         experienceColour="bg-black"
       />
 
-      <Header variant="subheading">
-        #OTHER EXPERIENCES
-      </Header>
+      <Header variant="subheading">#OTHER EXPERIENCES</Header>
 
       <ExperienceAccordion
         experienceTitle="Media & Merchandise Secretary"
@@ -48,5 +45,5 @@ export default function Experience() {
         experienceColour="bg-blue-300"
       />
     </>
-  )
+  );
 }

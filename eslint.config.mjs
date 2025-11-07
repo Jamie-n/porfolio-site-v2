@@ -1,16 +1,43 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextPlugin from "@next/eslint-plugin-next";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import prettier from "eslint-config-prettier/flat";
+import tsParser from "@typescript-eslint/parser";
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+export default defineConfig([
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
+  {
+    files: ["src/**/*.{ts,tsx}"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2025,
+        sourceType: "module",
+        ecmaFeatures: { jsx: true },
+      },
+      globals: {
+        React: "readonly",
+        JSX: "readonly",
+      },
+    },
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+    plugins: {
+      "@next/next": nextPlugin,
+      "@typescript-eslint": tsPlugin,
+      "react-hooks": reactHooksPlugin,
+    },
 
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-];
+    rules: {
+      ...reactHooksPlugin.configs.recommended.rules,
+      ...nextPlugin.configs.recommended.rules,
+    },
+  },
 
-export default eslintConfig;
+  // Prettier last
+  prettier,
+]);

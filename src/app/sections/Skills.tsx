@@ -1,8 +1,13 @@
 import Header from "../components/Header";
 import SegmentedProgressBar from "../components/ProgressBar";
 
-export const SkillLevels = ["Beginner", "Intermediate", "Advanced", "Expert"] as const;
-export type SkillLevel = typeof SkillLevels[number];
+export const SkillLevels = [
+  "Beginner",
+  "Intermediate",
+  "Advanced",
+  "Expert",
+] as const;
+export type SkillLevel = (typeof SkillLevels)[number];
 
 export interface Skill {
   name: string;
@@ -14,7 +19,6 @@ export interface SkillCategory {
   title: string;
   skills: Skill[];
 }
-
 
 export const skillCategories: SkillCategory[] = [
   {
@@ -61,7 +65,7 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: "Git", level: "Advanced", progress: 1 },
       { name: "Docker", level: "Intermediate", progress: 0.8 },
-      { name: "CI/CD", level: "Intermediate", progress: 0.75 }
+      { name: "CI/CD", level: "Intermediate", progress: 0.75 },
     ],
   },
   {
@@ -73,12 +77,9 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: "Cloud / Hosting",
-    skills: [
-      { name: "Azure", level: "Intermediate", progress: 0.75 },
-    ],
+    skills: [{ name: "Azure", level: "Intermediate", progress: 0.75 }],
   },
 ];
-
 
 export default function Skills() {
   return (
@@ -97,4 +98,3 @@ export default function Skills() {
     </>
   );
 }
-
