@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint & TypeCheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prettier check
+        run: npx prettier --check "src/**/*.{js,ts,tsx,json,css,scss,md}"
+
+      - name: ESLint
+        run: npx eslint "src/**/*.{js,ts,tsx}" --max-warnings=0
+        
+      - name: TypeScript check
+        run: npx tsc --noEmit
