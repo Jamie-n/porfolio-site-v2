@@ -1,11 +1,18 @@
 import Header from "../components/Header";
+import me from "@/assets/me.png";
 
 export default function Hero() {
   return (
     <div className="flex items-center flex-grow flex-row justify-between min-h-screen">
-      <div className="relative hover:rotate-45 transition-all duration-1000 ease-in-out">
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-red-500 w-96 h-96 rounded-full border-dashed dash" />
-        <div className="bg-red-500 w-80 h-80 rounded-full" />
+      <div className="relative group transition-all duration-1000 ease-in-out">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-red-500 w-96 h-96 rounded-full border-dashed transition-all duration-1000 ease-in-out group-hover:rotate-45" />
+        <div className="relative bg-red-500 w-80 h-80 rounded-full overflow-hidden">
+          <img
+            className="w-72 h-72 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-1000 ease-in-out"
+            src={me.src}
+            alt="Profile"
+          />
+        </div>
       </div>
 
       <div>

@@ -6,19 +6,19 @@ export default function DarkModeToggle() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    // Get saved user preference from localStorage
     const saved = localStorage.getItem("dark-mode");
 
     let initial: boolean;
 
-    if (saved === "true") {
-      // Use saved preference if available
-      initial = true;
-    } else if (saved === "false") {
-      initial = false;
-    } else {
-      // Otherwise, use browser preference
-      initial = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    switch (saved) {
+      case "true":
+        initial = true;
+        break;
+      case "false":
+        initial = true;
+        break;
+      default:
+        initial = window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
 
     document.documentElement.classList.toggle("dark", initial);

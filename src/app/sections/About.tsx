@@ -1,4 +1,6 @@
 import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
+import CustomAnchor from "../components/display/CustomAnchor";
+
 
 export default function () {
   return (
@@ -9,7 +11,7 @@ export default function () {
         </p>
 
         <p>
-          Want to see some examples of my work? Check out my <a href="https://github.com/Jamie-n" className="underline hover:text-red-500 transition-colors" target="_blank" rel="no-referrer">GitHub</a>.
+          Want to see some examples of my work? Check out my <CustomAnchor href="https://github.com/Jamie-n" target="_blank" rel="no-referrer">GitHub</CustomAnchor>.
         </p>
       </div>
 
