@@ -7,7 +7,7 @@ export default function Experience() {
       <ExperienceAccordion
         experienceTitle="Software Engineer"
         experienceStartDate="2024"
-        experienceCompany="The Curve"
+        experienceSubheading="The Curve"
         experienceColour="bg-red-500"
       />
 
@@ -15,7 +15,7 @@ export default function Experience() {
         experienceTitle="Backend Web Developer"
         experienceStartDate="2020"
         experienceEndDate="2024"
-        experienceCompany="The Health Informatics Service"
+        experienceSubheading="The Health Informatics Service"
         experienceColour="bg-blue-500"
       />
 
@@ -23,7 +23,7 @@ export default function Experience() {
         experienceTitle="Freelance Application Developer"
         experienceStartDate="2023"
         experienceEndDate="2023"
-        experienceCompany="Apple Designs Ltd"
+        experienceSubheading="Apple Designs Ltd"
         experienceColour="bg-green-500"
       />
 
@@ -31,7 +31,7 @@ export default function Experience() {
         experienceTitle="Shift Leader"
         experienceStartDate="2017"
         experienceEndDate="2019"
-        experienceCompany="JD Wetherspoon"
+        experienceSubheading="JD Wetherspoon"
         experienceColour="bg-black"
       />
 
@@ -41,7 +41,7 @@ export default function Experience() {
         experienceTitle="Media & Merchandise Secretary"
         experienceStartDate="2023"
         experienceEndDate="2024"
-        experienceCompany="Huddersfield University Snowsports Society"
+        experienceSubheading="Huddersfield University Snowsports Society"
         experienceColour="bg-blue-300"
       />
     </>

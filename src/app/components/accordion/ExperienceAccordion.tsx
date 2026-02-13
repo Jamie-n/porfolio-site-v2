@@ -1,10 +1,11 @@
+import { PropsWithChildren } from "react";
 import Accordion from "./Accordion";
 
-interface ExperienceAccordionProps {
+interface ExperienceAccordionProps extends PropsWithChildren {
   experienceTitle: string;
-  experienceStartDate: string;
-  experienceEndDate?: string;
-  experienceCompany: string;
+  experienceStartDate?: string;
+  experienceEndDate?: string | null;
+  experienceSubheading: string;
   experienceColour: string;
 }
 
@@ -12,21 +13,26 @@ export default function ExperienceAccordion({
   experienceTitle,
   experienceStartDate,
   experienceEndDate,
-  experienceCompany,
+  experienceSubheading,
   experienceColour,
+  children,
 }: ExperienceAccordionProps) {
-  return (
-    <Accordion>
+  const headerElement = (
+    <>
       <div
         className={`w-1 rounded-full me-3  ${experienceColour ?? "bg-blue-300"}`}
       />
       <div>
-        <p>
-          {experienceStartDate} - {experienceEndDate ?? "Present"}
-        </p>
-        <p className="text-3xl font-bold">{experienceCompany}</p>
+        {experienceStartDate && experienceEndDate && (
+          <p>
+            {experienceStartDate} - {experienceEndDate ?? "Present"}
+          </p>
+        )}
+        <p className="text-3xl font-bold">{experienceSubheading}</p>
         <p className="text-xl font-bold">{experienceTitle}</p>
       </div>
-    </Accordion>
+    </>
   );
+
+  return <Accordion Header={headerElement}>{children}</Accordion>;
 }
