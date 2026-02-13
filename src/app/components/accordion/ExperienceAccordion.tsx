@@ -15,11 +15,10 @@ export default function ExperienceAccordion({
     <>
       <div className={`w-1 rounded-full me-3  ${colour ?? "bg-blue-300"}`} />
       <div>
-        {startDate && endDate && (
-          <p>
-            {startDate} - {endDate ?? "Present"}
-          </p>
-        )}
+        <p>
+          {startDate}
+          {endDate !== null ? ` - ${endDate ?? "Present"}` : ""}
+        </p>
         <p className="text-3xl font-bold">{company}</p>
         <p className="text-xl font-bold">{title}</p>
       </div>
@@ -29,7 +28,6 @@ export default function ExperienceAccordion({
   return (
     <Accordion Header={headerElement}>
       <StyledContent {...rest} />
-
       {children}
     </Accordion>
   );

@@ -2,7 +2,7 @@ export type ExperienceContent = {
   title: string;
   company: string;
   startDate: number;
-  endDate: number | undefined;
+  endDate: number | undefined | null;
   colour: string;
   blurb: string;
   highlights: string[];
