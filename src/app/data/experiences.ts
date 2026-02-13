@@ -81,7 +81,13 @@ export const otherExperiences: Record<OtherExperiences, ExperienceContent> = {
     startDate: 2023,
     endDate: 2024,
     colour: "bg-blue-500",
-    blurb: "",
-    highlights: [],
+    blurb:
+      "Created and maintained a unified brand presence across all social media platforms, actively driving engagement and collaborating closely with brand partners. Leveraged design and promotional expertise to deliver high-quality merchandise, promotional items, and branded apparel that strengthened audience connection and visibility.",
+
+    highlights: [
+      "Developed and maintained a consistent visual identity across all social media channels.",
+      "Worked closely with brand partners to design and produce promotional and merchandise items, including competition squad uniforms and club merchandise.",
+      "Implemented strategies that actively increased audience engagement and brand recognition.",
+    ],
   },
 };

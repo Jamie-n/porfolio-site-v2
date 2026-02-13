@@ -1,4 +1,4 @@
-import { Skill, SkillLevel, SkillLevels } from "../sections/Skills";
+import { SkillLevel, Skill, SkillLevels } from "../data/skills";
 
 const levelColors: Record<SkillLevel, string> = {
   Beginner: "bg-red-800",

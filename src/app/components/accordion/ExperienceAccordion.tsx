@@ -1,3 +1,4 @@
+import { PropsWithChildren } from "react";
 import { ExperienceContent } from "../../data/experiences";
 import Accordion from "./Accordion";
 
@@ -7,8 +8,9 @@ export default function ExperienceAccordion({
   startDate,
   endDate,
   colour,
+  children,
   ...rest
-}: ExperienceContent) {
+}: ExperienceContent & PropsWithChildren) {
   const headerElement = (
     <>
       <div className={`w-1 rounded-full me-3  ${colour ?? "bg-blue-300"}`} />
@@ -27,6 +29,8 @@ export default function ExperienceAccordion({
   return (
     <Accordion Header={headerElement}>
       <StyledContent {...rest} />
+
+      {children}
     </Accordion>
   );
 }
@@ -39,7 +43,7 @@ function StyledContent({
     <>
       <p className="text-neutral-500 mb-5">{blurb}</p>
 
-      <ul className="list-disc list-outside ml-5">
+      <ul className="list-disc list-outside ml-5 mb-5">
         {highlights.map((content, idx) => (
           <li key={idx}>{content}</li>
         ))}
