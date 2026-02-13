@@ -1,32 +1,49 @@
+import { ExperienceContent } from "../../data/experiences";
 import Accordion from "./Accordion";
 
-interface ExperienceAccordionProps {
-  experienceTitle: string;
-  experienceStartDate: string;
-  experienceEndDate?: string;
-  experienceCompany: string;
-  experienceColour: string;
+export default function ExperienceAccordion({
+  title,
+  company,
+  startDate,
+  endDate,
+  colour,
+  ...rest
+}: ExperienceContent) {
+  const headerElement = (
+    <>
+      <div className={`w-1 rounded-full me-3  ${colour ?? "bg-blue-300"}`} />
+      <div>
+        {startDate && endDate && (
+          <p>
+            {startDate} - {endDate ?? "Present"}
+          </p>
+        )}
+        <p className="text-3xl font-bold">{company}</p>
+        <p className="text-xl font-bold">{title}</p>
+      </div>
+    </>
+  );
+
+  return (
+    <Accordion Header={headerElement}>
+      <StyledContent {...rest} />
+    </Accordion>
+  );
 }
 
-export default function ExperienceAccordion({
-  experienceTitle,
-  experienceStartDate,
-  experienceEndDate,
-  experienceCompany,
-  experienceColour,
-}: ExperienceAccordionProps) {
+function StyledContent({
+  blurb,
+  highlights,
+}: Pick<ExperienceContent, "blurb" | "highlights">) {
   return (
-    <Accordion>
-      <div
-        className={`w-1 rounded-full me-3  ${experienceColour ?? "bg-blue-300"}`}
-      />
-      <div>
-        <p>
-          {experienceStartDate} - {experienceEndDate ?? "Present"}
-        </p>
-        <p className="text-3xl font-bold">{experienceCompany}</p>
-        <p className="text-xl font-bold">{experienceTitle}</p>
-      </div>
-    </Accordion>
+    <>
+      <p className="text-neutral-500 mb-5">{blurb}</p>
+
+      <ul className="list-disc list-outside ml-5">
+        {highlights.map((content, idx) => (
+          <li key={idx}>{content}</li>
+        ))}
+      </ul>
+    </>
   );
 }

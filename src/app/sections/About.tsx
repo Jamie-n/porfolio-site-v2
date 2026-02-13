@@ -1,4 +1,4 @@
-import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
+// import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
 import CustomAnchor from "../components/display/CustomAnchor";
 
 export default function () {
@@ -6,14 +6,10 @@ export default function () {
     <>
       <div className="my-5">
         <p className="mb-10">
-          A friendly and dedicated software engineer who demonstrates strong
-          commitment to their employer, establishing strong relationships with
-          their peers and embraces the value of teamwork. He possesses a
-          remarkable ability to lear quickly and work efficiently to complete
-          tasks, whilst never hesitating to ask for assistance when needed.
-          Meticulous in his attention to detail, taking great pride in his work
-          and approaching problem solving with a a well organized, rational
-          mindset.
+          A pragmatic full-stack software engineer who excels at breaking down
+          complex problems and delivering simple, maintainable, and scalable
+          solutions. Experienced across the full development lifecycle and
+          comfortable collaborating with cross-functional and offshore teams.
         </p>
 
         <p>
@@ -31,11 +27,11 @@ export default function () {
 
       <p className="text-5xl font-bold my-5">Education</p>
 
-      <ExperienceAccordion
+      {/* <ExperienceAccordion
         experienceTitle="Software Engineering MSc"
         experienceStartDate="2023"
         experienceEndDate="2024"
-        experienceCompany="The University of Huddersfield"
+        experienceSubheading="The University of Huddersfield"
         experienceColour="bg-blue-500"
       />
 
@@ -43,9 +39,9 @@ export default function () {
         experienceTitle=" Software Engineering BSc (Hons)"
         experienceStartDate="2019"
         experienceEndDate="2024"
-        experienceCompany="The University of Huddersfield"
+        experienceSubheading="The University of Huddersfield"
         experienceColour="bg-blue-500"
-      />
+      /> */}
     </>
   );
 }
