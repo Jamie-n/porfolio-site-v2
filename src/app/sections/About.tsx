@@ -1,4 +1,4 @@
-import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
+// import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
 import CustomAnchor from "../components/display/CustomAnchor";
 
 export default function () {
@@ -27,7 +27,7 @@ export default function () {
 
       <p className="text-5xl font-bold my-5">Education</p>
 
-      <ExperienceAccordion
+      {/* <ExperienceAccordion
         experienceTitle="Software Engineering MSc"
         experienceStartDate="2023"
         experienceEndDate="2024"
@@ -41,7 +41,7 @@ export default function () {
         experienceEndDate="2024"
         experienceSubheading="The University of Huddersfield"
         experienceColour="bg-blue-500"
-      />
+      /> */}
     </>
   );
 }

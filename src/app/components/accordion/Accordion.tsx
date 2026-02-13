@@ -3,6 +3,7 @@ import {
   JSX,
   PropsWithChildren,
   useState,
+  useRef,
 } from "react";
 
 interface AccordionProps
@@ -16,25 +17,27 @@ export default function Accordion({
   children,
   ...rest
 }: AccordionProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <>
+    <div {...rest}>
       <div
-        className="my-3 py-2 flex cursor-pointer border-b-2 border-transparent hover:border-gray-100 transition-all ease-in-out "
-        {...rest}
+        className="my-3 py-2 flex cursor-pointer border-b-2 border-transparent hover:border-gray-100 transition-all ease-in-out"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {Header}
 
-        <div className={`self-center ms-auto  ${isOpen ? "rotate-180" : ""}`}>
+        <div
+          className={`self-center ms-auto transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -46,10 +49,13 @@ export default function Accordion({
       </div>
 
       <div
-        className={`transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? "h-auto opacity-100" : "max-h-0 opacity-0"}`}
+        ref={contentRef}
+        className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
+          isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
         <div className="py-2">{children}</div>
       </div>
-    </>
+    </div>
   );
 }

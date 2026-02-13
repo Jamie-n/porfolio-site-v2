@@ -1,11 +1,11 @@
-import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
-import Compute from "./experience/Compute";
-import PatientLeafletRepository from "./experience/PatientLeafletRepository";
+// import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
+// import Compute from "./experience/Compute";
+// import PatientLeafletRepository from "./experience/PatientLeafletRepository";
 
 export default function Projects() {
   return (
     <>
-      <ExperienceAccordion
+      {/* <ExperienceAccordion
         experienceTitle="Commercial Wordpress Site"
         experienceSubheading="Chris Bradbrook"
         experienceColour="bg-teal-500"
@@ -39,7 +39,7 @@ export default function Projects() {
         experienceColour="bg-red-500"
       >
         <Compute />
-      </ExperienceAccordion>
+      </ExperienceAccordion> */}
     </>
   );
 }

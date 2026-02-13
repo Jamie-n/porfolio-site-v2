@@ -1,38 +1,49 @@
-import { PropsWithChildren } from "react";
+import { ExperienceContent } from "../../data/experiences";
 import Accordion from "./Accordion";
 
-interface ExperienceAccordionProps extends PropsWithChildren {
-  experienceTitle: string;
-  experienceStartDate?: string;
-  experienceEndDate?: string | null;
-  experienceSubheading: string;
-  experienceColour: string;
-}
-
 export default function ExperienceAccordion({
-  experienceTitle,
-  experienceStartDate,
-  experienceEndDate,
-  experienceSubheading,
-  experienceColour,
-  children,
-}: ExperienceAccordionProps) {
+  title,
+  company,
+  startDate,
+  endDate,
+  colour,
+  ...rest
+}: ExperienceContent) {
   const headerElement = (
     <>
-      <div
-        className={`w-1 rounded-full me-3  ${experienceColour ?? "bg-blue-300"}`}
-      />
+      <div className={`w-1 rounded-full me-3  ${colour ?? "bg-blue-300"}`} />
       <div>
-        {experienceStartDate && experienceEndDate && (
+        {startDate && endDate && (
           <p>
-            {experienceStartDate} - {experienceEndDate ?? "Present"}
+            {startDate} - {endDate ?? "Present"}
           </p>
         )}
-        <p className="text-3xl font-bold">{experienceSubheading}</p>
-        <p className="text-xl font-bold">{experienceTitle}</p>
+        <p className="text-3xl font-bold">{company}</p>
+        <p className="text-xl font-bold">{title}</p>
       </div>
     </>
   );
 
-  return <Accordion Header={headerElement}>{children}</Accordion>;
+  return (
+    <Accordion Header={headerElement}>
+      <StyledContent {...rest} />
+    </Accordion>
+  );
+}
+
+function StyledContent({
+  blurb,
+  highlights,
+}: Pick<ExperienceContent, "blurb" | "highlights">) {
+  return (
+    <>
+      <p className="text-neutral-500 mb-5">{blurb}</p>
+
+      <ul className="list-disc list-outside ml-5">
+        {highlights.map((content, idx) => (
+          <li key={idx}>{content}</li>
+        ))}
+      </ul>
+    </>
+  );
 }
