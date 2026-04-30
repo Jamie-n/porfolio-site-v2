@@ -1,3 +1,5 @@
+"use client";
+
 import { formatIndex } from "../../../utils";
 import { SectionItem } from "../../[[...slug]]/page";
 import DarkModeToggle from "../DarkModeToggle";
@@ -25,7 +27,12 @@ export default function Sidebar({ sections }: SidebarProps) {
       </div>
       <div className="flex gap-5 flex-col">
         <div className="flex gap-5">
-          <a href="#">
+          <a
+            href="https://github.com/Jamie-n"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -38,7 +45,12 @@ export default function Sidebar({ sections }: SidebarProps) {
             </svg>
           </a>
 
-          <a href="#">
+          <a
+            href="https://www.linkedin.com/in/jamie-neighbours/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

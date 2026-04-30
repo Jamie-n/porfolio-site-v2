@@ -14,6 +14,23 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Jamie Neighbours - Portfolio",
+  description:
+    "Portfolio of Jamie Neighbours — full‑stack software engineer. Selected work, experience, skills, and certifications.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  ),
+  openGraph: {
+    title: "Jamie Neighbours - Portfolio",
+    description:
+      "Full‑stack software engineer. Selected work, experience, skills, and certifications.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Jamie Neighbours - Portfolio",
+    description:
+      "Full‑stack software engineer. Selected work, experience, skills, and certifications.",
+  },
 };
 
 export default function RootLayout({
