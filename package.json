@@ -7,6 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:ci": "eslint \"src/**/*.{js,ts,tsx}\" --max-warnings=0",
+    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,json,css,scss,md,yml}\"",
+    "format:write": "prettier --write \"src/**/*.{js,ts,tsx,json,css,scss,md,yml}\"",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky"
   },
   "dependencies": {
