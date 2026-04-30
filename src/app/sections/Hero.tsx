@@ -1,6 +1,4 @@
 import Header from "../components/Header";
-import Me from "@/assets/me.png";
-import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -8,13 +6,14 @@ export default function Hero() {
       <div className="relative group transition-all duration-1000 ease-in-out">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-red-500 w-96 h-96 rounded-full border-dashed transition-all duration-1000 ease-in-out group-hover:rotate-45" />
         <div className="relative bg-red-500 w-80 h-80 rounded-full overflow-hidden">
-          <Image
-            className="w-72 h-72 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-1000 ease-in-out"
-            src={Me.src}
-            alt="Profile"
-            width={288}
-            height={288}
-          />
+          <div
+            aria-label="Profile"
+            className="w-72 h-72 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-900/30 flex items-center justify-center transition-all duration-1000 ease-in-out"
+          >
+            <span className="text-6xl font-bold tracking-tight text-white/90">
+              JN
+            </span>
+          </div>
         </div>
       </div>
 
@@ -32,7 +31,12 @@ export default function Hero() {
           <span className="text-red-500"> Creative Problem Solver.</span>
         </h2>
         <div className="flex gap-3 text-7xl">
-          <a href="#">
+          <a
+            href="https://github.com/Jamie-n"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -45,7 +49,12 @@ export default function Hero() {
             </svg>
           </a>
 
-          <a href="#">
+          <a
+            href="https://www.linkedin.com/in/jamie-neighbours/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

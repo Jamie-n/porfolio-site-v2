@@ -1,5 +1,6 @@
 import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
-import PatientLeafletRepository from "./experience/PatientLeafletRepository";
+import ChrisBradbrook from "./projects/ChrisBradbrook";
+import PatientLeafletRepository from "./projects/PatientLeafletRepository";
 
 export default function Projects() {
   return (
@@ -19,7 +20,9 @@ export default function Projects() {
           "Managed the project from initial requirements and Figma designs through to final deployment, maintaining close communication with the client throughout.",
           "Technologies used: WordPress, custom theme development, responsive design.",
         ]}
-      ></ExperienceAccordion>
+      >
+        <ChrisBradbrook />
+      </ExperienceAccordion>
 
       <ExperienceAccordion
         title="Patient Leaflet Repository"
