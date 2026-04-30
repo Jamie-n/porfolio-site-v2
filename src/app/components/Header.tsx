@@ -1,20 +1,25 @@
 import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 
-interface HeaderProps extends PropsWithChildren, ComponentPropsWithoutRef<"p"> {
+interface HeaderProps
+  extends PropsWithChildren,
+    Omit<ComponentPropsWithoutRef<"h2">, "children"> {
   variant: "title" | "subheading";
 }
 
 export default function Header({ variant, children, ...rest }: HeaderProps) {
-  const baseStyle: ComponentPropsWithoutRef<"p"> = rest;
+  const className = rest.className ?? "";
 
-  switch (variant) {
-    case "title":
-      baseStyle.className = baseStyle.className + " font-bold text-7xl";
-      break;
-    case "subheading":
-      baseStyle.className = baseStyle.className + " font-bold text-5xl my-10";
-      break;
+  if (variant === "title") {
+    return (
+      <h1 {...rest} className={`${className} font-bold text-7xl`.trim()}>
+        {children}
+      </h1>
+    );
   }
 
-  return <p {...baseStyle}>{children}</p>;
+  return (
+    <h2 {...rest} className={`${className} font-bold text-5xl my-10`.trim()}>
+      {children}
+    </h2>
+  );
 }

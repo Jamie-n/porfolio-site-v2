@@ -1,4 +1,5 @@
-// import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
+"use client";
+
 import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
 import CustomAnchor from "../components/display/CustomAnchor";
 
@@ -18,7 +19,7 @@ export default function About() {
           <CustomAnchor
             href="https://github.com/Jamie-n"
             target="_blank"
-            rel="no-referrer"
+            rel="noopener noreferrer"
           >
             GitHub
           </CustomAnchor>

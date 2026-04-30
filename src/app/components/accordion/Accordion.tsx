@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ComponentPropsWithoutRef,
   JSX,
@@ -19,11 +21,15 @@ export default function Accordion({
 }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const contentId = rest.id ? `${rest.id}__content` : undefined;
 
   return (
     <div {...rest}>
-      <div
-        className="my-3 py-2 flex cursor-pointer border-b-2 border-transparent hover:border-gray-100 transition-all ease-in-out"
+      <button
+        type="button"
+        className="w-full text-left my-3 py-2 flex border-b-2 border-transparent hover:border-gray-100 transition-all ease-in-out"
+        aria-expanded={isOpen}
+        aria-controls={contentId}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {Header}
@@ -46,10 +52,11 @@ export default function Accordion({
             />
           </svg>
         </div>
-      </div>
+      </button>
 
       <div
         ref={contentRef}
+        id={contentId}
         className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
           isOpen ? "max-h-[99999px] opacity-100" : "max-h-0 opacity-0"
         }`}

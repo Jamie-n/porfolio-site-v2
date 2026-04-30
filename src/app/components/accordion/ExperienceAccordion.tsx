@@ -1,3 +1,5 @@
+"use client";
+
 import { PropsWithChildren } from "react";
 import { ExperienceContent } from "../../data/experiences";
 import Accordion from "./Accordion";
