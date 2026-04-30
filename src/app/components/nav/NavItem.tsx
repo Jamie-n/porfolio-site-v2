@@ -1,3 +1,5 @@
+"use client";
+
 import { usePathname } from "next/navigation";
 import { ComponentProps } from "react";
 import { scrollToElement } from "../../../utils";
