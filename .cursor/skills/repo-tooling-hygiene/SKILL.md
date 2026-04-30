@@ -23,6 +23,9 @@ disable-model-invocation: true
 - This repo uses **Prettier** and **ESLint**.
 - Expect **Husky + lint-staged** to run formatting/linting on commit.
 - When changing many files, run format/lint before finalizing.
+- **Do not treat warning suppression as design**:
+  - Avoid “fixing” problems with `// eslint-disable-next-line`, `/* eslint-disable */`, `@ts-ignore`, `@ts-expect-error`, or similar.
+  - If suppression is truly necessary, keep it **narrow**, document the reason in-place, and prefer refactoring to remove the underlying issue.
 
 ## File organization defaults
 
