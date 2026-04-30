@@ -2,9 +2,7 @@
 
 import { formatIndex } from "../../../utils";
 import { SectionItem } from "../../[[...slug]]/page";
-import { useDevMode } from "../../contexts/DevModeContext";
 import DarkModeToggle from "../DarkModeToggle";
-import Toggle from "../Toggle";
 import NavItem from "./NavItem";
 
 interface SidebarProps {
@@ -12,8 +10,6 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ sections }: SidebarProps) {
-  const { setDevMode, devMode } = useDevMode();
-
   return (
     <div className="w-80 h-full fixed pt-16 pb-6 px-12 flex justify-between flex-col">
       <div>
@@ -68,14 +64,6 @@ export default function Sidebar({ sections }: SidebarProps) {
           </a>
         </div>
         <DarkModeToggle />
-        <Toggle
-          checked={devMode}
-          onChange={() => setDevMode((prev) => !prev)}
-          labels={{
-            left: "Normal",
-            right: "Dev Mode",
-          }}
-        />
       </div>
     </div>
   );
