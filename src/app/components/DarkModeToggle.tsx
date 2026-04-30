@@ -4,19 +4,20 @@ import { useEffect, useState } from "react";
 import Toggle from "./Toggle";
 
 export default function DarkModeToggle() {
-  const getInitialDark = () => {
-    const saved = localStorage.getItem("dark-mode");
-    switch (saved) {
-      case "true":
-        return true;
-      case "false":
-        return false;
-      default:
-        return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-  };
+  const [dark, setDark] = useState(() => {
+    // Client component, but Next can still render it on the server.
+    if (typeof window === "undefined") return false;
 
-  const [dark, setDark] = useState(() => getInitialDark());
+    try {
+      const saved = window.localStorage.getItem("dark-mode");
+      if (saved === "true") return true;
+      if (saved === "false") return false;
+    } catch {
+      // ignore
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
 
   // Apply class to document on mount
   useEffect(() => {
@@ -26,8 +27,11 @@ export default function DarkModeToggle() {
   const toggle = () => {
     setDark((prev) => {
       const newMode = !prev;
-      document.documentElement.classList.toggle("dark", newMode);
-      localStorage.setItem("dark-mode", newMode.toString());
+      try {
+        window.localStorage.setItem("dark-mode", newMode.toString());
+      } catch {
+        // ignore
+      }
       return newMode;
     });
   };
