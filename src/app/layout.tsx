@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { DevModeProvider } from "./contexts/DevModeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +15,23 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Jamie Neighbours - Portfolio",
+  description:
+    "Portfolio of Jamie Neighbours — full‑stack software engineer. Selected work, experience, skills, and certifications.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  ),
+  openGraph: {
+    title: "Jamie Neighbours - Portfolio",
+    description:
+      "Full‑stack software engineer. Selected work, experience, skills, and certifications.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Jamie Neighbours - Portfolio",
+    description:
+      "Full‑stack software engineer. Selected work, experience, skills, and certifications.",
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +44,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <DevModeProvider>{children}</DevModeProvider>
       </body>
     </html>
   );
