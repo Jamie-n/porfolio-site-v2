@@ -38,8 +38,19 @@ export default function Reveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          obs.disconnect();
+          return;
         }
+
+        // Only reset after scrolling *up past* the element (i.e., it left below the viewport),
+        // so the enter animation can replay the next time you scroll down to it.
+        // If you scroll down and it leaves above the viewport, keep it visible.
+        const viewportBottom =
+          entry.rootBounds?.bottom ??
+          (typeof window !== "undefined" ? window.innerHeight : 0);
+        // IntersectionObserver often fires exactly at the boundary; use an epsilon so we still reset.
+        const leftBelowViewport =
+          entry.boundingClientRect.top >= viewportBottom - 1;
+        if (leftBelowViewport) setVisible(false);
       },
       { root: null, rootMargin, threshold: 0.06 },
     );
@@ -52,8 +63,8 @@ export default function Reveal({
     <div ref={ref} className={className} {...rest}>
       <div
         className={[
-          "transition-[opacity,transform] duration-[680ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[opacity,transform]",
-          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5",
+          "transition-opacity transition-transform duration-[680ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+          visible ? "opacity-100" : "opacity-0 translate-y-5",
         ].join(" ")}
         style={{
           ...style,
