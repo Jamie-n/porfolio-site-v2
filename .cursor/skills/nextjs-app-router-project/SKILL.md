@@ -1,10 +1,21 @@
 ---
 name: nextjs-app-router-project
-description: Create and refactor features in this repository’s Next.js 15 App Router setup. Use when adding routes/sections/components, changing navigation, or touching `src/app/` (especially the catch-all route `src/app/[[...slug]]/page.tsx`).
+description: >-
+  Creates and refactors features in this repository's Next.js 15 App Router setup.
+  Before coding, reads docs/ (especially docs/design-system.md) and mirrors existing
+  patterns in src/app/. Use when adding routes, sections, or components; changing
+  navigation; or editing src/app/ (especially the catch-all route
+  src/app/[[...slug]]/page.tsx).
 disable-model-invocation: true
 ---
 
 # Next.js App Router (project conventions)
+
+## Before you change code (required)
+
+1. **Read project docs first** — Start with [`docs/README.md`](docs/README.md). For UI work, read [`docs/design-system.md`](docs/design-system.md) and align with the live styleguide (`src/app/components/StyleguideOverlay.tsx`).
+2. **Ground decisions in existing code** — Find similar features (sections, components, hooks) and match their structure, naming, imports, and styling conventions. Prefer extending what exists over inventing parallel patterns.
+3. **Do not guess** — If something is unclear (routing behavior, data shape, design rule, env vars), **search/read the codebase** or **ask the user**. Unknowns are not an excuse to assume defaults from “typical Next.js apps.”
 
 ## Quick orientation (this repo)
 
@@ -17,6 +28,7 @@ disable-model-invocation: true
 
 ## Default workflow for changes
 
+0. Completed **[Before you change code](#before-you-change-code-required)** (docs + existing patterns + no guessing).
 1. Identify whether the change is:
    - **Section content/layout** → edit/add `src/app/sections/*`
    - **Reusable UI** → edit/add `src/app/components/*`
@@ -64,5 +76,6 @@ Otherwise:
 
 ## Styling
 
-- Prefer Tailwind utilities in components.
-- Keep `globals.css` for base styles, tokens, and resets only.
+- Follow **[`docs/design-system.md`](docs/design-system.md)** and the **`portfolio-design-style`** skill for brutalist UI rules; implement against recipes in `StyleguideOverlay.tsx`.
+- Prefer Tailwind utilities in components (mapped tokens from `tailwind.config.ts`).
+- Keep `globals.css` for base styles, tokens, and shared utilities (`bru-*`).

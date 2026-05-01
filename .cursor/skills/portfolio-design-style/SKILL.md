@@ -1,12 +1,12 @@
 ---
 name: portfolio-design-style
 description: >-
-  Applies this portfolio’s visual language using the in-app styleguide
-  (`StyleguideOverlay.tsx`) plus refined brutalism and print/editorial
-  principles. Use when styling or building UI in `src/app/`, changing
+  Applies this portfolio’s visual language using `docs/design-system.md`,
+  the in-app styleguide (`StyleguideOverlay.tsx`), and brutalist /
+  print-editorial principles. Use when styling UI in `src/app/`, changing
   `globals.css` or `tailwind.config.ts`, polishing sections/components, or
-  when the user mentions the styleguide, brutalist style, print design, or
-  visual consistency.
+  when the user mentions the styleguide, design system, brutalist style,
+  print design, or visual consistency.
 disable-model-invocation: true
 ---
 
@@ -15,6 +15,23 @@ disable-model-invocation: true
 ## Source of truth: the styleguide
 
 **Before shipping UI changes, align with the live styleguide** in `src/app/components/StyleguideOverlay.tsx`. It is the canonical catalog of tokens, recipes, and component demos. Prefer matching its patterns over inventing new ones.
+
+### Authority and source material (do not reinterpret)
+
+- The brutalist design direction is defined in `[docs/design-system.md](docs/design-system.md)`.
+- The reference posters (Swiss/brutalist print layout, grid overlays, big type, rules, vertical labels) are _already_ encoded into the site via tokens + motifs + styleguide demos. The job is to **extend consistently**, not “modernize” into a generic SaaS look.
+- When this skill conflicts with ad-hoc styling, **this skill wins**.
+
+### Don’t guess
+
+- Read **`docs/design-system.md`** and **`StyleguideOverlay.tsx`** before inventing classes or motifs.
+- Find the closest existing component/pattern in `src/app/` and mirror it; if unclear, search the codebase or ask — **do not** fill gaps with generic UI defaults.
+
+### Gap-filling policy (how we prevent styling drift)
+
+- If a new feature needs a UI pattern that is not documented in the styleguide overlay:
+  - **Add the recipe to `StyleguideOverlay.tsx` first** (tokens + spacing + interaction states + reduced-motion).
+  - Then build the feature by composing that recipe.
 
 The overlay documents these areas (read the corresponding sections in code when implementing):
 
@@ -35,6 +52,17 @@ The overlay documents these areas (read the corresponding sections in code when 
 - **Components** — composed examples.
 
 **Primitives used by the styleguide:** section titles use `bru-label`; demo blocks use `StyleguidePanel` → `bru-panel` with consistent padding (`px-6 py-5`). New styleguide-worthy demos should follow the same primitives.
+
+### Required “poster brutalism” motifs (from inspiration)
+
+Use these motifs as _structure_, not decoration:
+
+- **Rule-first composition**: hairline dividers + labeled headers; use `--border`/`--rule-solid` and `bru-divide-y` for stacks over grids.
+- **Grid overlays**: subtle 1px grid behind key panels (Hero, case study headers, quality panels) via `bru-panel`/`grid-overlay`.
+- **Vertical labels/indices**: use sparingly for section indices, years, or “NOW” signage.
+- **Big type with tight tracking**: hierarchy via type, tracking, and rules; avoid gradients or soft shadows.
+- **Echo headlines (optional)**: a solid + outline + low-opacity “repeat” treatment for hero/section title moments (document the recipe in the styleguide if used).
+- **Texture discipline**: grain is subtle; don’t stack grain + halftone + heavy borders in small areas.
 
 ---
 
@@ -69,11 +97,17 @@ Treat the page like **print layout** adapted for the web.
 - **Motion**: `animate-enter` / delays in `globals.css`; always respect **`prefers-reduced-motion`**.
 - **New tokens**: extend `globals.css`, then Tailwind if needed; prefer **`color-mix(in oklab, var(--foreground) …)`** for translucent UI.
 
+### Don’t accidentally break the brutalist look
+
+- Avoid: glass blur, soft multi-layer shadows, large radii/pill buttons, glossy gradients, colorful badge clouds.
+- Prefer: rectangles, rules, mono metadata, uppercase tracked labels, subtle accent wash (`--accent-weak`), and crisp 1px hover nudges.
+
 ---
 
 ## Quick checklist
 
 - [ ] Checked **StyleguideOverlay** for the closest existing recipe and matched spacing, type, and panel patterns.
+- [ ] If the pattern didn’t exist, added a **styleguide recipe first**, then reused it.
 - [ ] Brutalist: structure and type carry hierarchy; accent used with restraint; no gratuitous new colors or stacked textures.
 - [ ] Print: rules, meta typography, and section breaks feel consistent with existing spacers and motifs.
 - [ ] Theme CSS variables / existing Tailwind token names; `bru-*` text utilities where appropriate.

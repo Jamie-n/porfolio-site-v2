@@ -1,6 +1,9 @@
 ---
 name: nextjs-performance-a11y
-description: Apply Next.js/React best practices for performance, accessibility, and SEO in this portfolio site. Use when changing layout, adding UI components, images, links, or interactive elements.
+description: >-
+  Applies Next.js and React practices for performance, accessibility, and SEO on
+  this portfolio site. Use when changing layout, adding UI components, images,
+  links, or interactive elements.
 disable-model-invocation: true
 ---
 
