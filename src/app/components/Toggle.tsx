@@ -23,13 +23,9 @@ export default function Toggle({
         onChange={(e) => onCheckedChange(e.target.checked)}
         className="sr-only peer"
       />
-      <span className="me-3 text-xs font-medium uppercase tracking-[0.1em] text-foreground/72">
-        {left}
-      </span>
+      <span className="me-3 bru-button text-foreground/72">{left}</span>
       <div className="relative w-11 h-6 bg-surface border border-border rounded-none shadow-rule peer-checked:bg-accent-weak peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[color:var(--ring)] transition-colors duration-200 after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-foreground after:rounded-none after:h-5 after:w-5 after:transition-transform after:duration-200 after:ease-out peer-checked:after:translate-x-full" />
-      <span className="ms-3 text-xs font-medium uppercase tracking-[0.1em] text-foreground/72">
-        {right}
-      </span>
+      <span className="ms-3 bru-button text-foreground/72">{right}</span>
     </label>
   );
 }

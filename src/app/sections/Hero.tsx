@@ -29,10 +29,10 @@ export default function Hero() {
 
             <div className="absolute inset-x-0 top-0 border-b border-border bg-background/80 backdrop-blur-sm">
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground/70">
+                <span className="bru-label-compact text-foreground/70">
                   imprint
                 </span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground/70">
+                <span className="bru-label-compact text-foreground/70">
                   edition 2026
                 </span>
               </div>
@@ -50,7 +50,7 @@ export default function Hero() {
                   JN
                 </span>
 
-                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground/70">
+                <span className="bru-label-compact text-foreground/70">
                   portfolio mark
                 </span>
               </div>
@@ -58,10 +58,10 @@ export default function Hero() {
 
             <div className="absolute inset-x-0 bottom-0 border-t border-border bg-background/85">
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground/70">
+                <span className="bru-label-compact text-foreground/70">
                   uk / remote
                 </span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground/70">
+                <span className="bru-label-compact text-foreground/70">
                   build / ship / iterate
                 </span>
               </div>
@@ -103,20 +103,20 @@ export default function Hero() {
             <Link
               href="/projects"
               onClick={(e) => handleInternalJump(e, "/projects")}
-              className="border border-border bg-background px-4 py-3 text-xs font-medium uppercase tracking-[0.1em] shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40"
+              className="border border-border bg-background px-4 py-3 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40"
             >
               View projects
             </Link>
             <Link
               href="/experience"
               onClick={(e) => handleInternalJump(e, "/experience")}
-              className="border border-border bg-accent-weak px-4 py-3 text-xs font-medium uppercase tracking-[0.1em] shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40"
+              className="border border-border bg-accent-weak px-4 py-3 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40"
             >
               See experience
             </Link>
             <a
               href="mailto:jamie.neighbours@outlook.com"
-              className="px-2 py-3 text-xs font-medium uppercase tracking-[0.1em] text-foreground/72 transition-colors duration-200 ease-out hover:text-accent"
+              className="px-2 py-3 bru-link text-foreground/72 transition-colors duration-200 ease-out hover:text-accent"
             >
               Email
             </a>

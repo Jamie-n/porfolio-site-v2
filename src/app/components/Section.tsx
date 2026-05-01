@@ -43,9 +43,7 @@ export default function Section({
             <div className="grid gap-6">
               <div className="bru-panel px-4 py-3">
                 <div className="bru-label">Section</div>
-                <Header variant="title" className="uppercase">
-                  {title}
-                </Header>
+                <Header variant="title">{title}</Header>
               </div>
             </div>
           </Reveal>

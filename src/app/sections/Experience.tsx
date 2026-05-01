@@ -19,9 +19,7 @@ export default function Experience() {
 
       <div className="mt-14 mb-6 bru-panel px-4 py-3">
         <div className="bru-label">Appendix</div>
-        <Header variant="subheading" className="uppercase tracking-[-0.02em]">
-          Other experiences
-        </Header>
+        <Header variant="subheading">Other experiences</Header>
       </div>
       {Object.values(otherExperiences).map((ex, idx) => (
         <ExperienceAccordion key={idx} {...ex}>

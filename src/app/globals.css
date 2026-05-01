@@ -193,6 +193,32 @@
     background-position: 0 0;
   }
 
+  /* Headings */
+  .bru-h1 {
+    font-size: clamp(3.2rem, 6vw, 5.25rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  .bru-h2 {
+    font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  /* Panel + nav title */
+  .bru-h3 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
   /* Eyebrow / metadata / section labels */
   .bru-label {
     font-size: 0.8125rem;
@@ -248,6 +274,56 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: color-mix(in oklab, var(--foreground) 68%, transparent);
+  }
+
+  /* Body aliases (prefer these for new work) */
+  .bru-body {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: color-mix(in oklab, var(--foreground) 90%, transparent);
+  }
+
+  @media (min-width: 640px) {
+    .bru-body {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+  }
+
+  .bru-body-muted {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: color-mix(in oklab, var(--foreground) 78%, transparent);
+  }
+
+  @media (min-width: 640px) {
+    .bru-body-muted {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+  }
+
+  /* Microtype */
+  .bru-button {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .bru-tag {
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--foreground) 75%, transparent);
+  }
+
+  .bru-link {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--foreground) 72%, transparent);
   }
 
   /* Accordion header recipes */

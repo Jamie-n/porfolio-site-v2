@@ -54,7 +54,7 @@ export default function NavItem({
           />
           <span
             className={cn(
-              "font-bold uppercase tracking-[0.18em] text-[0.95rem] transition-all duration-200 ease-out",
+              "bru-h3 transition-all duration-200 ease-out",
               "hover:text-accent hover:-translate-y-[1px]",
               isActive && "text-accent",
             )}

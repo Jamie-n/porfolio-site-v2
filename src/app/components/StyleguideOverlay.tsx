@@ -51,9 +51,7 @@ function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="grid grid-cols-1 gap-3 py-3 sm:grid-cols-[minmax(0,10rem)_1fr] sm:gap-6">
       <div className={`bru-label sm:pt-0.5`}>{label}</div>
-      <div className="text-[0.9375rem] sm:text-sm leading-[1.6] text-foreground">
-        {value}
-      </div>
+      <div className="bru-body text-foreground">{value}</div>
     </div>
   );
 }
@@ -243,9 +241,7 @@ export default function StyleguideOverlay({
         className="w-full bru-panel px-4 py-3 text-left transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40"
       >
         <div className="bru-label">Reference</div>
-        <div className="mt-1 uppercase font-bold tracking-[0.18em] text-[0.95rem]">
-          {triggerLabel}
-        </div>
+        <div className="mt-1 bru-h3">{triggerLabel}</div>
       </button>
 
       {canPortal &&
@@ -291,16 +287,14 @@ export default function StyleguideOverlay({
                     <p id={titleId} className="bru-label">
                       Design language
                     </p>
-                    <h1 className="mt-2 font-bold tracking-[-0.06em] leading-[0.95] text-[clamp(1.85rem,4.5vw,3.5rem)] uppercase">
-                      Brutalist styleguide
-                    </h1>
+                    <h1 className="mt-2 bru-h2">Brutalist styleguide</h1>
                   </div>
 
                   <button
                     type="button"
                     onClick={requestClose}
                     ref={closeButtonRef}
-                    className="shrink-0 self-start border border-border bg-surface/40 px-4 py-2 text-[0.8125rem] font-medium uppercase tracking-[0.1em] text-foreground/75 shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    className="shrink-0 self-start border border-border bg-surface/40 px-4 py-2 bru-button text-foreground/75 shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     Close
                   </button>
@@ -348,16 +342,12 @@ export default function StyleguideOverlay({
                     <div className="bru-divide-y px-6">
                       <Row
                         label="Display"
-                        value={
-                          <div className="font-bold tracking-[-0.06em] leading-[0.9] text-[clamp(2.25rem,4vw,3.5rem)] uppercase">
-                            City
-                          </div>
-                        }
+                        value={<div className="bru-h1">City</div>}
                       />
                       <Row
                         label="Signage"
                         value={
-                          <div className="uppercase font-bold tracking-[0.14em] text-sm text-foreground/70">
+                          <div className="bru-h3 text-foreground/70">
                             Wild Fire City
                           </div>
                         }
@@ -369,7 +359,7 @@ export default function StyleguideOverlay({
                       <Row
                         label="Body"
                         value={
-                          <p className="bru-prose max-w-[72ch]">
+                          <p className="bru-body max-w-[72ch]">
                             Strong hierarchy, tight tracking in headers, and
                             readable editorial line-length for paragraphs.
                           </p>
@@ -403,33 +393,27 @@ export default function StyleguideOverlay({
                     <div className="grid gap-6">
                       <div className="grid gap-1">
                         <div className="bru-label">Display / H1</div>
-                        <div className="font-bold tracking-[-0.06em] leading-[0.9] text-[clamp(2.25rem,4vw,3.5rem)] uppercase">
-                          Brutal City
-                        </div>
+                        <div className="bru-h1">Brutal City</div>
                       </div>
 
                       <div className="grid gap-1 border-t border-rulesolid pt-6">
                         <div className="bru-label">H2</div>
-                        <div className="font-bold tracking-[-0.04em] leading-[1.0] text-[clamp(1.6rem,2.4vw,2.2rem)] uppercase">
-                          Section heading
-                        </div>
+                        <div className="bru-h2">Section heading</div>
                       </div>
 
                       <div className="grid gap-1 border-t border-rulesolid pt-6">
                         <div className="bru-label">H3 / panel title</div>
-                        <div className="uppercase font-bold tracking-[0.18em] text-[0.95rem]">
-                          Panel title
-                        </div>
+                        <div className="bru-h3">Panel title</div>
                       </div>
 
                       <div className="grid gap-2 border-t border-rulesolid pt-6">
                         <div className="bru-label">Body</div>
-                        <p className="bru-prose max-w-[72ch]">
+                        <p className="bru-body max-w-[72ch]">
                           Strong hierarchy, tight tracking in headers, and an
                           editorial line-length for paragraphs. Keep body text
                           readable in both light and dark themes.
                         </p>
-                        <p className="text-sm leading-[1.65] max-w-[72ch] text-muted">
+                        <p className="bru-body-muted max-w-[72ch]">
                           Muted body is for supporting copy, secondary metadata,
                           and less important detail.
                         </p>
@@ -466,13 +450,13 @@ export default function StyleguideOverlay({
                       <div className="grid gap-3 border-t border-rulesolid pt-6">
                         <div className="bru-label">Accent usage</div>
                         <div className="flex flex-wrap items-center gap-3">
-                          <span className="inline-flex items-center gap-2 border border-border px-3 py-2 text-xs font-medium uppercase tracking-[0.1em]">
+                          <span className="inline-flex items-center gap-2 border border-border px-3 py-2 bru-button">
                             Neutral
                           </span>
-                          <span className="inline-flex items-center gap-2 border border-border bg-accent-weak px-3 py-2 text-xs font-medium uppercase tracking-[0.1em]">
+                          <span className="inline-flex items-center gap-2 border border-border bg-accent-weak px-3 py-2 bru-button">
                             Accent weak
                           </span>
-                          <span className="inline-flex items-center gap-2 border border-border px-3 py-2 text-xs font-medium uppercase tracking-[0.1em] text-accent">
+                          <span className="inline-flex items-center gap-2 border border-border px-3 py-2 bru-button text-accent">
                             Accent text
                           </span>
                         </div>
@@ -513,19 +497,17 @@ export default function StyleguideOverlay({
                     <div className="mt-4 border border-rulesolid bru-divide-y bg-background/40">
                       <div className="flex items-center gap-3 py-3 px-4">
                         <span className="h-5 w-px shrink-0 bg-border" />
-                        <span className="font-bold uppercase tracking-[0.18em] text-[0.95rem]">
-                          01. Default item
-                        </span>
+                        <span className="bru-h3">01. Default item</span>
                       </div>
                       <div className="flex items-center gap-3 py-3 px-4">
                         <span className="h-5 w-px shrink-0 bg-accent" />
-                        <span className="font-bold uppercase tracking-[0.18em] text-[0.95rem] text-accent">
+                        <span className="bru-h3 text-accent">
                           02. Active item
                         </span>
                       </div>
                       <div className="flex items-center gap-3 py-3 px-4 group">
                         <span className="h-5 w-px shrink-0 bg-border transition-colors duration-200 ease-out group-hover:bg-accent" />
-                        <span className="font-bold uppercase tracking-[0.18em] text-[0.95rem] transition-all duration-200 ease-out group-hover:text-accent group-hover:-translate-y-[1px]">
+                        <span className="bru-h3 transition-all duration-200 ease-out group-hover:text-accent group-hover:-translate-y-[1px]">
                           03. Hover item
                         </span>
                       </div>
@@ -600,13 +582,13 @@ export default function StyleguideOverlay({
                     <div className="mt-6 flex flex-wrap gap-4 border-t border-rulesolid pt-6">
                       <button
                         type="button"
-                        className="border border-border bg-background px-4 py-3 text-xs font-medium uppercase tracking-[0.1em] shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                        className="border border-border bg-background px-4 py-3 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       >
                         Hover nudge
                       </button>
                       <button
                         type="button"
-                        className="border border-border bg-background px-4 py-3 text-xs font-medium uppercase tracking-[0.1em] shadow-rule transition-colors duration-200 ease-out hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                        className="border border-border bg-background px-4 py-3 bru-button shadow-rule transition-colors duration-200 ease-out hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       >
                         Color shift
                       </button>
@@ -656,7 +638,7 @@ export default function StyleguideOverlay({
                             (t) => (
                               <span
                                 key={t}
-                                className="border border-border bg-background px-3 py-1 text-[0.8125rem] uppercase tracking-[0.1em] text-foreground/75"
+                                className="border border-border bg-background px-3 py-1 bru-tag"
                               >
                                 {t}
                               </span>
@@ -800,19 +782,19 @@ export default function StyleguideOverlay({
                         <a
                           href="#"
                           onClick={(e) => e.preventDefault()}
-                          className="text-xs font-medium uppercase tracking-[0.1em] text-muted hover:text-accent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-none"
+                          className="bru-link text-muted hover:text-accent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-none"
                         >
                           Inline link
                         </a>
                         <button
                           type="button"
-                          className="border border-border bg-background px-4 py-2 text-xs font-medium uppercase tracking-[0.1em] shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                          className="border border-border bg-background px-4 py-2 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                         >
                           Button
                         </button>
                         <button
                           type="button"
-                          className="border border-border bg-accent-weak px-4 py-2 text-xs font-medium uppercase tracking-[0.1em] shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                          className="border border-border bg-accent-weak px-4 py-2 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                         >
                           Accent
                         </button>
@@ -912,7 +894,7 @@ export default function StyleguideOverlay({
                 </StyleguideSection>
 
                 <footer className="mt-12 border-t border-rulesolid pt-6">
-                  <p className="text-[0.8125rem] leading-normal text-foreground/72">
+                  <p className="bru-body-muted text-foreground/72">
                     Tip: Press{" "}
                     <span className="text-foreground font-semibold">Esc</span>{" "}
                     to close.

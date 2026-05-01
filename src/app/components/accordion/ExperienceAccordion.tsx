@@ -57,7 +57,7 @@ function StyledContent({
               <div className="flex flex-wrap items-end justify-between gap-3 border-b border-rulesolid px-4 py-2.5">
                 <div className="bru-label">Highlights</div>
                 <span
-                  className="font-mono text-[0.625rem] font-bold tabular-nums tracking-[0.22em] text-foreground/50 sm:text-[11px]"
+                  className="bru-acc-meta text-foreground/50"
                   aria-hidden="true"
                 >
                   {String(total).padStart(2, "0")}
@@ -73,7 +73,7 @@ function StyledContent({
                     key={idx}
                     className="grid grid-cols-[2.75rem_minmax(0,1fr)] divide-x divide-rulesolid"
                   >
-                    <div className="flex items-start justify-center bg-background/35 px-2 py-3 font-mono text-[0.6875rem] font-bold leading-none tabular-nums tracking-[0.14em] text-foreground/45">
+                    <div className="flex items-start justify-center bg-background/35 px-2 py-3 bru-acc-meta text-foreground/45">
                       {String(idx + 1).padStart(2, "0")}
                     </div>
                     <p className="m-0 px-4 py-3 bru-prose max-w-none">

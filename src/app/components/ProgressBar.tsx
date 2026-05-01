@@ -42,9 +42,7 @@ export default function SegmentedProgressBar({
     <div className="grid gap-2">
       <div className="flex items-end justify-between gap-3">
         <div className="min-w-0">
-          <div className="font-semibold tracking-[-0.01em] truncate">
-            {skill.name}
-          </div>
+          <div className="font-semibold truncate">{skill.name}</div>
           <div className="bru-label">
             {skill.level}
             {filledIndex >= 0 ? ` • ${progressPct}%` : ""}

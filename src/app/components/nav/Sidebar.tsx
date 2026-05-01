@@ -15,9 +15,7 @@ export default function Sidebar({ sections }: SidebarProps) {
     <div className="w-80 h-screen fixed top-0 left-0 pt-12 pb-6 px-10 flex justify-between flex-col border-r border-border bg-surface/75 overflow-y-auto">
       <div>
         <div className="mb-7 bru-panel px-4 py-4 animate-enter">
-          <p className="font-bold tracking-[-0.06em] text-[3.1rem] leading-[0.95]">
-            Jamie.
-          </p>
+          <p className="bru-h2">Jamie.</p>
           <p className="mt-2 bru-label">Full‑stack engineer · UI focused</p>
         </div>
 
