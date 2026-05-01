@@ -9,6 +9,7 @@ import Experience from "../sections/Experience";
 import Hero from "../sections/Hero";
 import Projects from "../sections/Projects";
 import Skills from "../sections/Skills";
+import { Fragment } from "react";
 
 export interface SectionItem {
   title: string;
@@ -35,14 +36,31 @@ export default function HomeClient() {
     <main className="no-scrollbar">
       <Sidebar sections={sections} />
       {sections.map(({ Component, href, title, showTitle }, idx) => (
-        <Section
-          key={href}
-          data={formatIndex(idx)}
-          href={href}
-          title={showTitle !== false ? title : undefined}
-        >
-          <Component />
-        </Section>
+        <Fragment key={href}>
+          <Section
+            data={formatIndex(idx)}
+            href={href}
+            title={showTitle !== false ? title : undefined}
+          >
+            <Component />
+          </Section>
+          {idx < sections.length - 1 && (
+            <div className="section-spacer ml-80 w-[calc(100%-20rem)]">
+              <div className="section-spacer__crosshair" aria-hidden="true" />
+              <div className="section-spacer__swatches" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="section-spacer__meta" aria-hidden="true">
+                <span>LOC: UK / REMOTE</span>
+                <span>BUILD: 2026</span>
+                <span>STATE: LIVE</span>
+              </div>
+            </div>
+          )}
+        </Fragment>
       ))}
     </main>
   );

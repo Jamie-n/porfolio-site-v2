@@ -1,10 +1,29 @@
 import { SkillLevel, Skill, SkillLevels } from "../data/skills";
 
-const levelColors: Record<SkillLevel, string> = {
-  Beginner: "bg-red-800",
-  Intermediate: "bg-red-700",
-  Advanced: "bg-red-600",
-  Expert: "bg-red-400",
+const levelStyles: Record<
+  SkillLevel,
+  { fill: string; tag: string; tick: string }
+> = {
+  Beginner: {
+    fill: "bg-accent opacity-40",
+    tag: "border-accent text-accent",
+    tick: "bg-accent opacity-60",
+  },
+  Intermediate: {
+    fill: "bg-accent opacity-55",
+    tag: "border-accent text-accent",
+    tick: "bg-accent opacity-75",
+  },
+  Advanced: {
+    fill: "bg-accent opacity-70",
+    tag: "border-accent text-accent",
+    tick: "bg-accent",
+  },
+  Expert: {
+    fill: "bg-accent",
+    tag: "bg-accent text-white border-accent",
+    tick: "bg-accent",
+  },
 };
 
 interface SegmentedProgressBarProps {
@@ -15,37 +34,69 @@ export default function SegmentedProgressBar({
   skill,
 }: SegmentedProgressBarProps) {
   const filledIndex = SkillLevels.indexOf(skill.level);
+  const progressPct =
+    Math.round(((skill.progress ?? 0) * 100 + Number.EPSILON) * 10) / 10;
+  const active = levelStyles[skill.level];
 
   return (
-    <div className="flex flex-col">
-      <div className="flex items-center justify-between mb-1">
-        <span className="font-medium">{skill.name}</span>
-        <span
-          className={`ml-2 px-2 py-0.5 text-xs rounded-full text-white ${levelColors[skill.level]}`}
-        >
-          {skill.level}
-        </span>
-      </div>
-      <div className="flex gap-1">
-        {SkillLevels.map((lvl, idx) => (
-          <div
-            key={idx}
-            className="flex-1 h-4 rounded relative bg-gray-300 dark:bg-gray-600"
-          >
-            {idx < filledIndex && (
-              <div
-                className={`h-4 rounded ${levelColors[lvl]}`}
-                style={{ width: "100%" }}
-              />
-            )}
-            {idx === filledIndex && (
-              <div
-                className={`h-4 rounded ${levelColors[lvl]}`}
-                style={{ width: `${(skill.progress ?? 0) * 100}%` }}
-              />
-            )}
+    <div className="grid gap-2">
+      <div className="flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <div className="font-semibold tracking-[-0.01em] truncate">
+            {skill.name}
           </div>
-        ))}
+          <div className="bru-label">
+            {skill.level}
+            {filledIndex >= 0 ? ` • ${progressPct}%` : ""}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={["relative bru-panel", "px-2 py-2"].join(" ")}
+        role="img"
+        aria-label={`${skill.name} proficiency: ${skill.level}${filledIndex >= 0 ? ` (${progressPct}%)` : ""}`}
+      >
+        <div className="flex gap-2">
+          {SkillLevels.map((lvl, idx) => {
+            const isBefore = idx < filledIndex;
+            const isActive = idx === filledIndex;
+            const segmentFill = isBefore
+              ? levelStyles[lvl].fill
+              : isActive
+                ? active.fill
+                : "";
+
+            return (
+              <div key={lvl} className="flex-1">
+                <div className="relative h-4 border border-border bg-background/40">
+                  {(isBefore || isActive) && (
+                    <div
+                      className={`h-full ${segmentFill}`}
+                      style={{
+                        width: isBefore ? "100%" : `${progressPct}%`,
+                      }}
+                    />
+                  )}
+
+                  {isActive && (
+                    <div
+                      className={[
+                        "absolute top-0 bottom-0 w-[2px]",
+                        "shadow-rule",
+                        active.tick,
+                      ].join(" ")}
+                      style={{ left: `calc(${progressPct}% - 1px)` }}
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
+
+                <div className="mt-2 bru-label-compact">{lvl}</div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

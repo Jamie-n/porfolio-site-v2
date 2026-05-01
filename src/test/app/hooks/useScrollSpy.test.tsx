@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { useRef } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import useScrollSpy from "./useScrollSpy";
+import useScrollSpy from "@/app/hooks/useScrollSpy";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({}),

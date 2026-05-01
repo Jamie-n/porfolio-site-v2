@@ -2,40 +2,75 @@
 
 import {
   ComponentPropsWithoutRef,
-  JSX,
   PropsWithChildren,
+  ReactNode,
+  useId,
+  useMemo,
   useState,
-  useRef,
 } from "react";
+import { cn } from "@/lib/cn";
 
 interface AccordionProps
   extends PropsWithChildren,
     ComponentPropsWithoutRef<"div"> {
-  Header: JSX.Element;
+  header: ReactNode;
+  defaultOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export default function Accordion({
-  Header,
+  header,
   children,
+  defaultOpen = false,
+  open,
+  onOpenChange,
   ...rest
 }: AccordionProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const contentId = rest.id ? `${rest.id}__content` : undefined;
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const reactId = useId();
+  const isControlled = open !== undefined;
+  const isOpen = isControlled ? open : uncontrolledOpen;
+  const contentId = useMemo(
+    () => (rest.id ? `${rest.id}__content` : `accordion_${reactId}__content`),
+    [reactId, rest.id],
+  );
+
+  const setIsOpen = (next: boolean | ((prev: boolean) => boolean)) => {
+    const resolved = typeof next === "function" ? next(isOpen) : next;
+    if (!isControlled) setUncontrolledOpen(resolved);
+    onOpenChange?.(resolved);
+  };
 
   return (
-    <div {...rest}>
+    <div
+      {...rest}
+      data-state={isOpen ? "open" : "closed"}
+      className={cn("my-4", rest.className)}
+    >
       <button
         type="button"
-        className="w-full text-left my-3 py-2 flex border-b-2 border-transparent hover:border-gray-100 transition-all ease-in-out"
+        className={cn(
+          "group relative w-full text-left py-3 px-6 flex overflow-hidden bru-panel",
+          "transition-[border-color,background-color,box-shadow] duration-200 ease-out",
+          "hover:border-accent/40 hover:bg-surface/80 hover:shadow-rule",
+          "data-[state=open]:bg-surface/85 data-[state=open]:border-accent/45 data-[state=open]:shadow-rule",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        )}
         aria-expanded={isOpen}
         aria-controls={contentId}
+        data-state={isOpen ? "open" : "closed"}
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {Header}
+        {header}
 
         <div
-          className={`self-center ms-auto transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+          className={cn(
+            "self-center ms-auto",
+            "transition-[transform,opacity] duration-200 ease-out motion-reduce:transition-none",
+            "opacity-70 group-hover:opacity-100",
+            isOpen && "rotate-180 scale-[1.06] opacity-100",
+          )}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,13 +90,21 @@ export default function Accordion({
       </button>
 
       <div
-        ref={contentRef}
         id={contentId}
-        className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
-          isOpen ? "max-h-[99999px] opacity-100" : "max-h-0 opacity-0"
-        }`}
+        data-testid="accordion-collapsible"
+        className={cn(
+          "overflow-hidden",
+          "transition-[max-height,opacity,filter] duration-500",
+          "[transition-timing-function:cubic-bezier(0.22,1,0.36,1)]",
+          "motion-reduce:transition-none",
+          isOpen
+            ? "max-h-[99999px] opacity-100 blur-0"
+            : "max-h-0 opacity-0 blur-[1px]",
+        )}
       >
-        <div className="py-2">{children}</div>
+        <div className="-mt-px border border-rulesolid border-t-0 bg-surface/65 shadow-rule">
+          <div className="px-6 py-5">{children}</div>
+        </div>
       </div>
     </div>
   );

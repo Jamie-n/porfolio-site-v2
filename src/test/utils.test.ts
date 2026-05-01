@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { formatIndex, scrollToElement, slugify } from "./utils";
+import { formatIndex, scrollToElement, slugify } from "@/utils";
 
 describe("slugify", () => {
   it("trims, lowercases, removes symbols, and hyphenates", () => {

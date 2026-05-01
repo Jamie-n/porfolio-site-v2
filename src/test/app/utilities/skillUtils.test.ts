@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { orderSkills } from "./skillUtils";
-import type { Skill } from "../data/skills";
+import { orderSkills } from "@/app/utilities/skillUtils";
+import type { Skill } from "@/app/data/skills";
 
 describe("orderSkills", () => {
   it("sorts by level descending then progress descending", () => {

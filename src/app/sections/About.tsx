@@ -2,20 +2,20 @@
 
 import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
 import CustomAnchor from "../components/display/CustomAnchor";
+import Header from "../components/Header";
 
 export default function About() {
   return (
     <>
-      <div className="my-5">
-        <p className="mb-10">
-          A pragmatic full-stack software engineer who excels at breaking down
-          complex problems and delivering simple, maintainable, and scalable
-          solutions. Experienced across the full development lifecycle and
-          comfortable collaborating with cross-functional and offshore teams.
+      <div className="mt-8 mb-12 grid gap-4 max-w-[72ch]">
+        <p className="bru-prose-muted max-w-[72ch]">
+          I’m a pragmatic full‑stack engineer focused on turning messy,
+          real‑world constraints into clean systems and crisp interfaces. I care
+          about fast feedback loops, maintainable code, and UI details that hold
+          up in production.
         </p>
-
-        <p>
-          Want to see some examples of my work? Check out my{" "}
+        <p className="bru-prose-muted max-w-[72ch]">
+          If you want the raw code, my work lives on{" "}
           <CustomAnchor
             href="https://github.com/Jamie-n"
             target="_blank"
@@ -27,7 +27,10 @@ export default function About() {
         </p>
       </div>
 
-      <p className="text-5xl font-bold my-5">Education</p>
+      <div className="mb-8 bru-panel px-4 py-3">
+        <div className="bru-label">Background</div>
+        <Header variant="subheading">Education</Header>
+      </div>
 
       <ExperienceAccordion
         title="Software Engineering MSc"

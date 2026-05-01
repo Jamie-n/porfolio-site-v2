@@ -1,11 +1,16 @@
 import { ComponentProps } from "react";
+import { cn } from "@/lib/cn";
 
 export default function CustomAnchor({
   children,
+  className,
   ...rest
-}: Omit<ComponentProps<"a">, "className">) {
+}: ComponentProps<"a">) {
   return (
-    <a {...rest} className="underline hover:text-red-500 transition-colors">
+    <a
+      {...rest}
+      className={cn("underline hover:text-accent transition-colors", className)}
+    >
       {children}
     </a>
   );
