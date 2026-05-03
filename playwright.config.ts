@@ -8,9 +8,9 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
-    // Shortens `FirstVisitSplash` client path so smoke tests can interact immediately.
-    reducedMotion: "reduce",
     colorScheme: "light",
+    // Shortens `FirstVisitSplash` client path so smoke tests can interact immediately.
+    contextOptions: { reducedMotion: "reduce" },
   },
   webServer: {
     command: "npm run dev -- --port 3000",
