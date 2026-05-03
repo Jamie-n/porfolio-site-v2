@@ -383,8 +383,9 @@ export default function JourneyOverlay({
                       variant="proseMuted"
                       className="mt-3 max-w-[72ch]"
                     >
-                      Context, inspiration, and how I&apos;m using AI as a force
-                      multiplier without outsourcing judgment.
+                      Why I rebuilt the site, what guided the visual direction,
+                      and how I use AI to move faster without handing off taste
+                      or accountability.
                     </BruText>
                   </div>
 
@@ -461,11 +462,11 @@ export default function JourneyOverlay({
                           variant="proseMuted"
                           className="mt-3 max-w-[72ch]"
                         >
-                          Add your original inspiration images to{" "}
+                          Drop original reference images in{" "}
                           <span className="font-mono text-[0.8125rem] text-foreground/70">
                             public/inspiration/
                           </span>{" "}
-                          and they&apos;ll appear here.
+                          to populate this gallery.
                         </BruText>
                         <div className="mt-5 grid gap-4 sm:grid-cols-2">
                           {[
@@ -528,9 +529,9 @@ export default function JourneyOverlay({
                           variant="proseMuted"
                           className="mt-3 max-w-[72ch]"
                         >
-                          View the workflow notes, CI configuration, and the
-                          supporting skill docs used while building and refining
-                          this portfolio.
+                          Browse the workflow notes, CI setup, and supporting
+                          skill docs I used while building and refining this
+                          site.
                         </BruText>
                         <div className="mt-5">
                           <SkillFileBrowser items={skills} />
