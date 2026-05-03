@@ -1,11 +1,13 @@
 ---
 name: portfolio-design-style
 description: >-
-  Applies this portfolio’s visual language using `docs/design-system.md`,
-  the in-app styleguide (`StyleguideOverlay.tsx`), and brutalist /
-  print-editorial principles. Use when styling UI in `src/app/`, changing
-  `globals.css` or `tailwind.config.ts`, polishing sections/components, or
-  when the user mentions the styleguide, design system, brutalist style,
+  Applies this portfolio’s visual language using `docs/design-system.md`
+  and the in-app styleguide (`StyleguideOverlay.tsx`) as the empirical
+  source of truth. Enforces componentised building blocks and content blocks,
+  mandatory styleguide recipes for new blocks, and a clear chapter/section
+  hierarchy. Use when styling UI in `src/app/`, changing `globals.css` or
+  `tailwind.config.ts`, polishing sections/components, or when the user
+  mentions the styleguide, design system, content blocks, brutalist style,
   print design, or visual consistency.
 disable-model-invocation: true
 ---
@@ -14,7 +16,15 @@ disable-model-invocation: true
 
 ## Source of truth: the styleguide
 
-**Before shipping UI changes, align with the live styleguide** in `src/app/components/StyleguideOverlay.tsx`. It is the canonical catalog of tokens, recipes, and component demos. Prefer matching its patterns over inventing new ones.
+**The live styleguide in `src/app/components/StyleguideOverlay.tsx` is the empirical source of truth** for this site: how blocks look, compose, and behave (spacing, type, states, motion). Read `docs/design-system.md` for intent and vocabulary, but **implement and validate against the overlay**. If prose and the overlay disagree, fix the drift (usually by updating the styleguide and/or the doc)—do not ship UI that only exists outside the styleguide.
+
+**Before shipping UI changes, align with the styleguide.** Prefer matching documented recipes over inventing new ones.
+
+### Componentize: building blocks and content blocks
+
+- **Componentise the system by default:** favor small, reusable **building blocks** (primitives, panels, type bands, metadata rows, cards, section headers, list treatments) over long one-off JSX in section files.
+- **Content blocks** are reusable compositions meant for real page content (not only chrome). Implement them as named components under `src/app/components/` (or shared primitives used by sections) with clear props so the same block can be dropped into multiple contexts.
+- **Extract** repeated markup into components early; if a pattern might be reused, treat it as a block—not a copy-paste variant.
 
 ### Authority and source material (do not reinterpret)
 
@@ -29,9 +39,15 @@ disable-model-invocation: true
 
 ### Gap-filling policy (how we prevent styling drift)
 
-- If a new feature needs a UI pattern that is not documented in the styleguide overlay:
-  - **Add the recipe to `StyleguideOverlay.tsx` first** (tokens + spacing + interaction states + reduced-motion).
-  - Then build the feature by composing that recipe.
+- If a new feature needs a UI pattern, token use, or **content block** that is not represented in the styleguide overlay:
+  - **Add a live recipe to `StyleguideOverlay.tsx` first** (tokens + spacing + interaction states + `prefers-reduced-motion`), placed in the correct place in the hierarchy (see below).
+  - Then build the feature by importing and composing that block (or matching its recipe exactly).
+
+### Styleguide structure (definitive hierarchy)
+
+- The overlay must stay a **clear, navigable tree**: use **`StyleguideChapter`** → **`StyleguideSection`** so readers scan top-to-bottom from foundations → surfaces/motifs → interaction → patterns → app shell.
+- **New content blocks and new recipes** get their own **`StyleguideSection`** (or a clearly named subsection inside the closest existing section)—do not bury unrelated demos inside an arbitrary panel.
+- Keep section titles descriptive and stable; match the ordering and grouping spirit of existing chapters when you extend the file.
 
 The overlay documents these areas (read the corresponding sections in code when implementing):
 
@@ -107,7 +123,8 @@ Treat the page like **print layout** adapted for the web.
 ## Quick checklist
 
 - [ ] Checked **StyleguideOverlay** for the closest existing recipe and matched spacing, type, and panel patterns.
-- [ ] If the pattern didn’t exist, added a **styleguide recipe first**, then reused it.
+- [ ] **Componentised** new UI into reusable building blocks or content blocks where appropriate (no unnecessary one-off markup in sections).
+- [ ] If the pattern or block didn’t exist, added a **live styleguide recipe** under the right **chapter → section** hierarchy, then composed the feature from that block or recipe.
 - [ ] Brutalist: structure and type carry hierarchy; accent used with restraint; no gratuitous new colors or stacked textures.
 - [ ] Print: rules, meta typography, and section breaks feel consistent with existing spacers and motifs.
 - [ ] Theme CSS variables / existing Tailwind token names; `bru-*` text utilities where appropriate.

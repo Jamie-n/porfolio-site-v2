@@ -2,8 +2,11 @@
 
 import { formatIndex } from "../../../utils";
 import { SectionItem } from "../../[[...slug]]/page";
+import { aiWorkflowFiles } from "@/app/data/aiWorkflowFiles";
 import DarkModeToggle from "../DarkModeToggle";
+import JourneyOverlay from "../JourneyOverlay";
 import StyleguideOverlay from "../StyleguideOverlay";
+import { BruText } from "../primitives/BruText";
 import NavItem from "./NavItem";
 
 interface SidebarProps {
@@ -15,8 +18,12 @@ export default function Sidebar({ sections }: SidebarProps) {
     <div className="w-80 h-screen fixed top-0 left-0 pt-12 pb-6 px-10 flex justify-between flex-col border-r border-border bg-surface/75 overflow-y-auto">
       <div>
         <div className="mb-7 bru-panel px-4 py-4 animate-enter">
-          <p className="bru-h2">Jamie.</p>
-          <p className="mt-2 bru-label">Full‑stack engineer · UI focused</p>
+          <BruText as="p" variant="displayH2">
+            Jamie.
+          </BruText>
+          <BruText as="p" variant="label" className="mt-2">
+            Full‑stack engineer · UI focused
+          </BruText>
         </div>
 
         <div className="flex flex-col gap-1">
@@ -70,6 +77,7 @@ export default function Sidebar({ sections }: SidebarProps) {
           </a>
         </div>
         <DarkModeToggle />
+        <JourneyOverlay skills={aiWorkflowFiles} />
         <StyleguideOverlay />
       </div>
     </div>

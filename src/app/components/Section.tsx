@@ -4,6 +4,7 @@ import { ComponentPropsWithoutRef, PropsWithChildren, useRef } from "react";
 import useScrollSpy from "../hooks/useScrollSpy";
 import ContentContainer from "./ContentContainer";
 import Header from "./Header";
+import { BruText } from "./primitives/BruText";
 import Reveal from "./Reveal";
 import { cn } from "@/lib/cn";
 
@@ -42,7 +43,7 @@ export default function Section({
           <Reveal>
             <div className="grid gap-6">
               <div className="bru-panel px-4 py-3">
-                <div className="bru-label">Section</div>
+                <BruText variant="label">Section</BruText>
                 <Header variant="title">{title}</Header>
               </div>
             </div>

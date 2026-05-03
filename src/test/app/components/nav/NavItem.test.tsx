@@ -25,7 +25,9 @@ describe("NavItem", () => {
 
   it("renders as active when pathname matches href", () => {
     render(<NavItem linkText="02. About" href="/about" />);
-    expect(screen.getByText("02. About")).toHaveClass("text-accent");
+    const label = screen.getByText("02. About");
+    expect(label).toHaveClass("bru-h3");
+    expect(label).toHaveClass("text-accent");
   });
 
   it("smooth-scrolls and updates URL without navigation", async () => {

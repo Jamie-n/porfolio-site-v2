@@ -1,4 +1,5 @@
 import { SkillLevel, Skill, SkillLevels } from "../data/skills";
+import { BruText } from "./primitives/BruText";
 
 const levelStyles: Record<
   SkillLevel,
@@ -43,10 +44,10 @@ export default function SegmentedProgressBar({
       <div className="flex items-end justify-between gap-3">
         <div className="min-w-0">
           <div className="font-semibold truncate">{skill.name}</div>
-          <div className="bru-label">
+          <BruText variant="label">
             {skill.level}
             {filledIndex >= 0 ? ` • ${progressPct}%` : ""}
-          </div>
+          </BruText>
         </div>
       </div>
 
@@ -90,7 +91,9 @@ export default function SegmentedProgressBar({
                   )}
                 </div>
 
-                <div className="mt-2 bru-label-compact">{lvl}</div>
+                <BruText variant="labelCompact" className="mt-2 block">
+                  {lvl}
+                </BruText>
               </div>
             );
           })}

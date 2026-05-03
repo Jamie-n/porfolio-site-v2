@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "../components/Header";
+import { BruText } from "../components/primitives/BruText";
 import type { MouseEvent } from "react";
 import { scrollToHref } from "@/utils";
 import Link from "next/link";
@@ -29,12 +30,20 @@ export default function Hero() {
 
             <div className="absolute inset-x-0 top-0 border-b border-border bg-background/80 backdrop-blur-sm">
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="bru-label-compact text-foreground/70">
+                <BruText
+                  as="span"
+                  variant="labelCompact"
+                  className="text-foreground/70"
+                >
                   imprint
-                </span>
-                <span className="bru-label-compact text-foreground/70">
+                </BruText>
+                <BruText
+                  as="span"
+                  variant="labelCompact"
+                  className="text-foreground/70"
+                >
                   edition 2026
-                </span>
+                </BruText>
               </div>
             </div>
 
@@ -50,20 +59,32 @@ export default function Hero() {
                   JN
                 </span>
 
-                <span className="bru-label-compact text-foreground/70">
+                <BruText
+                  as="span"
+                  variant="labelCompact"
+                  className="text-foreground/70"
+                >
                   portfolio mark
-                </span>
+                </BruText>
               </div>
             </div>
 
             <div className="absolute inset-x-0 bottom-0 border-t border-border bg-background/85">
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="bru-label-compact text-foreground/70">
+                <BruText
+                  as="span"
+                  variant="labelCompact"
+                  className="text-foreground/70"
+                >
                   uk / remote
-                </span>
-                <span className="bru-label-compact text-foreground/70">
+                </BruText>
+                <BruText
+                  as="span"
+                  variant="labelCompact"
+                  className="text-foreground/70"
+                >
                   build / ship / iterate
-                </span>
+                </BruText>
               </div>
             </div>
           </div>
@@ -72,7 +93,10 @@ export default function Hero() {
         <div className="grid gap-8 animate-enter animate-enter-delay-1 lg:pl-[24rem] lg:pt-10">
           <div className="grid gap-4">
             <div className="grid gap-3">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 bru-label">
+              <BruText
+                variant="label"
+                className="flex flex-wrap items-center gap-x-4 gap-y-2"
+              >
                 <span className="inline-flex items-center gap-2">
                   <span className="h-3 w-[1px] bg-border" />
                   Full‑stack engineer
@@ -85,17 +109,17 @@ export default function Hero() {
                   <span className="h-3 w-[1px] bg-border" />
                   UK / Remote
                 </span>
-              </div>
+              </BruText>
 
               <Header variant="title" className="text-balance">
                 I build sharp, print‑influenced web products that ship.
               </Header>
 
-              <p className="max-w-[62ch] bru-prose-muted">
+              <BruText as="p" variant="proseMuted" className="max-w-[62ch]">
                 I’m Jamie Neighbours — a software engineer who turns messy
                 problems into clean systems and crisp interfaces. Fast
                 iteration, strong UX, and details that hold up in production.
-              </p>
+              </BruText>
             </div>
           </div>
 

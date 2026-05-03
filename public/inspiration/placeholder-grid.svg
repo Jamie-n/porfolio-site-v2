@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" role="img" aria-label="Grid + rules placeholder">
+  <rect width="400" height="240" fill="#0d0d0d"/>
+  <g stroke="#1f1f1f" stroke-width="1">
+    <path d="M0 60 H400"/>
+    <path d="M0 120 H400"/>
+    <path d="M0 180 H400"/>
+    <path d="M80 0 V240"/>
+    <path d="M160 0 V240"/>
+    <path d="M240 0 V240"/>
+    <path d="M320 0 V240"/>
+  </g>
+  <g fill="#f5f5f5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="20" y="40" font-size="11" letter-spacing="3">GRID + RULES</text>
+    <text x="20" y="220" font-size="9" letter-spacing="2" fill="#888">PLATE 01</text>
+    <text x="380" y="220" font-size="9" letter-spacing="2" fill="#888" text-anchor="end">2026</text>
+  </g>
+  <g stroke="#e63946" stroke-width="1.5" fill="none">
+    <path d="M260 90 H340"/>
+    <path d="M260 90 V150"/>
+  </g>
+</svg>

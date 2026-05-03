@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { ComponentPropsWithoutRef, CSSProperties, MouseEvent } from "react";
 import { scrollToHref } from "@/utils";
 import { cn } from "@/lib/cn";
+import { BruText } from "../primitives/BruText";
 
 type AnchorProps = Omit<ComponentPropsWithoutRef<"a">, "href" | "children">;
 
@@ -52,15 +53,17 @@ export default function NavItem({
               isActive && "bg-accent",
             )}
           />
-          <span
+          <BruText
+            as="span"
+            variant="displayH3"
             className={cn(
-              "bru-h3 transition-all duration-200 ease-out",
+              "transition-all duration-200 ease-out",
               "hover:text-accent hover:-translate-y-[1px]",
               isActive && "text-accent",
             )}
           >
             {linkText}
-          </span>
+          </BruText>
         </span>
       </a>
     </div>

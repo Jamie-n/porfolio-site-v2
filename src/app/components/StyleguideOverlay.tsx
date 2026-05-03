@@ -9,8 +9,53 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
+import { cn } from "@/lib/cn";
+import Homepage from "@/assets/chris-bradbrook/hero.png";
 import Accordion from "./accordion/Accordion";
+import ExperienceAccordion from "./accordion/ExperienceAccordion";
+import CaseStudyCard, { caseStudyLinkButtonClassName } from "./CaseStudyCard";
+import AiLoopFlowchart from "./AiLoopFlowchart";
+import Flowchart from "./Flowchart";
+import DarkModeToggle from "./DarkModeToggle";
+import BrutalScreenshot from "./display/BrutalScreenshot";
+import CustomAnchor from "./display/CustomAnchor";
+import Header from "./Header";
+import Markdown from "./Markdown";
+import { OpenJourneyOverlayButton } from "./JourneyOverlay";
+import NavItem from "./nav/NavItem";
+import SegmentedProgressBar from "./ProgressBar";
+import Reveal from "./Reveal";
+import SkillFileBrowser, { type SkillFileItem } from "./SkillFileBrowser";
 import Toggle from "./Toggle";
+import { BruText } from "./primitives/BruText";
+
+const styleguideFileBrowserItems: SkillFileItem[] = [
+  {
+    id: "styleguide-ai-workflow",
+    title: "AI workflow notes",
+    path: "/content/ai-workflow/workflow.md",
+  },
+  {
+    id: "styleguide-journey-overview",
+    title: "Journey overview",
+    path: "/content/journey/overview.md",
+  },
+];
+
+const demoSkillForStyleguide = {
+  name: "TypeScript",
+  level: "Advanced" as const,
+  progress: 0.72,
+};
+
+const demoMarkdownSample = `## Markdown preview
+
+A **short** sample with a [link](https://example.com) and \`inline code\`.
+
+\`\`\`ts
+const ok = true;
+\`\`\`
+`;
 
 interface StyleguideOverlayProps {
   triggerLabel?: string;
@@ -27,7 +72,9 @@ function StyleguideSection({
 }) {
   return (
     <section className={`mt-10 ${className}`.trim()}>
-      <h2 className="bru-label">{title}</h2>
+      <BruText as="h2" variant="label">
+        {title}
+      </BruText>
       {children}
     </section>
   );
@@ -50,8 +97,45 @@ function StyleguidePanel({
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="grid grid-cols-1 gap-3 py-3 sm:grid-cols-[minmax(0,10rem)_1fr] sm:gap-6">
-      <div className={`bru-label sm:pt-0.5`}>{label}</div>
-      <div className="bru-body text-foreground">{value}</div>
+      <BruText variant="label" className="sm:pt-0.5">
+        {label}
+      </BruText>
+      <BruText variant="body" className="text-foreground">
+        {value}
+      </BruText>
+    </div>
+  );
+}
+
+function StyleguideChapter({
+  className,
+  eyebrow,
+  title,
+  description,
+}: {
+  className?: string;
+  eyebrow: string;
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "mt-14 scroll-mt-8 border-t border-rulesolid pt-10",
+        className,
+      )}
+    >
+      <BruText as="p" variant="label">
+        {eyebrow}
+      </BruText>
+      <BruText as="h2" variant="displayH2" className="mt-2 text-balance">
+        {title}
+      </BruText>
+      {description ? (
+        <BruText as="p" variant="proseMuted" className="mt-3 max-w-[72ch]">
+          {description}
+        </BruText>
+      ) : null}
     </div>
   );
 }
@@ -240,8 +324,10 @@ export default function StyleguideOverlay({
         onClick={openOverlay}
         className="w-full bru-panel px-4 py-3 text-left transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40"
       >
-        <div className="bru-label">Reference</div>
-        <div className="mt-1 bru-h3">{triggerLabel}</div>
+        <BruText variant="label">Reference</BruText>
+        <BruText variant="displayH3" className="mt-1 block">
+          {triggerLabel}
+        </BruText>
       </button>
 
       {canPortal &&
@@ -284,10 +370,12 @@ export default function StyleguideOverlay({
               <div className="p-6 sm:p-8 pb-10">
                 <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                   <div className="min-w-0">
-                    <p id={titleId} className="bru-label">
+                    <BruText as="p" id={titleId} variant="label">
                       Design language
-                    </p>
-                    <h1 className="mt-2 bru-h2">Brutalist styleguide</h1>
+                    </BruText>
+                    <BruText as="h1" variant="displayH2" className="mt-2">
+                      Brutalist styleguide
+                    </BruText>
                   </div>
 
                   <button
@@ -300,16 +388,12 @@ export default function StyleguideOverlay({
                   </button>
                 </header>
 
-                <StyleguideSection title="Motifs">
-                  <StyleguidePanel className="py-4 sm:py-5">
-                    <p className="bru-prose max-w-[80ch]">
-                      Boxed panels, subtle grid overlays, vertical/metadata
-                      labels, high contrast neutrals, and crisp physical hover
-                      motion. Accent red is reserved for interactive states and
-                      key hierarchy moments.
-                    </p>
-                  </StyleguidePanel>
-                </StyleguideSection>
+                <StyleguideChapter
+                  className="mt-8 border-t-0 pt-0"
+                  eyebrow="I. Foundations"
+                  title="Tokens, typography, spacing"
+                  description="Read in this order: semantic colour tokens, then typography (recipes and scale), then spacing rhythm. Later sections build on these primitives."
+                />
 
                 <StyleguideSection title="Tokens">
                   <StyleguidePanel className="py-0 px-0">
@@ -337,92 +421,185 @@ export default function StyleguideOverlay({
                   </StyleguidePanel>
                 </StyleguideSection>
 
-                <StyleguideSection title="Typography recipes">
-                  <StyleguidePanel className="py-0 px-0">
-                    <div className="bru-divide-y px-6">
-                      <Row
-                        label="Display"
-                        value={<div className="bru-h1">City</div>}
-                      />
-                      <Row
-                        label="Signage"
-                        value={
-                          <div className="bru-h3 text-foreground/70">
-                            Wild Fire City
+                <StyleguideSection title="Typography">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Recipes name the roles you pair in UI; scale shows the steps
+                    from display through body and captions. Keep headings tight
+                    and body copy within a comfortable measure.
+                  </p>
+                  <div className="mt-6 grid gap-8">
+                    <div>
+                      <div className="bru-label">Recipes</div>
+                      <StyleguidePanel className="mt-3 py-0 px-0">
+                        <div className="bru-divide-y px-6">
+                          <Row
+                            label="Display"
+                            value={<div className="bru-h1">City</div>}
+                          />
+                          <Row
+                            label="Signage"
+                            value={
+                              <div className="bru-h3 text-foreground/70">
+                                Wild Fire City
+                              </div>
+                            }
+                          />
+                          <Row
+                            label="Metadata"
+                            value={
+                              <div className="bru-label">104 High St. W</div>
+                            }
+                          />
+                          <Row
+                            label="Body"
+                            value={
+                              <p className="bru-body max-w-[72ch]">
+                                Strong hierarchy, tight tracking in headers, and
+                                readable editorial line-length for paragraphs.
+                              </p>
+                            }
+                          />
+                        </div>
+                      </StyleguidePanel>
+                    </div>
+                    <div>
+                      <div className="bru-label">Scale</div>
+                      <StyleguidePanel className="mt-3">
+                        <div className="grid gap-6">
+                          <div className="grid gap-1">
+                            <div className="bru-label">Display / H1</div>
+                            <div className="bru-h1">Brutal City</div>
                           </div>
-                        }
-                      />
-                      <Row
-                        label="Metadata"
-                        value={<div className="bru-label">104 High St. W</div>}
-                      />
-                      <Row
-                        label="Body"
-                        value={
-                          <p className="bru-body max-w-[72ch]">
-                            Strong hierarchy, tight tracking in headers, and
-                            readable editorial line-length for paragraphs.
-                          </p>
-                        }
-                      />
+
+                          <div className="grid gap-1 border-t border-rulesolid pt-6">
+                            <div className="bru-label">H2</div>
+                            <div className="bru-h2">Section heading</div>
+                          </div>
+
+                          <div className="grid gap-1 border-t border-rulesolid pt-6">
+                            <div className="bru-label">H3 / panel title</div>
+                            <div className="bru-h3">Panel title</div>
+                          </div>
+
+                          <div className="grid gap-2 border-t border-rulesolid pt-6">
+                            <div className="bru-label">Body</div>
+                            <p className="bru-body max-w-[72ch]">
+                              Strong hierarchy, tight tracking in headers, and
+                              an editorial line-length for paragraphs. Keep body
+                              text readable in both light and dark themes.
+                            </p>
+                            <p className="bru-body-muted max-w-[72ch]">
+                              Muted body is for supporting copy, secondary
+                              metadata, and less important detail.
+                            </p>
+                          </div>
+
+                          <div className="grid gap-1 border-t border-rulesolid pt-6">
+                            <div className="bru-label">Metadata / caption</div>
+                            <div className="bru-label">
+                              104 High St. W — 2026
+                            </div>
+                          </div>
+
+                          <div className="grid gap-2 border-t border-rulesolid pt-6">
+                            <div className="bru-label">
+                              Compact label (hero strips)
+                            </div>
+                            <div className="flex flex-wrap gap-6 border border-rulesolid bg-background/50 px-4 py-3">
+                              <span className="bru-label-compact text-foreground/70">
+                                imprint
+                              </span>
+                              <span className="bru-label-compact text-foreground/70">
+                                edition 2026
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </StyleguidePanel>
                     </div>
-                  </StyleguidePanel>
+                  </div>
                 </StyleguideSection>
 
-                <StyleguideSection title="Interaction">
-                  <StyleguidePanel className="py-0 px-0">
-                    <div className="bru-divide-y px-6">
-                      <Row
-                        label="Timing"
-                        value="Default transitions: 150–200ms, ease-out."
-                      />
-                      <Row
-                        label="Hover"
-                        value="A 1px nudge plus border/rule emphasis (avoid heavy fades)."
-                      />
-                      <Row
-                        label="Focus"
-                        value="Always visible ring via `:focus-visible` and the `--ring` token."
-                      />
-                    </div>
-                  </StyleguidePanel>
-                </StyleguideSection>
-
-                <StyleguideSection title="Typography scale">
+                <StyleguideSection title="Spacing & layout rhythm">
                   <StyleguidePanel>
                     <div className="grid gap-6">
-                      <div className="grid gap-1">
-                        <div className="bru-label">Display / H1</div>
-                        <div className="bru-h1">Brutal City</div>
+                      <p className="bru-prose-muted max-w-[80ch]">
+                        Use a small set of repeatable spacing steps. Panels
+                        typically use 20–24px padding; section separators use a
+                        thin rule plus a label.
+                      </p>
+                      <div className="grid gap-3 border-t border-rulesolid pt-6">
+                        <div className="bru-label">Spacing steps (px)</div>
+                        <div className="flex flex-wrap items-end gap-6">
+                          {[4, 8, 12, 16, 24, 32, 48].map((n) => (
+                            <div key={n} className="grid gap-2">
+                              <div
+                                className="w-10 border border-border bg-background"
+                                style={{ height: `${n}px` }}
+                              />
+                              <div className="bru-label text-center">{n}</div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
+                    </div>
+                  </StyleguidePanel>
+                </StyleguideSection>
 
-                      <div className="grid gap-1 border-t border-rulesolid pt-6">
-                        <div className="bru-label">H2</div>
-                        <div className="bru-h2">Section heading</div>
-                      </div>
+                <StyleguideChapter
+                  eyebrow="II. Patterns"
+                  title="Visual language, layout, and interaction"
+                  description="Motifs and colour sit on the token base. Case study cards, navigation, forms, motion, iconography, writing style, and components follow."
+                />
 
-                      <div className="grid gap-1 border-t border-rulesolid pt-6">
-                        <div className="bru-label">H3 / panel title</div>
-                        <div className="bru-h3">Panel title</div>
+                <StyleguideSection title="Motifs">
+                  <StyleguidePanel className="py-4 sm:py-5">
+                    <p className="bru-prose max-w-[80ch]">
+                      Boxed panels, subtle grid overlays, vertical/metadata
+                      labels, high contrast neutrals, and crisp physical hover
+                      motion. Accent red is reserved for interactive states and
+                      key hierarchy moments.
+                    </p>
+                    <div className="mt-6 border-t border-rulesolid pt-6 grid gap-3">
+                      <div className="bru-label">
+                        Hero / print surfaces (live site)
                       </div>
-
-                      <div className="grid gap-2 border-t border-rulesolid pt-6">
-                        <div className="bru-label">Body</div>
-                        <p className="bru-body max-w-[72ch]">
-                          Strong hierarchy, tight tracking in headers, and an
-                          editorial line-length for paragraphs. Keep body text
-                          readable in both light and dark themes.
-                        </p>
-                        <p className="bru-body-muted max-w-[72ch]">
-                          Muted body is for supporting copy, secondary metadata,
-                          and less important detail.
-                        </p>
-                      </div>
-
-                      <div className="grid gap-1 border-t border-rulesolid pt-6">
-                        <div className="bru-label">Metadata / caption</div>
-                        <div className="bru-label">104 High St. W — 2026</div>
-                      </div>
+                      <ul className="m-0 list-disc pl-5 bru-prose-muted max-w-[80ch] space-y-1">
+                        <li>
+                          <span className="text-foreground/80 font-medium">
+                            bru-label-compact
+                          </span>{" "}
+                          — imprint strips and microcopy in tight rails.
+                        </li>
+                        <li>
+                          <span className="text-foreground/80 font-medium">
+                            halftone
+                          </span>{" "}
+                          and{" "}
+                          <span className="text-foreground/80 font-medium">
+                            reg-marks
+                          </span>{" "}
+                          — texture overlays on the hero portrait card.
+                        </li>
+                        <li>
+                          Dashed frame:{" "}
+                          <code className="font-mono text-[0.8125rem]">
+                            border-dashed
+                          </code>{" "}
+                          outer rule with a slight{" "}
+                          <code className="font-mono text-[0.8125rem]">
+                            group-hover:rotate-1
+                          </code>{" "}
+                          on the hero stack.
+                        </li>
+                        <li>
+                          Strips:{" "}
+                          <code className="font-mono text-[0.8125rem]">
+                            bg-background/80 backdrop-blur-sm
+                          </code>{" "}
+                          for top/bottom imprint bars on the portrait.
+                        </li>
+                      </ul>
                     </div>
                   </StyleguidePanel>
                 </StyleguideSection>
@@ -465,28 +642,65 @@ export default function StyleguideOverlay({
                   </StyleguidePanel>
                 </StyleguideSection>
 
-                <StyleguideSection title="Spacing & layout rhythm">
-                  <StyleguidePanel>
-                    <div className="grid gap-6">
-                      <p className="bru-prose-muted max-w-[80ch]">
-                        Use a small set of repeatable spacing steps. Panels
-                        typically use 20–24px padding; section separators use a
-                        thin rule plus a label.
+                <StyleguideSection title="Case study card">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Projects use this panel: eyebrow, title, optional meta line,
+                    three metadata chips, muted summary, ruled bullet list, CTA
+                    row, and an optional appendix (for example a screenshot
+                    grid).
+                  </p>
+                  <CaseStudyCard
+                    className="mt-6 mb-0"
+                    title="Example shipped product"
+                    meta="Client ltd · 2024"
+                    chips={["Next.js · App Router", "RBAC", "design tokens"]}
+                    summary={
+                      <p>
+                        Two sentences max: what shipped, for whom, and the
+                        constraint that mattered most.
                       </p>
-                      <div className="grid gap-3 border-t border-rulesolid pt-6">
-                        <div className="bru-label">Spacing steps (px)</div>
-                        <div className="flex flex-wrap items-end gap-6">
-                          {[4, 8, 12, 16, 24, 32, 48].map((n) => (
-                            <div key={n} className="grid gap-2">
-                              <div
-                                className="w-10 border border-border bg-background"
-                                style={{ height: `${n}px` }}
-                              />
-                              <div className="bru-label text-center">{n}</div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                    }
+                    bullets={[
+                      "Framed the problem before touching the stack—clear success criteria and rollback.",
+                      "Cut scope into shippable slices so review stayed honest and timelines stayed credible.",
+                      "Chose boring foundations where possible; complexity only where it earned rent.",
+                    ]}
+                    footer={
+                      <a
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
+                        className={caseStudyLinkButtonClassName}
+                      >
+                        Visit live site
+                      </a>
+                    }
+                    appendix={{
+                      label: "Screens",
+                      children: (
+                        <p className="bru-body-muted text-sm leading-relaxed">
+                          Appendix slot: screenshot grid, diagrams, or
+                          repository notes.
+                        </p>
+                      ),
+                    }}
+                  />
+                </StyleguideSection>
+
+                <StyleguideSection title="Interaction">
+                  <StyleguidePanel className="py-0 px-0">
+                    <div className="bru-divide-y px-6">
+                      <Row
+                        label="Timing"
+                        value="Default transitions: 150–200ms, ease-out."
+                      />
+                      <Row
+                        label="Hover"
+                        value="A 1px nudge plus border/rule emphasis (avoid heavy fades)."
+                      />
+                      <Row
+                        label="Focus"
+                        value="Always visible ring via `:focus-visible` and the `--ring` token."
+                      />
                     </div>
                   </StyleguidePanel>
                 </StyleguideSection>
@@ -597,33 +811,314 @@ export default function StyleguideOverlay({
                 </StyleguideSection>
 
                 <StyleguideSection title="Iconography">
-                  <StyleguidePanel>
-                    <div className="bru-label">Sizes & hover</div>
-                    <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-                      <button
-                        type="button"
-                        className="grid shrink-0 place-items-center border border-border bg-background h-10 w-10 shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                        aria-label="Icon button"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          className="h-5 w-5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 6v12m6-6H6"
-                          />
-                        </svg>
-                      </button>
-                      <p className="bru-prose-muted max-w-[72ch]">
-                        Prefer 16–20px icons, ~1.5 stroke, and the same hover
-                        rules as links (accent + 1px nudge when appropriate).
-                      </p>
+                  <StyleguidePanel className="py-0 px-0">
+                    <div className="bru-divide-y">
+                      <div className="px-6 py-5">
+                        <div className="bru-label">
+                          Stroke icons (UI chrome)
+                        </div>
+                        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+                          <button
+                            type="button"
+                            className="grid shrink-0 place-items-center border border-border bg-background h-10 w-10 shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                            aria-label="Example stroke icon control"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              className="h-5 w-5"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 6v12m6-6H6"
+                              />
+                            </svg>
+                          </button>
+                          <p className="bru-prose-muted max-w-[72ch] m-0">
+                            Boxed controls:{" "}
+                            <span className="text-foreground/85 font-medium">
+                              20×20px
+                            </span>{" "}
+                            glyph in a{" "}
+                            <span className="text-foreground/85 font-medium">
+                              40×40px
+                            </span>{" "}
+                            hit area,{" "}
+                            <span className="text-foreground/85 font-medium">
+                              strokeWidth 1.5
+                            </span>
+                            , round caps/joins — same hover and focus recipes as
+                            bordered buttons.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="px-6 py-5">
+                        <div className="bru-label">
+                          Inline social (16×16, fill) — live site
+                        </div>
+                        <p className="mt-3 bru-prose-muted max-w-[80ch] m-0">
+                          Sidebar and hero reuse identical GitHub and LinkedIn
+                          marks:{" "}
+                          <code className="font-mono text-[0.8125rem]">
+                            fill=&quot;currentColor&quot;
+                          </code>
+                          ,{" "}
+                          <code className="font-mono text-[0.8125rem]">
+                            width=&quot;16&quot; height=&quot;16&quot;
+                          </code>
+                          , no extra wrapper — hover is{" "}
+                          <code className="font-mono text-[0.8125rem]">
+                            transition-all duration-200 ease-out
+                            hover:text-accent hover:-translate-y-[1px]
+                          </code>
+                          . Icon-only anchors always set a descriptive{" "}
+                          <code className="font-mono text-[0.8125rem]">
+                            aria-label
+                          </code>
+                          .
+                        </p>
+                        <div className="mt-4 flex items-center gap-6">
+                          <a
+                            href="https://github.com/Jamie-n"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitHub profile (demo link)"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              className="transition-all duration-200 ease-out hover:text-accent hover:-translate-y-[1px]"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                            </svg>
+                          </a>
+                          <a
+                            href="https://www.linkedin.com/in/jamie-neighbours/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn profile (demo link)"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              className="bi bi-linkedin transition-all duration-200 ease-out hover:text-accent hover:-translate-y-[1px]"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="px-6 py-5">
+                        <div className="bru-label">
+                          Arrows & marks in layout
+                        </div>
+                        <p className="mt-3 bru-prose-muted max-w-[80ch] m-0">
+                          Flow diagrams use the character{" "}
+                          <span className="font-mono text-foreground/85">
+                            →
+                          </span>{" "}
+                          inside ruled cells (see AI workflow flowchart). Hero
+                          colour squares beside the monogram are bordered{" "}
+                          <code className="font-mono text-[0.8125rem]">
+                            span
+                          </code>
+                          s, not icon fonts — keep decorative marks in CSS/boxes
+                          unless a glyph needs to scale with user font settings.
+                        </p>
+                      </div>
+                    </div>
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Writing style">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Voice, structure, and microcopy patterns used across
+                    sections — align new copy with these before inventing a new
+                    tone.
+                  </p>
+                  <StyleguidePanel className="py-0 px-0">
+                    <div className="bru-divide-y px-6">
+                      <Row
+                        label="Point of view"
+                        value={
+                          <span>
+                            First person, direct: intros say what you do and how
+                            you work (
+                            <span className="text-foreground/90">
+                              “I build…”, “I bias toward…”
+                            </span>
+                            ). Avoid third-person bio voice in section leads.
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Dialect"
+                        value={
+                          <span>
+                            UK English where it matters (
+                            <span className="text-foreground/90">
+                              honours, behaviour, organisation
+                            </span>
+                            ). Keep product names and proper nouns as published.
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Hyphens & wraps"
+                        value={
+                          <span>
+                            For fixed compounds in UI, prefer a non-breaking
+                            hyphen (
+                            <code className="font-mono text-[0.8125rem]">
+                              ‑
+                            </code>
+                            U+2011) so lines do not split awkwardly — e.g.{" "}
+                            <span className="text-foreground/90">
+                              full‑stack
+                            </span>
+                            ,{" "}
+                            <span className="text-foreground/90">
+                              day‑to‑day
+                            </span>
+                            ,{" "}
+                            <span className="text-foreground/90">
+                              end‑to‑end
+                            </span>
+                            .
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Section intros"
+                        value={
+                          <span>
+                            Open with one or two short paragraphs in{" "}
+                            <code className="font-mono text-[0.8125rem]">
+                              bru-prose-muted
+                            </code>{" "}
+                            and{" "}
+                            <code className="font-mono text-[0.8125rem]">
+                              max-w-[72ch]
+                            </code>
+                            ; state scope and audience, not marketing fluff.
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Rails & eyebrows"
+                        value={
+                          <span>
+                            Panel rails use{" "}
+                            <code className="font-mono text-[0.8125rem]">
+                              bru-label
+                            </code>
+                            : short category nouns (
+                            <span className="text-foreground/90">
+                              Category, Appendix, Case study, Section
+                            </span>
+                            ). Pair with{" "}
+                            <code className="font-mono text-[0.8125rem]">
+                              Header
+                            </code>{" "}
+                            subheading for the human-readable title.
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Headlines"
+                        value={
+                          <span>
+                            Hero and major titles: sentence case, concrete claim
+                            (
+                            <code className="font-mono text-[0.8125rem]">
+                              variant=&quot;title&quot;
+                            </code>
+                            ). In-panel headings:{" "}
+                            <code className="font-mono text-[0.8125rem]">
+                              variant=&quot;subheading&quot;
+                            </code>
+                            , title case or sentence case to match the phrase.
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Chips & metadata"
+                        value={
+                          <span>
+                            Case study chips are neutral phrases with middle
+                            dots between stack tokens; meta lines stay compact (
+                            <span className="text-foreground/90">
+                              Client · year
+                            </span>
+                            ). Section spacer microtype uses caps labels with
+                            colons (
+                            <span className="text-foreground/90">
+                              LOC:, BUILD:, STATE:
+                            </span>
+                            ).
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Lists"
+                        value={
+                          <span>
+                            Bullets are full sentences: lead with a capital, end
+                            with a period. Highlights rows keep the same rhythm
+                            as case-study bullets.
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Calls to action"
+                        value={
+                          <span>
+                            Verbs first, few words:{" "}
+                            <span className="text-foreground/90">
+                              View projects, See experience, Email, Visit…
+                            </span>
+                            . Prefer action over clever label copy on primary
+                            buttons.
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Numbers"
+                        value={
+                          <span>
+                            Nav indices are zero-padded two digits (
+                            <code className="font-mono text-[0.8125rem]">
+                              formatIndex
+                            </code>
+                            → <span className="text-foreground/90">01</span>,{" "}
+                            <span className="text-foreground/90">10</span>
+                            ). Years in experience rails are plain numerals;
+                            highlight counts use two-digit padding in rails.
+                          </span>
+                        }
+                      />
+                      <Row
+                        label="Avoid"
+                        value={
+                          <span>
+                            Hype stacks, exclamation marks in primary chrome,
+                            emoji in navigation or section titles, and vague
+                            superlatives without a concrete claim.
+                          </span>
+                        }
+                      />
                     </div>
                   </StyleguidePanel>
                 </StyleguideSection>
@@ -891,6 +1386,399 @@ export default function StyleguideOverlay({
                       </div>
                     </div>
                   </div>
+                </StyleguideSection>
+
+                <StyleguideChapter
+                  eyebrow="III. Application"
+                  title="Components used on the live site"
+                  description="These are the same React building blocks imported by pages and sections (not mock-only markup). Use them as the empirical catalog when extending the UI."
+                />
+
+                <StyleguideSection title="Layout shell">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Main scroll uses{" "}
+                    <span className="text-foreground font-medium">Section</span>{" "}
+                    (fixed sidebar offset{" "}
+                    <code className="font-mono text-[0.8125rem]">ml-80</code>,{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      min-h-screen
+                    </code>
+                    , scroll-spy id per route) wrapping{" "}
+                    <span className="text-foreground font-medium">
+                      ContentContainer
+                    </span>{" "}
+                    for horizontal padding (
+                    <code className="font-mono text-[0.8125rem]">
+                      px-6 … 2xl:px-32
+                    </code>
+                    ). Section titles use a{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      bru-panel
+                    </code>{" "}
+                    +{" "}
+                    <span className="text-foreground font-medium">Header</span>{" "}
+                    (
+                    <code className="font-mono text-[0.8125rem]">
+                      variant=&quot;title&quot;
+                    </code>{" "}
+                    → <code className="font-mono text-[0.8125rem]">bru-h1</code>
+                    ;{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      variant=&quot;subheading&quot;
+                    </code>{" "}
+                    → <code className="font-mono text-[0.8125rem]">bru-h2</code>
+                    ).
+                  </p>
+                  <StyleguidePanel className="mt-4">
+                    <div className="bru-label">Header variants</div>
+                    <div className="mt-4 grid gap-6 border-t border-rulesolid pt-6">
+                      <div>
+                        <div className="bru-label">title → bru-h1</div>
+                        <Header variant="title" className="mt-2 text-balance">
+                          Example page title
+                        </Header>
+                      </div>
+                      <div className="border-t border-rulesolid pt-6">
+                        <div className="bru-label">subheading → bru-h2</div>
+                        <Header variant="subheading" className="mt-2">
+                          Example panel heading
+                        </Header>
+                      </div>
+                    </div>
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Scroll reveal (Reveal)">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Sections wrap content in{" "}
+                    <span className="text-foreground font-medium">Reveal</span>:
+                    intersection-triggered opacity + translate, ~680ms easing,
+                    optional stagger delay. Respects scroll direction so content
+                    can replay when re-entering from below.
+                  </p>
+                  <StyleguidePanel className="mt-4 max-w-xl">
+                    <Reveal>
+                      <div className="border border-rulesolid bg-background/55 px-4 py-3 shadow-rule">
+                        <div className="bru-label">Revealed block</div>
+                        <p className="mt-2 m-0 bru-prose-muted text-sm">
+                          Scroll this drawer until this panel enters view — it
+                          uses the same Reveal component as the main page
+                          sections.
+                        </p>
+                      </div>
+                    </Reveal>
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Sidebar navigation (NavItem)">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Primary nav uses{" "}
+                    <span className="text-foreground font-medium">NavItem</span>{" "}
+                    with{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      aria-current
+                    </code>{" "}
+                    when active, rail colour transition, and smooth in-page
+                    scroll to section ids.
+                  </p>
+                  <StyleguidePanel className="mt-4 py-0 px-0 overflow-hidden">
+                    <NavItem linkText="00. Example home" href="/" />
+                    <NavItem linkText="01. Example about" href="/about" />
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Theme toggle (DarkModeToggle)">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Theme switching reuses{" "}
+                    <span className="text-foreground font-medium">Toggle</span>{" "}
+                    with persisted preference and{" "}
+                    <code className="font-mono text-[0.8125rem]">dark</code>{" "}
+                    class on{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      document.documentElement
+                    </code>
+                    . This control is live — it updates the whole app theme.
+                  </p>
+                  <StyleguidePanel className="mt-4 max-w-md">
+                    <DarkModeToggle />
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Experience accordion">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    <span className="text-foreground font-medium">
+                      ExperienceAccordion
+                    </span>{" "}
+                    composes Accordion with a coloured left rail, date meta, and
+                    the highlights index-rail panel used on About, Experience,
+                    and Certifications.
+                  </p>
+                  <div className="mt-4">
+                    <ExperienceAccordion
+                      title="Example position"
+                      startDate={2024}
+                      endDate={undefined}
+                      company="Example organisation"
+                      colour="bg-blue-500"
+                      blurb="Summary slot: one tight paragraph that reads like the live experience entries."
+                      highlights={[
+                        "First highlight row (index rail + bru-prose).",
+                        "Second highlight row demonstrates the numbered list pattern.",
+                      ]}
+                    />
+                  </div>
+                </StyleguideSection>
+
+                <StyleguideSection title="Skill proficiency bar">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Skills sections use{" "}
+                    <span className="text-foreground font-medium">
+                      SegmentedProgressBar
+                    </span>{" "}
+                    (from{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      ProgressBar.tsx
+                    </code>
+                    ): four level segments, fill by level + progress within the
+                    active band, tick marker, and{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      bru-label-compact
+                    </code>{" "}
+                    under each segment.
+                  </p>
+                  <StyleguidePanel className="mt-4 max-w-2xl">
+                    <SegmentedProgressBar skill={demoSkillForStyleguide} />
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Links: CustomAnchor vs bru-link">
+                  <StyleguidePanel className="mt-4">
+                    <div className="grid gap-4">
+                      <p className="m-0 bru-prose-muted max-w-[80ch]">
+                        <span className="text-foreground font-medium">
+                          CustomAnchor
+                        </span>{" "}
+                        — default underline + hover accent (used inside prose
+                        and case-study CTAs when you need a plain anchor).
+                      </p>
+                      <p className="m-0">
+                        <CustomAnchor
+                          href="https://example.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          External CustomAnchor
+                        </CustomAnchor>
+                      </p>
+                      <p className="m-0 bru-prose-muted max-w-[80ch] border-t border-rulesolid pt-4">
+                        <span className="text-foreground font-medium">
+                          bru-link
+                        </span>{" "}
+                        — muted inline link pattern (see Components and Markdown
+                        demos).
+                      </p>
+                      <p className="m-0">
+                        <a
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                          className="bru-link text-muted hover:text-accent transition-colors duration-200"
+                        >
+                          Inline bru-link preview
+                        </a>
+                      </p>
+                    </div>
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Screenshot frame (BrutalScreenshot)">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Project appendices use{" "}
+                    <span className="text-foreground font-medium">
+                      BrutalScreenshot
+                    </span>
+                    : hard black border, offset drop shadow, mono caption bar
+                    with swatches — distinct from token-soft{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      bru-panel
+                    </code>{" "}
+                    cards.
+                  </p>
+                  <div className="mt-4 max-w-md">
+                    <BrutalScreenshot
+                      src={Homepage}
+                      alt="Styleguide sample screenshot"
+                      label="Sample / hero"
+                      sizes="400px"
+                    />
+                  </div>
+                </StyleguideSection>
+
+                <StyleguideSection title="Markdown body">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    Journey tabs render markdown through{" "}
+                    <span className="text-foreground font-medium">
+                      Markdown
+                    </span>
+                    : sanitized HTML,{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      bru-prose
+                    </code>{" "}
+                    body,{" "}
+                    <code className="font-mono text-[0.8125rem]">bru-link</code>{" "}
+                    on anchors, fenced blocks via syntax highlighter.
+                  </p>
+                  <StyleguidePanel className="mt-4">
+                    <Markdown>{demoMarkdownSample}</Markdown>
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="File browser (SkillFileBrowser)">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    The Journey overlay embeds{" "}
+                    <span className="text-foreground font-medium">
+                      SkillFileBrowser
+                    </span>
+                    : two-column ruled layout, file list buttons, raw preview
+                    pane, markdown vs monospace + Prism for other extensions.
+                  </p>
+                  <div className="mt-4 min-h-[12rem]">
+                    <SkillFileBrowser items={styleguideFileBrowserItems} />
+                  </div>
+                </StyleguideSection>
+
+                <StyleguideSection title="Flowchart">
+                  <p className="mt-4 max-w-[80ch] bru-prose-muted">
+                    <span className="text-foreground font-medium">
+                      Flowchart
+                    </span>{" "}
+                    is the shared ruled diagram: header band, responsive step
+                    grid, optional summary row, and props for steps, labels,
+                    column layout, and connector glyph.{" "}
+                    <span className="text-foreground font-medium">
+                      AiLoopFlowchart
+                    </span>{" "}
+                    is a thin preset for the plan → execute → test → refine loop
+                    used in Journey content.
+                  </p>
+                  <div className="mt-4 grid gap-6">
+                    <AiLoopFlowchart title="AI workflow loop" />
+                    <StyleguidePanel>
+                      <p className="m-0 mb-4 bru-prose-muted max-w-[80ch]">
+                        Same building blocks with custom{" "}
+                        <code className="font-mono text-[0.8125rem]">
+                          steps
+                        </code>{" "}
+                        and no loop row:
+                      </p>
+                      <Flowchart
+                        title="Hand-off"
+                        headerEyebrow="Sequence"
+                        ariaLabel="Design leads to Build."
+                        columnLayout={2}
+                        steps={[
+                          { id: "design", label: "Design" },
+                          { id: "build", label: "Build" },
+                        ]}
+                        summaryRow={null}
+                      />
+                    </StyleguidePanel>
+                  </div>
+                </StyleguideSection>
+
+                <StyleguideSection title="Journey overlay trigger">
+                  <StyleguidePanel className="mt-4">
+                    <p className="m-0 bru-prose-muted max-w-[80ch]">
+                      Projects can open the Journey drawer programmatically via{" "}
+                      <code className="font-mono text-[0.8125rem]">
+                        OpenJourneyOverlayButton
+                      </code>{" "}
+                      (custom event). Styling matches primary bordered buttons.
+                    </p>
+                    <div className="mt-4">
+                      <OpenJourneyOverlayButton
+                        tab="journey"
+                        className="border border-border bg-background px-4 py-3 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      >
+                        Open Journey overlay
+                      </OpenJourneyOverlayButton>
+                    </div>
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Segmented tabs (Journey overlay)">
+                  <StyleguidePanel className="mt-4">
+                    <p className="m-0 bru-prose-muted max-w-[80ch]">
+                      In-app tab controls for multi-pane drawers use this
+                      pressed / default recipe (
+                      <code className="font-mono text-[0.8125rem]">
+                        aria-pressed
+                      </code>
+                      , accent weak fill when active).
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        aria-pressed="true"
+                        className="border border-border bg-background px-4 py-2 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background text-accent border-accent/50 bg-accent-weak"
+                      >
+                        Journey
+                      </button>
+                      <button
+                        type="button"
+                        aria-pressed="false"
+                        className="border border-border bg-background px-4 py-2 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background text-foreground/75"
+                      >
+                        Inspiration
+                      </button>
+                      <button
+                        type="button"
+                        aria-pressed="false"
+                        className="border border-border bg-background px-4 py-2 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background text-foreground/75"
+                      >
+                        AI
+                      </button>
+                    </div>
+                  </StyleguidePanel>
+                </StyleguideSection>
+
+                <StyleguideSection title="Key / value list (About-style panel)">
+                  <StyleguidePanel className="mt-4">
+                    <p className="m-0 bru-prose-muted max-w-[80ch]">
+                      Working-style lists use a ruled{" "}
+                      <code className="font-mono text-[0.8125rem]">ul</code>{" "}
+                      with{" "}
+                      <code className="font-mono text-[0.8125rem]">
+                        bru-label
+                      </code>{" "}
+                      keys and{" "}
+                      <code className="font-mono text-[0.8125rem]">
+                        bru-prose
+                      </code>{" "}
+                      values — same structure as the About section.
+                    </p>
+                    <ul className="mt-4 list-none p-0 m-0 border border-rulesolid bg-background/55 shadow-rule max-w-xl">
+                      {[
+                        {
+                          k: "Example axis",
+                          v: "Short supporting sentence in body prose.",
+                        },
+                        {
+                          k: "Second row",
+                          v: "Another value cell; last row drops bottom border via last:border-b-0.",
+                        },
+                      ].map((row) => (
+                        <li
+                          key={row.k}
+                          className="grid gap-1 border-b border-rulesolid last:border-b-0 px-5 py-3"
+                        >
+                          <div className="bru-label text-foreground/70">
+                            {row.k}
+                          </div>
+                          <p className="m-0 bru-prose max-w-none">{row.v}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </StyleguidePanel>
                 </StyleguideSection>
 
                 <footer className="mt-12 border-t border-rulesolid pt-6">
