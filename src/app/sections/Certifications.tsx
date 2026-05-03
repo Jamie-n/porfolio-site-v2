@@ -6,8 +6,9 @@ export default function Certifications() {
     <>
       <div className="mt-8 mb-10 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          Certifications that back up the fundamentals: cloud concepts, platform
-          services, and the operational basics that matter when you ship.
+          Formal credentials on the fundamentals—Azure services, cloud concepts,
+          and the operational basics I lean on when shipping to real
+          environments.
         </BruText>
       </div>
 
@@ -17,7 +18,7 @@ export default function Certifications() {
         endDate={undefined}
         company="Microsoft"
         colour="bg-blue-500"
-        blurb="Professional certification demonstrating foundational knowledge of Microsoft Azure cloud services."
+        blurb="Foundational Azure: core services, pricing models, governance, and how the platform fits together—useful context when I design or deploy cloud-backed work."
         highlights={[]}
       />
     </>

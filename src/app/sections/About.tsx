@@ -16,7 +16,7 @@ export default function About() {
           up in production.
         </BruText>
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          If you want the raw code, my work lives on{" "}
+          Code and experiments live on{" "}
           <CustomAnchor
             href="https://github.com/Jamie-n"
             target="_blank"
@@ -54,19 +54,19 @@ export default function About() {
           {[
             {
               k: "Feedback loops",
-              v: "Prefer small, production‑shaped slices—measurable changes that can be rolled back cleanly.",
+              v: "I prefer small, production‑shaped slices—measurable changes that can be rolled back cleanly.",
             },
             {
               k: "Maintainable systems",
-              v: "Keep the core boring: clear boundaries, predictable data flow, and fewer “clever” moving parts.",
+              v: "I keep the core boring: clear boundaries, predictable data flow, and fewer “clever” moving parts.",
             },
             {
               k: "Interface craft",
-              v: "Strong hierarchy and restraint: readable type, clear spacing, and interactions that don’t shout.",
+              v: "I bias toward hierarchy and restraint: readable type, clear spacing, and interactions that don’t shout.",
             },
             {
               k: "Reliability",
-              v: "Guardrails over heroics: linting, targeted tests, and failure states that degrade gracefully.",
+              v: "I lean on guardrails over heroics: linting, targeted tests, and failure states that degrade gracefully.",
             },
           ].map((row) => (
             <li
@@ -95,21 +95,21 @@ export default function About() {
         endDate={2024}
         company="The University of Huddersfield"
         colour="bg-blue-500"
-        blurb="Completed a Master's in Software Engineering with a focus on AI and data-driven solutions. Developed advanced technical skills through a capstone project analyzing sentiment in real-world datasets, combining machine learning and natural language processing techniques."
+        blurb="MSc in Software Engineering with a focus on AI and data-driven systems. My capstone applied ML and NLP to real-world text—sentiment and signals in clinical-adjacent data—so I could go deep on evaluation, ethics, and what the model was actually learning."
         highlights={[
-          "Delivered a Master's project on AI-based sentiment analysis, applying ML algorithms to analyze textual data with a focus on identifying underlying mental health conditions.",
+          "Master’s project on AI-based sentiment analysis on textual data, with attention to mental-health-related signals and responsible interpretation.",
         ]}
       />
 
       <ExperienceAccordion
-        title=" Software Engineering BSc (Hons)"
+        title="Software Engineering BSc (Hons)"
         startDate={2019}
         endDate={2023}
         company="The University of Huddersfield"
         colour="bg-blue-500"
-        blurb="Graduated with first-class honours in Software Engineering. Recognized for academic excellence, including achieving the highest grade for the Final Year Project, demonstrating strong problem-solving and software development skills."
+        blurb="First-class honours in Software Engineering. I cared most about systems thinking and shipping a final-year project that could justify its own complexity—computer vision for train autonomy and safety monitoring—which earned the top mark in the cohort."
         highlights={[
-          "Awarded highest grade for Final Year Project, developing a computer vision system for train autonomy and safety monitoring.",
+          "Highest grade for Final Year Project: a computer vision system for train autonomy and safety monitoring.",
         ]}
       />
     </>

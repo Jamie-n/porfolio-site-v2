@@ -19,16 +19,14 @@ export const experiences: Record<Experiences, ExperienceContent> = {
     endDate: undefined,
     colour: "bg-red-500",
     blurb:
-      "Delivering pragmatic software solutions in a fast-paced consultancy environment through close collaboration with clients and partner organisations to solve complex business challenges. Leveraging strong technical leadership and communication skills to shape implementation approaches, guide junior and offshore developers, and translate stakeholder pain points into scalable, high-quality digital solutions delivered across the full development lifecycle.",
+      "Software engineer at The Curve, a consultancy where I ship pragmatic solutions with clients and partners. I spend my time clarifying what actually needs building, owning features across the stack, and helping junior and offshore developers stay unblocked—without losing sight of quality, usability, or how work lands in production.",
     highlights: [
-      "Worked closely with partner organisations to deliver technical solutions to complex business problems",
-      "Provided technical guidance and support to junior developers and offshore team members",
-      "Helped shape technical approaches and implementation decisions within project teams",
-      "Communicated directly with clients to identify pain points and process blockers, translating them into actionable technical requirements",
-      "Assisted in leading multiple digital transformation initiatives from design through implementation",
-      "Took ownership of features across the full development lifecycle, with a specific focus on quality, usability and maintainability",
-      "Contributed to code reviews, refactoring efforts, and continuous improvements",
-      "Acted as a technical bridge between stakeholders and development teams to ensure clear communication and smooth delivery",
+      "I partner with clients and external organisations on complex delivery—turning pain points into clear requirements and incremental releases.",
+      "I mentor junior and offshore teammates through pairing and reviews, and I keep handoffs explicit so scope doesn’t drift.",
+      "I own features end to end with a bias toward maintainable code, sensible UX, and releases that can be rolled back cleanly.",
+      "I bridge stakeholders and engineering: surfacing risks early and keeping expectations aligned with what we ship.",
+      "I help shape technical direction inside teams—approach, sequencing, and trade-offs that fit the business constraint.",
+      "I stay in refactors, code review, and continuous improvement alongside day-to-day feature work.",
     ],
   },
   chft: {
@@ -38,11 +36,11 @@ export const experiences: Record<Experiences, ExperienceContent> = {
     endDate: 2024,
     colour: "bg-blue-500",
     blurb:
-      "Collaborated with Calderdale & Huddersfield Foundation NHS Trust (CHFT) and partner healthcare organisations to deliver innovative digital maturity solutions that enhanced operational efficiency. Leveraged technical expertise and strong collaborative skills to bridge the gap between healthcare requirements and effective, solution-aligned delivery.",
+      "Web developer with the Health Informatics Service, supporting Calderdale & Huddersfield NHS Foundation Trust and partner organisations. I replaced fragile paper and legacy surfaces with dependable web tools—always with an eye on what clinical and operational staff need at the point of use.",
     highlights: [
-      "Conducted the design and delivery of a return to work system, replacing an existing paper process. This system is now the de facto application for reporting workplace accidents & absences across the trust.",
-      "Designed and developed the CHFT Patient leaflet repository to help streamline leaflet management and help consultants access the correct up-to-date information.",
-      "Led a successful overhaul of an end-of-life training system for an external partner.",
+      "Designed and delivered a return-to-work system that replaced a paper accident-and-absence process; it became the Trust’s default channel for reporting.",
+      "Built and evolved the CHFT Patient Leaflet Repository so consultants can find accurate, governed leaflets in one place.",
+      "Led the overhaul of an end-of-life training system for an external partner, from discovery through cutover.",
     ],
   },
   "apple-designs": {
@@ -52,11 +50,11 @@ export const experiences: Record<Experiences, ExperienceContent> = {
     endDate: 2023,
     colour: "bg-green-500",
     blurb:
-      "Led technical direction and end-to-end feature delivery, delivering a bespoke start up mobile application tailored to the operational needs of a small business client. Leveraging strong technical expertise and client-facing communication skills to translate business requirements a scalable, high-quality digital solutions delivered on time.",
+      "Freelance engagement where I owned technical direction and delivery for a bespoke mobile app for a small-business client. I translated day-to-day operations into a focused product, kept communication tight, and shipped on a timeline we could both trust.",
     highlights: [
-      "Led technical direction and feature delivery for client projects",
-      "Delivered bespoke web applications for small business clients",
-      "Managed client communication, requirements gathering, and delivery timelines",
+      "Set technical direction and shipped end-to-end features for a startup-style mobile product.",
+      "Delivered bespoke web work for small businesses with clear boundaries and predictable milestones.",
+      "Ran requirements, client communication, and sequencing so releases stayed manageable.",
     ],
   },
   "js-wetherspoon": {
@@ -66,10 +64,10 @@ export const experiences: Record<Experiences, ExperienceContent> = {
     endDate: 2019,
     colour: "bg-black",
     blurb:
-      "Led shift operations and supported team members within a fast-paced, customer-focused environment, ensuring smooth daily service delivery and high performance standards. Leveraging strong organisational skills and accountability to manage opening and closing procedures, cash handling responsibilities, and deliver a consistently positive customer experience.",
+      "Before I moved into engineering full time, I led shifts in a high-volume pub: opening and closing, cash handling, and keeping service steady when the floor was full.",
     highlights: [
-      "Led shifts and supported team members in a fast-paced environment",
-      "Responsible for opening/closing duties, cash handling, and customer experience",
+      "Led shifts and supported the team during busy service.",
+      "Accountable for opening and closing, cash procedures, and a consistent customer experience.",
     ],
   },
 };
@@ -82,12 +80,12 @@ export const otherExperiences: Record<OtherExperiences, ExperienceContent> = {
     endDate: 2024,
     colour: "bg-blue-500",
     blurb:
-      "Created and maintained a unified brand presence across all social media platforms, actively driving engagement and collaborating closely with brand partners. Leveraged design and promotional expertise to deliver high-quality merchandise, promotional items, and branded apparel that strengthened audience connection and visibility.",
+      "Volunteered as media and merchandise secretary—keeping social channels cohesive, working with brand partners on kit and promo, and making sure what we published actually looked like the same club.",
 
     highlights: [
-      "Developed and maintained a consistent visual identity across all social media channels.",
-      "Worked closely with brand partners to design and produce promotional and merchandise items, including competition squad uniforms and club merchandise.",
-      "Implemented strategies that actively increased audience engagement and brand recognition.",
+      "Maintained a consistent visual identity across social channels.",
+      "Collaborated with sponsors on squad uniforms, club merchandise, and promotional drops.",
+      "Ran campaigns that lifted engagement and made the society easier to recognise on campus.",
     ],
   },
 };

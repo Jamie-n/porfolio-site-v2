@@ -12,9 +12,9 @@ export default function Projects() {
     <>
       <div className="mt-8 mb-10 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          Selected work with an emphasis on outcomes: clean UX, maintainable
-          systems, and shipping end‑to‑end. Each item includes a short summary
-          and the key decisions behind it.
+          A short list of work I’m happy to stand behind—clear UX, maintainable
+          systems, and delivery I owned end to end. Each card is a quick read on
+          outcomes and the decisions that shaped them.
         </BruText>
       </div>
 
@@ -28,13 +28,13 @@ export default function Projects() {
         ]}
         summary={
           <p>
-            Laravel portfolio reimagined in Next.js—same intent, better
+            I reimagined my Laravel portfolio in Next.js—same intent, clearer
             architecture and craft, with an editorial design system and
             AI‑assisted delivery kept under human direction, taste, and review.
           </p>
         }
         bullets={[
-          "Requirements, IA, and front‑end moved together—not a reskin on old foundations.",
+          "I moved requirements, IA, and the front end together—not a reskin on old foundations.",
           "Print/editorial brutalism lives in tokens and components so the look scales without one‑offs.",
           "Plan → build → test → refine, with guardrails so generated work stays shippable and maintainable.",
         ]}
@@ -55,13 +55,13 @@ export default function Projects() {
         ]}
         summary={
           <p>
-            Celebrant site from brief through Figma, custom WordPress theme,
-            deployment, and handoff—responsive, production‑ready, owned
-            end‑to‑end.
+            I took a celebrant site from brief through Figma, custom WordPress
+            theme, deployment, and handoff—responsive, production‑ready, and
+            owned end to end.
           </p>
         }
         bullets={[
-          "Brief and constraints became IA and a visual system before theme code.",
+          "I turned the brief and constraints into IA and a visual system before writing theme code.",
           "Responsive layouts and clear component boundaries—customisation only where it paid off.",
           "Tight client loops through launch: predictable milestones, steady go‑live, no last‑minute surprises.",
         ]}
@@ -88,15 +88,15 @@ export default function Projects() {
         ]}
         summary={
           <p>
-            A web platform to store, search, and maintain patient information
-            leaflets across the Trust. The thrust of the work was a{" "}
+            I helped build and evolve a Trust-wide platform to store, search,
+            and maintain patient information leaflets. The hard part was a{" "}
             <span className="text-foreground/85">rebuild and migration</span>:
-            moving to a clearer architecture and safer content lifecycle without
-            losing day‑to‑day usability for clinicians and the public site.
+            clearer architecture and a safer content lifecycle without losing
+            day‑to‑day usability for clinicians or the public site.
           </p>
         }
         bullets={[
-          "Migration path: inventory legacy content, normalise structure, and cut over with rollback in mind.",
+          "I followed a migration path: inventory legacy content, normalise structure, and cut over with rollback in mind.",
           "Single place for governed leaflets—upload, versioning, and discovery so departments stay aligned.",
           "Dual audience: staff workflows for upkeep and a public‑facing surface that stays readable and trustworthy.",
         ]}

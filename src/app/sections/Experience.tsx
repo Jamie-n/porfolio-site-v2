@@ -8,9 +8,9 @@ export default function Experience() {
     <>
       <div className="mt-8 mb-10 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          A snapshot of roles and projects where I shipped production features,
-          tightened UX, and improved reliability. I like work that blends
-          product thinking with strong engineering fundamentals.
+          Roles where I’ve shipped production features, tightened UX, and
+          improved reliability. I gravitate toward work that pairs product
+          judgment with solid engineering—not either one in isolation.
         </BruText>
       </div>
 
@@ -19,13 +19,13 @@ export default function Experience() {
       ))}
 
       <div className="mt-14 mb-6 bru-panel px-4 py-3">
-        <BruText variant="label">Appendix</BruText>
-        <Header variant="subheading">Other experiences</Header>
+        <BruText variant="label">More background</BruText>
+        <Header variant="subheading">Community and earlier roles</Header>
       </div>
       {Object.values(otherExperiences).map((ex, idx) => (
         <ExperienceAccordion key={idx} {...ex}>
           <BruText variant="proseMuted">
-            Images for this project aren’t currently included in the repository.
+            I haven’t added screenshots for this entry to the repo yet.
           </BruText>
         </ExperienceAccordion>
       ))}
