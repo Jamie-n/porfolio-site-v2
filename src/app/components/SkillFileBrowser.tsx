@@ -4,8 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Markdown from "./Markdown";
 import { BruText } from "./primitives/BruText";
 import { cn } from "@/lib/cn";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import LazyPrism from "./syntax/LazyPrism";
 
 export type SkillFileItem = {
   id: string;
@@ -174,24 +173,7 @@ export default function SkillFileBrowser({
                   <Markdown>{content}</Markdown>
                 ) : (
                   <pre className="overflow-x-auto whitespace-pre border border-rulesolid bg-background/50 px-4 py-3 shadow-rule font-mono text-[0.8125rem] leading-relaxed text-foreground/85">
-                    <SyntaxHighlighter
-                      language={codeLanguage}
-                      style={oneDark}
-                      customStyle={{
-                        margin: 0,
-                        background: "transparent",
-                        padding: 0,
-                        whiteSpace: "pre",
-                      }}
-                      codeTagProps={{
-                        style: {
-                          fontFamily:
-                            "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-                        },
-                      }}
-                    >
-                      {content}
-                    </SyntaxHighlighter>
+                    <LazyPrism language={codeLanguage}>{content}</LazyPrism>
                   </pre>
                 )}
               </>

@@ -4,8 +4,7 @@ import { BruText } from "./primitives/BruText";
 import ReactMarkdown from "react-markdown";
 import { cn } from "@/lib/cn";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import LazyPrism from "./syntax/LazyPrism";
 
 const schema = {
   ...defaultSchema,
@@ -97,26 +96,7 @@ export default function Markdown({ children }: { children: string }) {
             const lang = className?.replace("language-", "") ?? "";
             const raw = String(children ?? "").replace(/\n$/, "");
 
-            return (
-              <SyntaxHighlighter
-                language={lang}
-                style={oneDark}
-                customStyle={{
-                  margin: 0,
-                  background: "transparent",
-                  padding: 0,
-                  whiteSpace: "pre",
-                }}
-                codeTagProps={{
-                  style: {
-                    fontFamily:
-                      "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-                  },
-                }}
-              >
-                {raw}
-              </SyntaxHighlighter>
-            );
+            return <LazyPrism language={lang}>{raw}</LazyPrism>;
           },
           pre: ({ children, ...props }) => (
             <pre
