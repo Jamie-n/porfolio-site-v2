@@ -3,7 +3,7 @@
 import Header from "../components/Header";
 import { BruText } from "../components/primitives/BruText";
 import type { MouseEvent } from "react";
-import { scrollToHref } from "@/utils";
+import { scrollToHref } from "@/lib/utils";
 import Link from "next/link";
 
 export default function Hero() {

@@ -1,7 +1,7 @@
 "use client";
 
-import { formatIndex } from "../../../utils";
-import { SectionItem } from "../../[[...slug]]/page";
+import type { SectionItem } from "@/app/types/sectionItem";
+import { formatIndex } from "@/lib/utils";
 import { aiWorkflowFiles } from "@/app/data/aiWorkflowFiles";
 import DarkModeToggle from "../DarkModeToggle";
 import JourneyOverlay from "../JourneyOverlay";

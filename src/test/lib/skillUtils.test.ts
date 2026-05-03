@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  flattenSkillCategories,
-  skillsGroupedByUsage,
-} from "@/app/utilities/skillUtils";
+import { flattenSkillCategories, skillsGroupedByUsage } from "@/lib/skillUtils";
 import type { Skill, SkillCategory } from "@/app/data/skills";
 
 describe("skillsGroupedByUsage", () => {

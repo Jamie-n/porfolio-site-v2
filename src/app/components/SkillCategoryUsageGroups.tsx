@@ -1,6 +1,6 @@
 import type { Skill } from "../data/skills";
 import { skillUsagePresentation } from "../data/skillUsagePresentation";
-import { skillsGroupedByUsage } from "../utilities/skillUtils";
+import { skillsGroupedByUsage } from "@/lib/skillUtils";
 import { BruText } from "./primitives/BruText";
 import { cn } from "@/lib/cn";
 

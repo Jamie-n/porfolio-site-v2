@@ -1,6 +1,7 @@
 "use client";
 
-import { formatIndex } from "@/utils";
+import type { SectionItem } from "@/app/types/sectionItem";
+import { formatIndex } from "@/lib/utils";
 import Sidebar from "../components/nav/Sidebar";
 import Section from "../components/Section";
 import About from "../sections/About";
@@ -10,13 +11,6 @@ import Hero from "../sections/Hero";
 import Projects from "../sections/Projects";
 import Skills from "../sections/Skills";
 import { Fragment } from "react";
-
-export interface SectionItem {
-  title: string;
-  Component: React.ComponentType;
-  href: string;
-  showTitle?: boolean;
-}
 
 export default function HomeClient() {
   const sections: SectionItem[] = [

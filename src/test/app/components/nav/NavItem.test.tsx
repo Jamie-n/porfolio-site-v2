@@ -6,8 +6,9 @@ vi.mock("next/navigation", () => ({
   usePathname: () => "/about",
 }));
 
-vi.mock("@/utils", async () => {
-  const actual = await vi.importActual<typeof import("@/utils")>("@/utils");
+vi.mock("@/lib/utils", async () => {
+  const actual =
+    await vi.importActual<typeof import("@/lib/utils")>("@/lib/utils");
   return {
     ...actual,
     scrollToHref: vi.fn(() => Promise.resolve()),
@@ -15,7 +16,7 @@ vi.mock("@/utils", async () => {
 });
 
 import NavItem from "@/app/components/nav/NavItem";
-import { scrollToHref } from "@/utils";
+import { scrollToHref } from "@/lib/utils";
 
 describe("NavItem", () => {
   beforeEach(() => {

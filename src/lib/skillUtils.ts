@@ -1,5 +1,5 @@
-import type { Skill, SkillCategory, SkillUsage } from "../data/skills";
-import { SkillUsages } from "../data/skills";
+import type { Skill, SkillCategory, SkillUsage } from "@/app/data/skills";
+import { SkillUsages } from "@/app/data/skills";
 
 export type SkillsUsageGroup = { usage: SkillUsage; skills: Skill[] };
 

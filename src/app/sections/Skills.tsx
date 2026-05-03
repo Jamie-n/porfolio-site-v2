@@ -4,7 +4,7 @@ import SkillCategoryUsageGroups, {
 } from "../components/SkillCategoryUsageGroups";
 import { BruText } from "../components/primitives/BruText";
 import { skillCategories } from "../data/skills";
-import { flattenSkillCategories } from "../utilities/skillUtils";
+import { flattenSkillCategories } from "@/lib/skillUtils";
 
 export default function Skills() {
   const flat = flattenSkillCategories(skillCategories);
