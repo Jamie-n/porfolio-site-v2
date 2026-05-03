@@ -23,8 +23,8 @@ import Header from "./Header";
 import Markdown from "./Markdown";
 import { OpenJourneyOverlayButton } from "./JourneyOverlay";
 import NavItem from "./nav/NavItem";
-import SegmentedProgressBar from "./ProgressBar";
 import Reveal from "./Reveal";
+import SkillCategoryUsageGroups from "./SkillCategoryUsageGroups";
 import SkillFileBrowser, { type SkillFileItem } from "./SkillFileBrowser";
 import Toggle from "./Toggle";
 import { BruText } from "./primitives/BruText";
@@ -42,11 +42,12 @@ const styleguideFileBrowserItems: SkillFileItem[] = [
   },
 ];
 
-const demoSkillForStyleguide = {
-  name: "TypeScript",
-  level: "Advanced" as const,
-  progress: 0.72,
-};
+const demoSkillsForStyleguide = [
+  { name: "TypeScript", usage: "Daily" as const },
+  { name: "React", usage: "Daily" as const },
+  { name: "Playwright", usage: "Regular" as const },
+  { name: "Rust", usage: "Exploring" as const },
+];
 
 const demoMarkdownSample = `## Markdown preview
 
@@ -946,7 +947,15 @@ export default function StyleguideOverlay({
                   <p className="mt-4 max-w-[80ch] bru-prose-muted">
                     Voice, structure, and microcopy patterns used across
                     sections — align new copy with these before inventing a new
-                    tone.
+                    tone. Cursor agents: project skill{" "}
+                    <code className="font-mono text-[0.8125rem] text-foreground/85">
+                      portfolio-site-voice
+                    </code>{" "}
+                    (
+                    <code className="font-mono text-[0.8125rem] text-foreground/85">
+                      .cursor/skills/portfolio-site-voice/SKILL.md
+                    </code>
+                    ) should stay in sync with this section.
                   </p>
                   <StyleguidePanel className="py-0 px-0">
                     <div className="bru-divide-y px-6">
@@ -1017,6 +1026,30 @@ export default function StyleguideOverlay({
                         }
                       />
                       <Row
+                        label="Portfolio narrative"
+                        value={
+                          <span>
+                            Blurbs and leads stay{" "}
+                            <span className="text-foreground/90">
+                              first person
+                            </span>
+                            : say what shipped, for whom, and the trade-offs—not
+                            consultancy filler (
+                            <span className="text-foreground/90">
+                              leveraging, solutions-oriented
+                            </span>
+                            , undifferentiated stakeholder paragraphs). Case
+                            studies and experience highlights read like
+                            interview answers: specific, not keyword-stuffed.
+                            Skills and certifications explain structure honestly
+                            (e.g. frequency in real work, not implied
+                            proficiency scores). Journey markdown, meta
+                            descriptions, and overlay helper text use the same
+                            direct voice.
+                          </span>
+                        }
+                      />
+                      <Row
                         label="Rails & eyebrows"
                         value={
                           <span>
@@ -1026,13 +1059,18 @@ export default function StyleguideOverlay({
                             </code>
                             : short category nouns (
                             <span className="text-foreground/90">
-                              Category, Appendix, Case study, Section
+                              Technical stack, More background, Exploring, Case
+                              study, Section
                             </span>
                             ). Pair with{" "}
                             <code className="font-mono text-[0.8125rem]">
                               Header
                             </code>{" "}
-                            subheading for the human-readable title.
+                            subheading for the human-readable title (
+                            <span className="text-foreground/90">
+                              What I build with
+                            </span>
+                            , etc.).
                           </span>
                         }
                       />
@@ -1114,8 +1152,14 @@ export default function StyleguideOverlay({
                         value={
                           <span>
                             Hype stacks, exclamation marks in primary chrome,
-                            emoji in navigation or section titles, and vague
-                            superlatives without a concrete claim.
+                            emoji in navigation or section titles, vague
+                            superlatives without a concrete claim, and résumé
+                            boilerplate (
+                            <span className="text-foreground/90">
+                              leveraging, utilised, demonstrates strong,
+                              best-in-class
+                            </span>
+                            ).
                           </span>
                         }
                       />
@@ -1529,25 +1573,23 @@ export default function StyleguideOverlay({
                   </div>
                 </StyleguideSection>
 
-                <StyleguideSection title="Skill proficiency bar">
+                <StyleguideSection title="Skills: usage groups">
                   <p className="mt-4 max-w-[80ch] bru-prose-muted">
-                    Skills sections use{" "}
-                    <span className="text-foreground font-medium">
-                      SegmentedProgressBar
-                    </span>{" "}
-                    (from{" "}
+                    The live Skills section uses one merged usage panel (minimal
+                    pills) plus Exploring. Implemented in{" "}
                     <code className="font-mono text-[0.8125rem]">
-                      ProgressBar.tsx
-                    </code>
-                    ): four level segments, fill by level + progress within the
-                    active band, tick marker, and{" "}
-                    <code className="font-mono text-[0.8125rem]">
-                      bru-label-compact
+                      SkillCategoryUsageGroups.tsx
                     </code>{" "}
-                    under each segment.
+                    with{" "}
+                    <code className="font-mono text-[0.8125rem]">
+                      skillsGroupedByUsage
+                    </code>
+                    .
                   </p>
                   <StyleguidePanel className="mt-4 max-w-2xl">
-                    <SegmentedProgressBar skill={demoSkillForStyleguide} />
+                    <SkillCategoryUsageGroups
+                      skills={demoSkillsForStyleguide}
+                    />
                   </StyleguidePanel>
                 </StyleguideSection>
 

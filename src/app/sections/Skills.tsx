@@ -1,33 +1,45 @@
 import Header from "../components/Header";
+import SkillCategoryUsageGroups, {
+  ExploringSkillsList,
+} from "../components/SkillCategoryUsageGroups";
 import { BruText } from "../components/primitives/BruText";
-import SegmentedProgressBar from "../components/ProgressBar";
 import { skillCategories } from "../data/skills";
-import { orderSkills } from "../utilities/skillUtils";
+import { flattenSkillCategories } from "../utilities/skillUtils";
 
 export default function Skills() {
+  const flat = flattenSkillCategories(skillCategories);
+  const inUseSkills = flat.filter((s) => s.usage !== "Exploring");
+  const exploringSkills = flat.filter((s) => s.usage === "Exploring");
+
   return (
     <>
-      <div className="mt-8 mb-10 max-w-[72ch]">
+      <div className="mt-8 mb-8 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          A practical snapshot of what I reach for day‑to‑day. I bias toward
-          tools that make products faster, safer, and easier to maintain.
+          The languages, frameworks, and tools I draw on in real projects. I
+          group them by how often each one shows up in my work—roughly daily,
+          regular, or occasional—so this reads as an honest stack snapshot, not
+          a keyword list. Anything I’m still mostly experimenting with is listed
+          separately at the bottom.
         </BruText>
       </div>
 
-      {skillCategories.map(({ title, skills }) => (
-        <div key={title} className="mb-8">
-          <div className="mb-6 bru-panel px-4 py-3">
-            <BruText variant="label">Category</BruText>
-            <Header variant="subheading">{title}</Header>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            {orderSkills(skills).map((skill) => (
-              <SegmentedProgressBar key={skill.name} skill={skill} />
-            ))}
-          </div>
+      <div className="mb-8 bru-panel overflow-hidden p-0">
+        <div className="border-b border-rulesolid px-4 py-3 sm:px-5">
+          <BruText variant="label">Technical stack</BruText>
+          <Header variant="subheading">What I build with</Header>
         </div>
-      ))}
+        <SkillCategoryUsageGroups skills={inUseSkills} />
+      </div>
+
+      {exploringSkills.length > 0 ? (
+        <div className="mb-8 bru-panel overflow-hidden p-0">
+          <div className="border-b border-rulesolid px-4 py-3 sm:px-5">
+            <BruText variant="label">Exploring</BruText>
+            <Header variant="subheading">Learning, not shipping yet</Header>
+          </div>
+          <ExploringSkillsList skills={exploringSkills} />
+        </div>
+      ) : null}
     </>
   );
 }

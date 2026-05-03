@@ -1,30 +1,35 @@
-import { Skill, skillLevelOrder } from "../data/skills";
+import type { Skill, SkillCategory, SkillUsage } from "../data/skills";
+import { SkillUsages } from "../data/skills";
+
+export type SkillsUsageGroup = { usage: SkillUsage; skills: Skill[] };
+
+export type CategorizedSkill = Skill & { categoryTitle: string };
+
+/** Flatten category panels into one list while keeping domain labels. */
+export function flattenSkillCategories(
+  categories: SkillCategory[],
+): CategorizedSkill[] {
+  return categories.flatMap((c) =>
+    c.skills.map((skill) => ({ ...skill, categoryTitle: c.title })),
+  );
+}
 
 /**
- * Orders an array of skills by skill level and progress.
- *
- * Sorting rules:
- * 1. Primary sort: by `level` according to `SkillLevels` (Expert → Beginner).
- *    Missing levels are treated as lowest priority.
- * 2. Secondary sort: within the same level, by `progress` in descending order.
- *    Missing progress values are treated as 0.
- *
- * @param {Skill[]} skills - Array of skill objects to sort. Each skill can have:
- *                            - `level?: SkillLevel` (optional, e.g., "Beginner" | "Intermediate" | "Advanced" | "Expert")
- *                            - `progress?: number` (optional numeric progress)
- * @returns {Skill[]} A new array of skills sorted by level and progress (highest level and progress first)
+ * Buckets skills by usage tier (Daily → Exploring). Skills are sorted by
+ * name within each tier. Empty tiers are omitted.
  */
-export const orderSkills = (skills: Skill[]): Skill[] => {
-  return [...skills].sort((a, b) => {
-    // Map levels to numeric order; missing levels get -1
-    const levelA = a.level ? skillLevelOrder[a.level] : -1;
-    const levelB = b.level ? skillLevelOrder[b.level] : -1;
-
-    // Primary sort: level descending (Expert first)
-    const levelDiff = levelB - levelA;
-    if (levelDiff !== 0) return levelDiff;
-
-    // Secondary sort: progress descending
-    return (b.progress ?? 0) - (a.progress ?? 0);
-  });
-};
+export function skillsGroupedByUsage(skills: Skill[]): SkillsUsageGroup[] {
+  const map = new Map<SkillUsage, Skill[]>();
+  for (const u of SkillUsages) map.set(u, []);
+  for (const s of skills) {
+    map.get(s.usage)?.push(s);
+  }
+  return SkillUsages.map((usage) => ({
+    usage,
+    skills: (map.get(usage) ?? [])
+      .slice()
+      .sort((a, b) =>
+        a.name.localeCompare(b.name, undefined, { sensitivity: "base" }),
+      ),
+  })).filter((g) => g.skills.length > 0);
+}

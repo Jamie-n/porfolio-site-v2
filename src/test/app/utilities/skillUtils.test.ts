@@ -1,28 +1,59 @@
 import { describe, expect, it } from "vitest";
-import { orderSkills } from "@/app/utilities/skillUtils";
-import type { Skill } from "@/app/data/skills";
+import {
+  flattenSkillCategories,
+  skillsGroupedByUsage,
+} from "@/app/utilities/skillUtils";
+import type { Skill, SkillCategory } from "@/app/data/skills";
 
-describe("orderSkills", () => {
-  it("sorts by level descending then progress descending", () => {
+describe("skillsGroupedByUsage", () => {
+  it("groups by usage tier in Daily→Exploring order and sorts names", () => {
     const skills: Skill[] = [
-      { name: "A", level: "Beginner", progress: 1 },
-      { name: "B", level: "Expert", progress: 0.1 },
-      { name: "C", level: "Advanced", progress: 0.9 },
-      { name: "D", level: "Expert", progress: 0.9 },
-      { name: "E", level: "Advanced", progress: 0.2 },
+      { name: "Zed", usage: "Exploring" },
+      { name: "Beta", usage: "Daily" },
+      { name: "Alpha", usage: "Daily" },
+      { name: "Gamma", usage: "Regular" },
     ];
 
-    const ordered = orderSkills(skills).map((s) => s.name);
-    expect(ordered).toEqual(["D", "B", "C", "E", "A"]);
+    expect(skillsGroupedByUsage(skills)).toEqual([
+      {
+        usage: "Daily",
+        skills: [
+          { name: "Alpha", usage: "Daily" },
+          { name: "Beta", usage: "Daily" },
+        ],
+      },
+      { usage: "Regular", skills: [{ name: "Gamma", usage: "Regular" }] },
+      { usage: "Exploring", skills: [{ name: "Zed", usage: "Exploring" }] },
+    ]);
   });
 
-  it("does not mutate the input array", () => {
-    const skills: Skill[] = [
-      { name: "A", level: "Beginner", progress: 1 },
-      { name: "B", level: "Expert", progress: 0.1 },
+  it("omits empty tiers", () => {
+    const skills: Skill[] = [{ name: "Only", usage: "Occasional" }];
+    expect(skillsGroupedByUsage(skills)).toEqual([
+      { usage: "Occasional", skills: [{ name: "Only", usage: "Occasional" }] },
+    ]);
+  });
+});
+
+describe("flattenSkillCategories", () => {
+  it("preserves skills with category titles in panel order", () => {
+    const categories: SkillCategory[] = [
+      {
+        title: "A",
+        skills: [{ name: "X", usage: "Daily" }],
+      },
+      {
+        title: "B",
+        skills: [
+          { name: "Y", usage: "Regular" },
+          { name: "Z", usage: "Exploring" },
+        ],
+      },
     ];
-    const copy = [...skills];
-    orderSkills(skills);
-    expect(skills).toEqual(copy);
+    expect(flattenSkillCategories(categories)).toEqual([
+      { name: "X", usage: "Daily", categoryTitle: "A" },
+      { name: "Y", usage: "Regular", categoryTitle: "B" },
+      { name: "Z", usage: "Exploring", categoryTitle: "B" },
+    ]);
   });
 });

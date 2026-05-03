@@ -1,23 +1,25 @@
-export const SkillLevels = [
-  "Beginner",
-  "Intermediate",
-  "Advanced",
-  "Expert",
+/** How often this tool shows up in real work — not a proficiency score. */
+export const SkillUsages = [
+  "Daily",
+  "Regular",
+  "Occasional",
+  "Exploring",
 ] as const;
 
-export type SkillLevel = (typeof SkillLevels)[number];
+export type SkillUsage = (typeof SkillUsages)[number];
 
-export const skillLevelOrder: Record<SkillLevel, number> = {
-  Beginner: 0,
-  Intermediate: 1,
-  Advanced: 2,
-  Expert: 3,
+export const skillUsageOrder: Record<SkillUsage, number> = {
+  Daily: 3,
+  Regular: 2,
+  Occasional: 1,
+  Exploring: 0,
 };
 
 export interface Skill {
   name: string;
-  level: SkillLevel;
-  progress?: number; // 0-1 within the current level, default = 1
+  usage: SkillUsage;
+  /** Override Simple Icons slug when `name` does not map cleanly. */
+  iconSlug?: string;
 }
 
 export interface SkillCategory {
@@ -29,62 +31,62 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Languages",
     skills: [
-      { name: "HTML", level: "Advanced", progress: 1 },
-      { name: "CSS", level: "Advanced", progress: 1 },
-      { name: "PHP", level: "Advanced", progress: 0.5 },
-      { name: "TypeScript", level: "Advanced", progress: 0.9 },
-      { name: "C#", level: "Advanced", progress: 0.9 },
+      { name: "HTML", usage: "Daily" },
+      { name: "CSS", usage: "Daily" },
+      { name: "PHP", usage: "Regular" },
+      { name: "TypeScript", usage: "Daily" },
+      { name: "C#", usage: "Regular" },
     ],
   },
   {
     title: "Frameworks & Libraries",
     skills: [
-      { name: "Bootstrap", level: "Advanced", progress: 1 },
-      { name: "React", level: "Advanced", progress: 0.9 },
-      { name: "React Native (Expo)", level: "Beginner", progress: 0.9 },
-      { name: "Tailwind", level: "Intermediate", progress: 0.6 },
-      { name: ".NET", level: "Advanced", progress: 1 },
-      { name: "Laravel", level: "Advanced", progress: 0.8 },
-      { name: "Entity Framework", level: "Advanced", progress: 0.9 },
-      { name: "Wordpress", level: "Beginner", progress: 0.5 },
+      { name: "Bootstrap", usage: "Regular" },
+      { name: "React", usage: "Daily" },
+      { name: "React Native (Expo)", usage: "Occasional" },
+      { name: "Tailwind", usage: "Regular" },
+      { name: ".NET", usage: "Regular" },
+      { name: "Laravel", usage: "Regular" },
+      { name: "Entity Framework", usage: "Regular" },
+      { name: "Wordpress", usage: "Occasional" },
     ],
   },
 
   {
     title: "Testing Frameworks",
     skills: [
-      { name: "XUnit", level: "Advanced", progress: 0.9 },
-      { name: "Jest", level: "Advanced", progress: 1 },
+      { name: "XUnit", usage: "Regular" },
+      { name: "Jest", usage: "Regular" },
     ],
   },
   {
     title: "Databases",
     skills: [
-      { name: "MySQL", level: "Intermediate", progress: 0.8 },
-      { name: "PostgreSQL", level: "Intermediate", progress: 0.7 },
-      { name: "MS SQL", level: "Intermediate", progress: 0.5 },
+      { name: "MySQL", usage: "Occasional" },
+      { name: "PostgreSQL", usage: "Occasional" },
+      { name: "MS SQL", usage: "Occasional" },
     ],
   },
   {
     title: "DevOps & Tools",
     skills: [
-      { name: "Git & Hooks", level: "Advanced", progress: 1 },
-      { name: "Docker", level: "Intermediate", progress: 0.8 },
-      { name: "CI/CD", level: "Intermediate", progress: 0.75 },
+      { name: "Git & Hooks", usage: "Daily" },
+      { name: "Docker", usage: "Occasional" },
+      { name: "CI/CD", usage: "Occasional" },
     ],
   },
   {
     title: "UI/UX & Design",
     skills: [
-      { name: "Figma", level: "Advanced", progress: 0.2 },
-      { name: "Adobe Illustrator", level: "Intermediate", progress: 0.7 },
+      { name: "Figma", usage: "Occasional" },
+      { name: "Adobe Illustrator", usage: "Occasional" },
     ],
   },
   {
     title: "Cloud / Hosting",
     skills: [
-      { name: "Azure", level: "Beginner", progress: 0.75 },
-      { name: "Digital Ocean", level: "Beginner", progress: 0.4 },
+      { name: "Azure", usage: "Exploring" },
+      { name: "Digital Ocean", usage: "Exploring" },
     ],
   },
 ];
