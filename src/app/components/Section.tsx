@@ -36,7 +36,7 @@ export default function Section({
       className={cn(
         "relative w-full bg-text",
         /* Align with `main` max-lg top padding (pt-14): one viewport = pad + section */
-        "min-h-[calc(100svh-3.5rem)] lg:min-h-screen",
+        "bru-section-min lg:min-h-screen",
         "lg:ml-80 lg:w-[calc(100%-20rem)]",
         rest.className,
       )}

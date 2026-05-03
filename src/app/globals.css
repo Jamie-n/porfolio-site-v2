@@ -85,6 +85,8 @@
   */
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     scrollbar-width: thin;
     /* Neutral thumb, invisible track; accent only on interaction */
     scrollbar-color: color-mix(
@@ -159,7 +161,8 @@
 
     to {
       opacity: 1;
-      transform: none;
+      /* Explicit end transform: Safari can fail to interpolate to `none`. */
+      transform: translate3d(0, 0, 0);
     }
   }
 
@@ -184,12 +187,14 @@
     from {
       opacity: 0;
       transform: translateY(0.08em) scale(0.94);
+      -webkit-clip-path: inset(100% 0 0 0);
       clip-path: inset(100% 0 0 0);
     }
 
     to {
       opacity: 1;
-      transform: none;
+      transform: translate3d(0, 0, 0) scale(1);
+      -webkit-clip-path: inset(0 0 0 0);
       clip-path: inset(0 0 0 0);
     }
   }
@@ -202,7 +207,7 @@
 
     to {
       opacity: 1;
-      transform: none;
+      transform: scale(1);
     }
   }
 
@@ -226,29 +231,29 @@
 
     to {
       opacity: 1;
-      transform: none;
+      transform: translate3d(0, 0, 0);
     }
   }
 
   @keyframes first-visit-splash-sweep {
     from {
       opacity: 0;
-      transform: translateX(-100%);
+      transform: translate3d(-100%, 0, 0);
     }
 
     12% {
       opacity: 1;
-      transform: translateX(-100%);
+      transform: translate3d(-100%, 0, 0);
     }
 
     88% {
       opacity: 1;
-      transform: translateX(100%);
+      transform: translate3d(100%, 0, 0);
     }
 
     to {
       opacity: 0;
-      transform: translateX(100%);
+      transform: translate3d(100%, 0, 0);
     }
   }
 
@@ -260,7 +265,7 @@
 
     to {
       opacity: 1;
-      transform: none;
+      transform: scale(1);
     }
   }
 
@@ -460,6 +465,17 @@
   /* Row stack: solid rules that read cleanly over .bru-panel / .grid-overlay */
   .bru-divide-y > * + * {
     border-top: 1px solid var(--rule-solid);
+  }
+
+  /* Section min-height: vh fallback, svh when supported (mobile URL bar / older engines). */
+  .bru-section-min {
+    min-height: calc(100vh - 3.5rem);
+  }
+
+  @supports (height: 1svh) {
+    .bru-section-min {
+      min-height: calc(100svh - 3.5rem);
+    }
   }
 
   /* Tight caps for skill meter labels, etc. */
@@ -812,6 +828,9 @@
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, "Liberation Mono", "Courier New", monospace;
   font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings:
+    "tnum" 1,
+    "zero" 1;
   font-weight: 800;
   letter-spacing: -0.12em;
   line-height: 0.85;
@@ -831,4 +850,10 @@
   filter: blur(0.9px);
   transform: rotate(-1.25deg);
   z-index: 0;
+}
+
+.dark .bg-text::after {
+  /* `multiply` on a dark surface collapses contrast in WebKit/Gecko; screen keeps the watermark legible. */
+  mix-blend-mode: screen;
+  opacity: 0.4;
 }
