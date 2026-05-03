@@ -44,6 +44,7 @@ export default function DarkModeToggle() {
         left: "Light",
         right: "Dark",
       }}
+      testId="dark-mode-toggle"
     />
   );
 }

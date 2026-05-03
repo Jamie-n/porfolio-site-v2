@@ -4,17 +4,22 @@ type ToggleProps = {
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
   labels: { left: string; right: string };
+  testId?: string;
 } & Omit<ComponentPropsWithoutRef<"input">, "type" | "checked" | "onChange">;
 
 export default function Toggle({
   checked,
   onCheckedChange,
   labels,
+  testId,
   ...rest
 }: ToggleProps) {
   const { left, right } = labels;
   return (
-    <label className="inline-flex items-center cursor-pointer select-none">
+    <label
+      className="inline-flex items-center cursor-pointer select-none"
+      data-testid={testId}
+    >
       <input
         {...rest}
         type="checkbox"
