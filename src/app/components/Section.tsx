@@ -34,7 +34,10 @@ export default function Section({
       data-text={data}
       {...rest}
       className={cn(
-        "relative min-h-screen ml-80 w-[calc(100%-20rem)] bg-text",
+        "relative w-full bg-text",
+        /* Align with `main` max-lg top padding (pt-14): one viewport = pad + section */
+        "min-h-[calc(100svh-3.5rem)] lg:min-h-screen",
+        "lg:ml-80 lg:w-[calc(100%-20rem)]",
         rest.className,
       )}
     >

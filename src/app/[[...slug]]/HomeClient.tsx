@@ -33,7 +33,7 @@ export default function HomeClient() {
   ];
 
   return (
-    <main className="no-scrollbar">
+    <main className="min-w-0 overflow-x-clip pt-14 lg:pt-0">
       <Sidebar sections={sections} />
       {sections.map(({ Component, href, title, showTitle }, idx) => (
         <Fragment key={href}>
@@ -45,7 +45,7 @@ export default function HomeClient() {
             <Component />
           </Section>
           {idx < sections.length - 1 && (
-            <div className="section-spacer ml-80 w-[calc(100%-20rem)]">
+            <div className="section-spacer w-full lg:ml-80 lg:w-[calc(100%-20rem)]">
               <div className="section-spacer__crosshair" aria-hidden="true" />
               <div className="section-spacer__swatches" aria-hidden="true">
                 <span />
