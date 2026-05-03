@@ -69,6 +69,10 @@ The overlay documents these areas (read the corresponding sections in code when 
 
 **Primitives used by the styleguide:** section titles use `bru-label`; demo blocks use `StyleguidePanel` → `bru-panel` with consistent padding (`px-6 py-5`). New styleguide-worthy demos should follow the same primitives.
 
+### Related: portfolio copy voice
+
+This skill covers **visual** language. **Prose, tone, and narrative** for the site live in the **`portfolio-site-voice`** project skill (`.cursor/skills/portfolio-site-voice/SKILL.md`) and the styleguide **Writing style** section in `StyleguideOverlay.tsx`. When you add or reshape sections, update copy guidance in both places if the rules change.
+
 ### Required “poster brutalism” motifs (from inspiration)
 
 Use these motifs as _structure_, not decoration:
