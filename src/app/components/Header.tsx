@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import { cn } from "@/lib/cn";
 
 interface HeaderProps
   extends PropsWithChildren,
@@ -7,18 +8,18 @@ interface HeaderProps
 }
 
 export default function Header({ variant, children, ...rest }: HeaderProps) {
-  const className = rest.className ?? "";
+  const className = rest.className;
 
   if (variant === "title") {
     return (
-      <h1 {...rest} className={`${className} font-bold text-7xl`.trim()}>
+      <h1 {...rest} className={cn("bru-h1", className)}>
         {children}
       </h1>
     );
   }
 
   return (
-    <h2 {...rest} className={`${className} font-bold text-5xl my-10`.trim()}>
+    <h2 {...rest} className={cn("bru-h2", className)}>
       {children}
     </h2>
   );

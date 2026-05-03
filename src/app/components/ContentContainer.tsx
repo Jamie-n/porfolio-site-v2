@@ -1,14 +1,21 @@
 import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import { cn } from "@/lib/cn";
 
-interface SectionProps
-  extends PropsWithChildren,
-    ComponentPropsWithoutRef<"div"> {
-  title?: string;
-}
+type ContentContainerProps = PropsWithChildren<ComponentPropsWithoutRef<"div">>;
 
-export default function ContentContainer({ children, ...rest }: SectionProps) {
+export default function ContentContainer({
+  children,
+  className,
+  ...rest
+}: ContentContainerProps) {
   return (
-    <div className={`px-36 py-12 ${rest.className ?? ""}`.trim()}>
+    <div
+      {...rest}
+      className={cn(
+        "px-6 sm:px-10 lg:px-16 xl:px-24 2xl:px-32 py-10 sm:py-12",
+        className,
+      )}
+    >
       {children}
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import { formatIndex } from "@/utils";
+import type { SectionItem } from "@/app/types/sectionItem";
+import { formatIndex } from "@/lib/utils";
 import Sidebar from "../components/nav/Sidebar";
 import Section from "../components/Section";
 import About from "../sections/About";
@@ -9,13 +10,7 @@ import Experience from "../sections/Experience";
 import Hero from "../sections/Hero";
 import Projects from "../sections/Projects";
 import Skills from "../sections/Skills";
-
-export interface SectionItem {
-  title: string;
-  Component: React.ComponentType;
-  href: string;
-  showTitle?: boolean;
-}
+import { Fragment } from "react";
 
 export default function HomeClient() {
   const sections: SectionItem[] = [
@@ -32,17 +27,34 @@ export default function HomeClient() {
   ];
 
   return (
-    <main className="no-scrollbar">
+    <main className="min-w-0 overflow-x-clip pt-14 lg:pt-0">
       <Sidebar sections={sections} />
       {sections.map(({ Component, href, title, showTitle }, idx) => (
-        <Section
-          key={href}
-          data={formatIndex(idx)}
-          href={href}
-          title={showTitle !== false ? title : undefined}
-        >
-          <Component />
-        </Section>
+        <Fragment key={href}>
+          <Section
+            data={formatIndex(idx)}
+            href={href}
+            title={showTitle !== false ? title : undefined}
+          >
+            <Component />
+          </Section>
+          {idx < sections.length - 1 && (
+            <div className="section-spacer w-full lg:ml-80 lg:w-[calc(100%-20rem)]">
+              <div className="section-spacer__crosshair" aria-hidden="true" />
+              <div className="section-spacer__swatches" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="section-spacer__meta" aria-hidden="true">
+                <span>LOC: UK / REMOTE</span>
+                <span>BUILD: 2026</span>
+                <span>STATE: LIVE</span>
+              </div>
+            </div>
+          )}
+        </Fragment>
       ))}
     </main>
   );

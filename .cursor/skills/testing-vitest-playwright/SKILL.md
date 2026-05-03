@@ -1,6 +1,9 @@
 ---
 name: testing-vitest-playwright
-description: Add or update tests in this repo using Vitest + Testing Library and Playwright. Use when writing unit/component tests, updating test setup, or debugging failing `npm run test` / `npm run test:e2e`.
+description: >-
+  Adds or updates tests using Vitest, Testing Library, and Playwright in this
+  repository. Use when writing unit or component tests, updating test setup, or
+  debugging failures from npm run test or npm run test:e2e.
 disable-model-invocation: true
 ---
 

@@ -1,14 +1,12 @@
 "use client";
 
-import {
-  ComponentPropsWithoutRef,
-  PropsWithChildren,
-  useEffect,
-  useRef,
-} from "react";
+import { ComponentPropsWithoutRef, PropsWithChildren, useRef } from "react";
 import useScrollSpy from "../hooks/useScrollSpy";
 import ContentContainer from "./ContentContainer";
 import Header from "./Header";
+import { BruText } from "./primitives/BruText";
+import Reveal from "./Reveal";
+import { cn } from "@/lib/cn";
 
 interface SectionProps
   extends PropsWithChildren,
@@ -27,25 +25,36 @@ export default function Section({
 }: SectionProps) {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  // Set data-text after hydration
-  useEffect(() => {
-    if (ref.current && data) {
-      ref.current.dataset.text = data;
-    }
-  }, [data]);
-
   useScrollSpy(ref, href);
 
   return (
     <div
       id={href}
       ref={ref}
+      data-text={data}
       {...rest}
-      className={`relative min-h-screen ml-80 bg-text mb-10 ${rest.className ?? ""}`.trim()}
+      className={cn(
+        "relative w-full bg-text",
+        /* Align with `main` max-lg top padding (pt-14): one viewport = pad + section */
+        "bru-section-min lg:min-h-screen",
+        "lg:ml-80 lg:w-[calc(100%-20rem)]",
+        rest.className,
+      )}
     >
-      <ContentContainer>
-        {title && <Header variant="title">#{title.toUpperCase()}</Header>}
-        {children}
+      <ContentContainer className="grid gap-8">
+        {title && (
+          <Reveal>
+            <div className="grid gap-6">
+              <div className="bru-panel px-4 py-3">
+                <BruText variant="label">Section</BruText>
+                <Header variant="title">{title}</Header>
+              </div>
+            </div>
+          </Reveal>
+        )}
+        <Reveal delayMs={title ? 80 : 0}>
+          <div className="min-w-0">{children}</div>
+        </Reveal>
       </ContentContainer>
     </div>
   );

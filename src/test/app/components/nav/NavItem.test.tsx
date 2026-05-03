@@ -6,17 +6,17 @@ vi.mock("next/navigation", () => ({
   usePathname: () => "/about",
 }));
 
-vi.mock("../../../utils", async () => {
+vi.mock("@/lib/utils", async () => {
   const actual =
-    await vi.importActual<typeof import("../../../utils")>("../../../utils");
+    await vi.importActual<typeof import("@/lib/utils")>("@/lib/utils");
   return {
     ...actual,
-    scrollToElement: vi.fn(() => Promise.resolve()),
+    scrollToHref: vi.fn(() => Promise.resolve()),
   };
 });
 
-import NavItem from "./NavItem";
-import { scrollToElement } from "../../../utils";
+import NavItem from "@/app/components/nav/NavItem";
+import { scrollToHref } from "@/lib/utils";
 
 describe("NavItem", () => {
   beforeEach(() => {
@@ -26,7 +26,9 @@ describe("NavItem", () => {
 
   it("renders as active when pathname matches href", () => {
     render(<NavItem linkText="02. About" href="/about" />);
-    expect(screen.getByText("02. About")).toHaveClass("text-red-500");
+    const label = screen.getByText("02. About");
+    expect(label).toHaveClass("bru-h3");
+    expect(label).toHaveClass("text-accent");
   });
 
   it("smooth-scrolls and updates URL without navigation", async () => {
@@ -39,11 +41,6 @@ describe("NavItem", () => {
 
     const link = screen.getByRole("link");
     await user.click(link);
-    expect(scrollToElement).toHaveBeenCalledWith(section);
-    expect(window.history.replaceState).toHaveBeenCalledWith(
-      null,
-      "",
-      "/projects",
-    );
+    expect(scrollToHref).toHaveBeenCalledWith("/projects");
   });
 });

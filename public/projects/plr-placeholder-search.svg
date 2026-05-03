@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" role="img" aria-label="Placeholder: search and index UI">
+  <rect width="400" height="240" fill="#0d0d0d"/>
+  <g stroke="#2a2a2a" stroke-width="1">
+    <path d="M0 48 H400"/>
+    <path d="M0 96 H400"/>
+    <path d="M0 144 H400"/>
+    <path d="M0 192 H400"/>
+    <path d="M120 48 V240"/>
+    <path d="M280 48 V240"/>
+  </g>
+  <rect x="16" y="16" width="368" height="28" fill="#141414" stroke="#333" stroke-width="1"/>
+  <rect x="28" y="22" width="180" height="16" fill="#1a1a1a" stroke="#2a2a2a"/>
+  <rect x="312" y="22" width="60" height="16" fill="#e63946" opacity="0.35" stroke="#e63946"/>
+  <g fill="#d4d4d4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="24" y="84" font-size="10" letter-spacing="2.5">SEARCH / INDEX</text>
+    <text x="24" y="108" font-size="9" fill="#888" letter-spacing="1.5">Placeholder screenshot  replace with product capture</text>
+    <text x="24" y="220" font-size="9" letter-spacing="2" fill="#666">PLR PLATE</text>
+    <text x="376" y="220" font-size="9" letter-spacing="2" fill="#666" text-anchor="end">01</text>
+  </g>
+</svg>

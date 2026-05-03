@@ -32,6 +32,20 @@ export function scrollToElement(
   });
 }
 
+export async function scrollToHref(
+  href: string,
+  options?: {
+    threshold?: number;
+    getTarget?: (href: string) => HTMLElement | null;
+  },
+): Promise<void> {
+  const target = options?.getTarget?.(href) ?? document.getElementById(href);
+  if (!target) return;
+
+  await scrollToElement(target, options?.threshold);
+  window.history.replaceState(null, "", href);
+}
+
 export function formatIndex(index: number): string {
   return (index + 1).toString().padStart(2, "0");
 }

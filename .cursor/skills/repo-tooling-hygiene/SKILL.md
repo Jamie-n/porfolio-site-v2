@@ -1,6 +1,9 @@
 ---
 name: repo-tooling-hygiene
-description: Keep this repo consistent with its tooling (ESLint, Prettier, Husky, lint-staged) and Next.js conventions. Use when adding dependencies, changing scripts, formatting, or preparing commits/PRs.
+description: >-
+  Keeps this repository aligned with ESLint, Prettier, Husky, lint-staged, and
+  Next.js conventions. Use when adding dependencies, changing npm scripts,
+  formatting code, or preparing commits or pull requests.
 disable-model-invocation: true
 ---
 

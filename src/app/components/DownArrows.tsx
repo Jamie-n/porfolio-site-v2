@@ -7,7 +7,7 @@ export default function DownArrows() {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="size-6 text-gray-800 "
+        className="size-6 text-foreground"
       >
         <path
           strokeLinecap="round"
@@ -22,7 +22,7 @@ export default function DownArrows() {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="size-6 text-gray-400"
+        className="size-6 text-muted"
       >
         <path
           strokeLinecap="round"
@@ -37,7 +37,7 @@ export default function DownArrows() {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="size-6 text-white"
+        className="size-6 text-foreground"
       >
         <path
           strokeLinecap="round"

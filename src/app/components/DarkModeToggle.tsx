@@ -39,11 +39,12 @@ export default function DarkModeToggle() {
   return (
     <Toggle
       checked={dark}
-      onChange={toggle}
+      onCheckedChange={() => toggle()}
       labels={{
         left: "Light",
         right: "Dark",
       }}
+      testId="dark-mode-toggle"
     />
   );
 }
