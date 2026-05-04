@@ -38,9 +38,23 @@ const schema = {
   ],
 };
 
-export default function Markdown({ children }: { children: string }) {
+type MarkdownProps = {
+  children: string;
+  /** Muted, single-paragraph case study copy: no block gap, **text** uses subtle emphasis. */
+  caseStudySummary?: boolean;
+};
+
+export default function Markdown({
+  children,
+  caseStudySummary = false,
+}: MarkdownProps) {
   return (
-    <div className="grid gap-4 min-w-0 break-words [overflow-wrap:anywhere]">
+    <div
+      className={cn(
+        "min-w-0 break-words [overflow-wrap:anywhere] grid",
+        caseStudySummary ? "gap-0" : "gap-4",
+      )}
+    >
       <ReactMarkdown
         disallowedElements={[
           "img",
@@ -57,9 +71,20 @@ export default function Markdown({ children }: { children: string }) {
           p: ({ className, ...props }) => (
             <BruText
               as="p"
-              variant="prose"
+              variant={caseStudySummary ? "proseMuted" : "prose"}
               className={cn(
-                "max-w-[80ch] break-words [overflow-wrap:anywhere]",
+                caseStudySummary
+                  ? "m-0 max-w-[72ch] break-words [overflow-wrap:anywhere]"
+                  : "max-w-[80ch] break-words [overflow-wrap:anywhere]",
+                className,
+              )}
+              {...props}
+            />
+          ),
+          strong: ({ className, ...props }) => (
+            <strong
+              className={cn(
+                caseStudySummary && "font-normal text-foreground/85",
                 className,
               )}
               {...props}

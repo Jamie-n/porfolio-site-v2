@@ -8,8 +8,24 @@ export type ExperienceContent = {
   highlights: string[];
 };
 
-type Experiences = "the-curve" | "chft" | "apple-designs" | "js-wetherspoon";
-type OtherExperiences = "media-and-merch";
+export type Experiences =
+  | "the-curve"
+  | "chft"
+  | "apple-designs"
+  | "js-wetherspoon";
+export type OtherExperiences = "media-and-merch";
+
+/** Display order for the Experience section. */
+export const EXPERIENCE_IDS = [
+  "the-curve",
+  "chft",
+  "apple-designs",
+  "js-wetherspoon",
+] as const satisfies readonly Experiences[];
+
+export const OTHER_EXPERIENCE_IDS = [
+  "media-and-merch",
+] as const satisfies readonly OtherExperiences[];
 
 export const experiences: Record<Experiences, ExperienceContent> = {
   "the-curve": {
@@ -89,3 +105,10 @@ export const otherExperiences: Record<OtherExperiences, ExperienceContent> = {
     ],
   },
 };
+
+export const experienceList: readonly ExperienceContent[] = EXPERIENCE_IDS.map(
+  (id) => experiences[id],
+);
+
+export const otherExperienceList: readonly ExperienceContent[] =
+  OTHER_EXPERIENCE_IDS.map((id) => otherExperiences[id]);
