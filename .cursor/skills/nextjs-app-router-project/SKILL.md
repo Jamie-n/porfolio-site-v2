@@ -14,9 +14,9 @@ disable-model-invocation: true
 
 ## Before you change code (required)
 
-1. **Read project docs first** — Start with [`docs/README.md`](docs/README.md). For UI work, read [`docs/design-system.md`](docs/design-system.md) and align with the live styleguide (`src/app/components/StyleguideOverlay.tsx`), which is the **empirical** catalog of blocks and recipes (not optional for new content blocks).
-2. **Ground decisions in existing code** — Find similar features (sections, components, hooks) and match their structure, naming, imports, and styling conventions. Prefer extending what exists over inventing parallel patterns.
-3. **Do not guess** — If something is unclear (routing behavior, data shape, design rule, env vars), **search/read the codebase** or **ask the user**. Unknowns are not an excuse to assume defaults from “typical Next.js apps.”
+1. **Read project docs first** - Start with [`docs/README.md`](docs/README.md). For UI work, read [`docs/design-system.md`](docs/design-system.md) and align with the live styleguide (`src/app/components/StyleguideOverlay.tsx`), which is the **empirical** catalog of blocks and recipes (not optional for new content blocks).
+2. **Ground decisions in existing code** - Find similar features (sections, components, hooks) and match their structure, naming, imports, and styling conventions. Prefer extending what exists over inventing parallel patterns.
+3. **Do not guess** - If something is unclear (routing behavior, data shape, design rule, env vars), **search/read the codebase** or **ask the user**. Unknowns are not an excuse to assume defaults from “typical Next.js apps.”
 
 ## Quick orientation (this repo)
 

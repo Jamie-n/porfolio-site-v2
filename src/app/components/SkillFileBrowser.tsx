@@ -143,7 +143,7 @@ export default function SkillFileBrowser({
             <div className="min-w-0">
               <BruText variant="label">Preview</BruText>
               <BruText variant="accTitle" className="mt-1 truncate">
-                {active?.title ?? "—"}
+                {active?.title ?? "-"}
               </BruText>
             </div>
             {active?.path && (

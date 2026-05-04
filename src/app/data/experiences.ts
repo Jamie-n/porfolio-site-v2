@@ -35,13 +35,13 @@ export const experiences: Record<Experiences, ExperienceContent> = {
     endDate: undefined,
     colour: "bg-red-500",
     blurb:
-      "Software engineer at The Curve, a consultancy where I ship pragmatic solutions with clients and partners. I spend my time clarifying what actually needs building, owning features across the stack, and helping junior and offshore developers stay unblocked—without losing sight of quality, usability, or how work lands in production.",
+      "Software engineer at The Curve, a consultancy where I ship pragmatic solutions with clients and partners. I spend my time clarifying what actually needs building, owning features across the stack, and helping junior and offshore developers stay unblocked - without losing sight of quality, usability, or how work lands in production.",
     highlights: [
-      "I partner with clients and external organisations on complex delivery—turning pain points into clear requirements and incremental releases.",
+      "I partner with clients and external organisations on complex delivery - turning pain points into clear requirements and incremental releases.",
       "I mentor junior and offshore teammates through pairing and reviews, and I keep handoffs explicit so scope doesn’t drift.",
       "I own features end to end with a bias toward maintainable code, sensible UX, and releases that can be rolled back cleanly.",
       "I bridge stakeholders and engineering: surfacing risks early and keeping expectations aligned with what we ship.",
-      "I help shape technical direction inside teams—approach, sequencing, and trade-offs that fit the business constraint.",
+      "I help shape technical direction inside teams - approach, sequencing, and trade-offs that fit the business constraint.",
       "I stay in refactors, code review, and continuous improvement alongside day-to-day feature work.",
     ],
   },
@@ -52,7 +52,7 @@ export const experiences: Record<Experiences, ExperienceContent> = {
     endDate: 2024,
     colour: "bg-blue-500",
     blurb:
-      "Web developer with the Health Informatics Service, supporting Calderdale & Huddersfield NHS Foundation Trust and partner organisations. I replaced fragile paper and legacy surfaces with dependable web tools—always with an eye on what clinical and operational staff need at the point of use.",
+      "Web developer with the Health Informatics Service, supporting Calderdale & Huddersfield NHS Foundation Trust and partner organisations. I replaced fragile paper and legacy surfaces with dependable web tools - always with an eye on what clinical and operational staff need at the point of use.",
     highlights: [
       "Designed and delivered a return-to-work system that replaced a paper accident-and-absence process; it became the Trust’s default channel for reporting.",
       "Built and evolved the CHFT Patient Leaflet Repository so consultants can find accurate, governed leaflets in one place.",
@@ -96,7 +96,7 @@ export const otherExperiences: Record<OtherExperiences, ExperienceContent> = {
     endDate: 2024,
     colour: "bg-blue-500",
     blurb:
-      "Volunteered as media and merchandise secretary—keeping social channels cohesive, working with brand partners on kit and promo, and making sure what we published actually looked like the same club.",
+      "Volunteered as media and merchandise secretary - keeping social channels cohesive, working with brand partners on kit and promo, and making sure what we published actually looked like the same club.",
 
     highlights: [
       "Maintained a consistent visual identity across social channels.",

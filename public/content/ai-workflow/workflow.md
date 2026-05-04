@@ -1,6 +1,6 @@
 # AI workflow (with human guardrails)
 
-Agentic AI is great at scaffolding fast—but it still needs **human judgment** to stay unique and maintainable.
+Agentic AI is great at scaffolding fast - but it still needs **human judgment** to stay unique and maintainable.
 
 Used well, it’s a **force multiplier**, not a replacement.
 

@@ -53,7 +53,7 @@ export function OpenJourneyOverlayButton({
 }
 
 async function fetchText(path: string) {
-  // Static markdown lives under `public/content/` — avoid stale HTTP cache and
+  // Static markdown lives under `public/content/` - avoid stale HTTP cache and
   // stale React state so edits show up without a hard reload.
   const res = await fetch(path, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to load content: ${path}`);

@@ -1,4 +1,4 @@
-/** How often this tool shows up in real work — not a proficiency score. */
+/** How often this tool shows up in real work - not a proficiency score. */
 export const SkillUsages = [
   "Daily",
   "Regular",

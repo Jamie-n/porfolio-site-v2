@@ -2,7 +2,7 @@
 
 This portfolio is a **reinvention** of my original site.
 
-The old version was a **Laravel** app. It’s still on GitHub—a useful snapshot of where I was—but the **tooling, structure, and front-end craft** no longer matched how I work today.
+The old version was a **Laravel** app. It’s still on GitHub - a useful snapshot of where I was - but the **tooling, structure, and front-end craft** no longer matched how I work today.
 
 This rebuild is both:
 

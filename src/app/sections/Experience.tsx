@@ -25,15 +25,11 @@ export default function Experience() {
 
       <Panel padding="sm" className="mt-14 mb-6">
         <BruText variant="label">More background</BruText>
-        <Header variant="subheading">Community and earlier roles</Header>
+        <Header variant="subheading">Other Roles</Header>
       </Panel>
 
       {otherExperienceList.map((ex, idx) => (
-        <ExperienceAccordion key={OTHER_EXPERIENCE_IDS[idx]} {...ex}>
-          <BruText variant="proseMuted">
-            I haven't added screenshots for this entry to the repo yet.
-          </BruText>
-        </ExperienceAccordion>
+        <ExperienceAccordion key={OTHER_EXPERIENCE_IDS[idx]} {...ex} />
       ))}
     </>
   );

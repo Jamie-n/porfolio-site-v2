@@ -32,7 +32,7 @@
     --grid: rgba(10, 10, 10, 0.06);
     --grain-opacity: 0.06;
 
-    /* Opaque horizontal rules (tables / rows on grid panels — avoids moiré with --grid) */
+    /* Opaque horizontal rules (tables / rows on grid panels - avoids moiré with --grid) */
     --rule-solid: color-mix(in oklab, var(--foreground) 16%, var(--background));
   }
 

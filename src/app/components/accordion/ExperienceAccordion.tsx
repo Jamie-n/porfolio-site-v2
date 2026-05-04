@@ -22,7 +22,7 @@ export default function ExperienceAccordion({
       <div className="ps-4">
         <BruText variant="accMeta">
           {startDate}
-          {endDate !== null ? ` — ${endDate ?? "Present"}` : ""}
+          {endDate !== null ? ` - ${endDate ?? "Present"}` : ""}
         </BruText>
         <BruText variant="accTitle" className="mt-1 block">
           {company}
