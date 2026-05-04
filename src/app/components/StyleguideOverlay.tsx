@@ -803,7 +803,9 @@ export default function StyleguideOverlay({
                       For fixed compounds in UI, prefer a non-breaking hyphen (
                       <code className="font-mono text-[0.8125rem]">‑</code>
                       U+2011) so lines do not split awkwardly — e.g.{" "}
-                      <span className="text-foreground/90">full‑stack</span>,{" "}
+                      <span className="text-foreground/90">
+                        full‑stack
+                      </span>,{" "}
                       <span className="text-foreground/90">day‑to‑day</span>,{" "}
                       <span className="text-foreground/90">end‑to‑end</span>.
                     </span>
