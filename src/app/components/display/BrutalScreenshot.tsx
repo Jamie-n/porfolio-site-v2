@@ -49,7 +49,8 @@ export default function BrutalScreenshot({
           sizes={sizes}
           priority={priority}
           className={[
-            "h-auto w-full select-none bg-white",
+            "w-full select-none bg-white",
+            "aspect-video object-cover object-top",
             imageClassName,
           ].join(" ")}
           {...imageProps}
