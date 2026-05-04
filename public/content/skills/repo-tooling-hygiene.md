@@ -4,20 +4,16 @@ The goal is simple: **keep the repo easy to work in and hard to break**. Tooling
 
 ## Working defaults
 
-- **npm** for package management; keep `package-lock.json` in sync.
+- Use a single package manager and keep the lockfile in sync.
 - Prefer minimal dependency additions; remove unused deps when they appear.
-- Keep app code under `src/app/` with a clear split:
-  - `components/` for reusable UI
-  - `sections/` for page sections
-  - `data/` for typed static content
-  - `utilities/` for pure helpers
+- Keep app code organized with a clear split between reusable UI, page sections, typed content, and pure helpers.
 
 ## Local checks I rely on
 
-- Dev: `npm run dev`
-- Lint: `npm run lint`
-- Unit tests: `npm run test` (plus watch/coverage as needed)
-- E2E tests: `npm run test:e2e` (run locally when interaction changes)
+- Development server for fast feedback
+- Linting + formatting to keep the baseline consistent
+- Unit/component tests for behavior checks
+- End-to-end tests when interaction changes
 
 ## Guardrails
 

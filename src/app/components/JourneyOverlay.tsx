@@ -53,7 +53,9 @@ export function OpenJourneyOverlayButton({
 }
 
 async function fetchText(path: string) {
-  const res = await fetch(path, { cache: "force-cache" });
+  // Static markdown lives under `public/content/` — avoid stale HTTP cache and
+  // stale React state so edits show up without a hard reload.
+  const res = await fetch(path, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to load content: ${path}`);
   return await res.text();
 }
@@ -159,15 +161,9 @@ export default function JourneyOverlay({
       try {
         setLoadingError(null);
         const [j, i, a] = await Promise.all([
-          journeyMd
-            ? Promise.resolve(journeyMd)
-            : fetchText("/content/journey/overview.md"),
-          inspirationMd
-            ? Promise.resolve(inspirationMd)
-            : fetchText("/content/inspiration/overview.md"),
-          aiMd
-            ? Promise.resolve(aiMd)
-            : fetchText("/content/ai-workflow/workflow.md"),
+          fetchText("/content/journey/overview.md"),
+          fetchText("/content/inspiration/overview.md"),
+          fetchText("/content/ai-workflow/workflow.md"),
         ]);
         if (cancelled) return;
         setJourneyMd(j);
@@ -183,7 +179,7 @@ export default function JourneyOverlay({
     return () => {
       cancelled = true;
     };
-  }, [open, journeyMd, inspirationMd, aiMd]);
+  }, [open]);
 
   const activeMarkdown = useMemo(() => {
     if (tab === "journey") return journeyMd;

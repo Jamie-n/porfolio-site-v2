@@ -6,17 +6,12 @@ This isn’t “decoration” for its own sake—the goal is to make the layout 
 
 ## The spec (before the pixels)
 
-This direction was originally captured as a concrete plan:
+Before writing components, I wrote down a concrete spec: layout rules, type scale, spacing rhythm, interaction affordances, and what _not_ to do.
 
-- `portfolio-website/.cursor/plans/premium_ui_styling_polish_e66ae2b2.plan.md`
-
-That plan is what guided the refactor into a consistent language, and it’s why the UI feels deliberate instead of “random Tailwind.”
+Having that written standard is what kept the refactor cohesive—and it’s why the UI feels deliberate instead of “random Tailwind.”
 
 ## The living system
 
-In this repo the inspiration is encoded into two artifacts:
+I keep the system “alive” in two places: a written design spec and an in-app styleguide that documents tokens, recipes, and interaction rules.
 
-- `docs/design-system.md` (the written spec)
-- `src/app/components/StyleguideOverlay.tsx` (a living catalog of tokens + recipes + interaction rules)
-
-Together they keep new features from drifting stylistically.
+Together, they make it easy to extend the site without drifting stylistically.
