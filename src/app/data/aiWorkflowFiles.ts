@@ -24,37 +24,30 @@ export const aiWorkflowFiles: SkillFileItem[] = [
     path: "/api/raw/.cursor/plans/premium_ui_styling_polish_e66ae2b2.plan.md",
   },
 
-  // Skills (how we implemented)
+  // Skills (human-readable summaries)
   {
     id: "skill-nextjs-app-router-project",
-    title: "Skill: Next.js App Router project conventions",
-    path: "/api/raw/.cursor/skills/nextjs-app-router-project/SKILL.md",
+    title: "Next.js App Router project conventions",
+    path: "/content/skills/nextjs-app-router-project.md",
   },
   {
     id: "skill-portfolio-design-style",
-    title: "Skill: Portfolio design style",
-    path: "/api/raw/.cursor/skills/portfolio-design-style/SKILL.md",
+    title: "Portfolio design style",
+    path: "/content/skills/portfolio-design-style.md",
   },
   {
     id: "skill-testing-vitest-playwright",
-    title: "Skill: Testing (Vitest + Playwright)",
-    path: "/api/raw/.cursor/skills/testing-vitest-playwright/SKILL.md",
+    title: "Testing (Vitest + Playwright)",
+    path: "/content/skills/testing-vitest-playwright.md",
   },
   {
     id: "skill-nextjs-performance-a11y",
-    title: "Skill: Next.js performance + a11y",
-    path: "/api/raw/.cursor/skills/nextjs-performance-a11y/SKILL.md",
+    title: "Next.js performance + accessibility",
+    path: "/content/skills/nextjs-performance-a11y.md",
   },
   {
     id: "skill-repo-tooling-hygiene",
-    title: "Skill: Repo tooling hygiene",
-    path: "/api/raw/.cursor/skills/repo-tooling-hygiene/SKILL.md",
-  },
-
-  // CI (automated backstop)
-  {
-    id: "ci-workflow",
-    title: "CI workflow (GitHub Actions)",
-    path: "/api/raw/.github/workflows/ci.yml",
+    title: "Repo tooling + hygiene",
+    path: "/content/skills/repo-tooling-hygiene.md",
   },
 ];

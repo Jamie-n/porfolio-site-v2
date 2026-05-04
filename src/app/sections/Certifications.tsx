@@ -1,5 +1,5 @@
-import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
-import { BruText } from "../components/primitives/BruText";
+import ExperienceAccordion from "@/app/components/accordion/ExperienceAccordion";
+import { BruText } from "@/app/components/primitives/BruText";
 
 export default function Certifications() {
   return (

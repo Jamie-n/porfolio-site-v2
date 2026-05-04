@@ -1,16 +1,40 @@
 "use client";
 
-import ExperienceAccordion from "../components/accordion/ExperienceAccordion";
-import CustomAnchor from "../components/display/CustomAnchor";
-import Header from "../components/Header";
-import { BruText } from "../components/primitives/BruText";
+import ExperienceAccordion from "@/app/components/accordion/ExperienceAccordion";
+import CustomAnchor from "@/app/components/display/CustomAnchor";
+import Header from "@/app/components/Header";
+import { BruText } from "@/app/components/primitives/BruText";
+import { Panel } from "@/app/components/primitives/Panel";
+import {
+  RuledList,
+  KeyValueListItem,
+} from "@/app/components/primitives/RuledList";
+
+const WORKING_STYLE = [
+  {
+    k: "Feedback loops",
+    v: "I prefer small, production‑shaped slices—measurable changes that can be rolled back cleanly.",
+  },
+  {
+    k: "Maintainable systems",
+    v: "I keep the core boring: clear boundaries, predictable data flow, and fewer \u201cclever\u201d moving parts.",
+  },
+  {
+    k: "Interface craft",
+    v: "I bias toward hierarchy and restraint: readable type, clear spacing, and interactions that don't shout.",
+  },
+  {
+    k: "Reliability",
+    v: "I lean on guardrails over heroics: linting, targeted tests, and failure states that degrade gracefully.",
+  },
+];
 
 export default function About() {
   return (
     <>
       <div className="mt-8 mb-12 grid gap-4 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          I’m a pragmatic full‑stack engineer focused on turning messy,
+          I'm a pragmatic full‑stack engineer focused on turning messy,
           real‑world constraints into clean systems and crisp interfaces. I care
           about fast feedback loops, maintainable code, and UI details that hold
           up in production.
@@ -28,7 +52,7 @@ export default function About() {
         </BruText>
       </div>
 
-      <div className="mb-12 bru-panel px-6 py-5">
+      <Panel className="mb-12">
         <BruText variant="label">Working style</BruText>
         <Header variant="subheading">How I build</Header>
 
@@ -50,44 +74,19 @@ export default function About() {
           </span>
         </BruText>
 
-        <ul className="mt-5 list-none p-0 m-0 border border-rulesolid bg-background/55 shadow-rule">
-          {[
-            {
-              k: "Feedback loops",
-              v: "I prefer small, production‑shaped slices—measurable changes that can be rolled back cleanly.",
-            },
-            {
-              k: "Maintainable systems",
-              v: "I keep the core boring: clear boundaries, predictable data flow, and fewer “clever” moving parts.",
-            },
-            {
-              k: "Interface craft",
-              v: "I bias toward hierarchy and restraint: readable type, clear spacing, and interactions that don’t shout.",
-            },
-            {
-              k: "Reliability",
-              v: "I lean on guardrails over heroics: linting, targeted tests, and failure states that degrade gracefully.",
-            },
-          ].map((row) => (
-            <li
-              key={row.k}
-              className="grid gap-1 border-b border-rulesolid last:border-b-0 px-5 py-3"
-            >
-              <BruText variant="label" className="text-foreground/70">
-                {row.k}
-              </BruText>
-              <BruText as="p" variant="prose" className="m-0 max-w-none">
-                {row.v}
-              </BruText>
-            </li>
+        <RuledList className="mt-5">
+          {WORKING_STYLE.map((row) => (
+            <KeyValueListItem key={row.k} label={row.k}>
+              {row.v}
+            </KeyValueListItem>
           ))}
-        </ul>
-      </div>
+        </RuledList>
+      </Panel>
 
-      <div className="mb-8 bru-panel px-4 py-3">
+      <Panel padding="sm" className="mb-8">
         <BruText variant="label">Background</BruText>
         <Header variant="subheading">Education</Header>
-      </div>
+      </Panel>
 
       <ExperienceAccordion
         title="Software Engineering MSc"
@@ -97,7 +96,7 @@ export default function About() {
         colour="bg-blue-500"
         blurb="MSc in Software Engineering with a focus on AI and data-driven systems. My capstone applied ML and NLP to real-world text—sentiment and signals in clinical-adjacent data—so I could go deep on evaluation, ethics, and what the model was actually learning."
         highlights={[
-          "Master’s project on AI-based sentiment analysis on textual data, with attention to mental-health-related signals and responsible interpretation.",
+          "Master's project on AI-based sentiment analysis on textual data, with attention to mental-health-related signals and responsible interpretation.",
         ]}
       />
 

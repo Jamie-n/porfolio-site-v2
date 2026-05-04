@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { ComponentPropsWithoutRef, CSSProperties, MouseEvent } from "react";
 import { scrollToHref } from "@/lib/utils";
 import { cn } from "@/lib/cn";
-import { BruText } from "../primitives/BruText";
+import { BruText } from "@/app/components/primitives/BruText";
 
 type AnchorProps = Omit<ComponentPropsWithoutRef<"a">, "href" | "children">;
 
