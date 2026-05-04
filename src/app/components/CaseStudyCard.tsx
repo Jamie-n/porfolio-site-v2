@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Header from "./Header";
 import { BruText } from "./primitives/BruText";
+import { RuledList, RuledListItem } from "./primitives/RuledList";
 import { cn } from "@/lib/cn";
 
 export const caseStudyLinkButtonClassName = cn(
@@ -58,9 +59,9 @@ export default function CaseStudyCard({
         {summary}
       </BruText>
 
-      <ul className="mt-5 list-none p-0 m-0 border border-rulesolid bg-background/55 shadow-rule">
+      <RuledList className="mt-5">
         {bullets.map((t) => (
-          <li key={t} className="border-b border-rulesolid last:border-b-0">
+          <RuledListItem key={t}>
             <BruText
               as="p"
               variant="prose"
@@ -68,9 +69,9 @@ export default function CaseStudyCard({
             >
               {t}
             </BruText>
-          </li>
+          </RuledListItem>
         ))}
-      </ul>
+      </RuledList>
 
       {footer ? (
         <div className="mt-5 flex flex-wrap gap-3 border-t border-rulesolid pt-6">

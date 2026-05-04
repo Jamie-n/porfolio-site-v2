@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Markdown from "./Markdown";
 import { BruText } from "./primitives/BruText";
+import { Button, LinkButton } from "./primitives/Button";
 import { cn } from "@/lib/cn";
 import LazyPrism from "./syntax/LazyPrism";
 
@@ -111,17 +112,15 @@ export default function SkillFileBrowser({
             {items.map((i) => {
               const isActive = i.id === active?.id;
               return (
-                <button
+                <Button
                   key={i.id}
-                  type="button"
                   onClick={() => setActiveId(i.id)}
                   className={cn(
-                    "w-full text-left px-4 py-3 border-b border-rulesolid transition-all duration-200 ease-out",
-                    "hover:-translate-y-[1px] hover:text-accent",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                    "w-full text-left px-4 py-3 border-b border-rulesolid rounded-none",
+                    "hover:-translate-y-0 hover:border-rulesolid",
                     isActive
-                      ? "bg-accent-weak text-accent"
-                      : "text-foreground/80",
+                      ? "bg-accent-weak text-accent border-border"
+                      : "bg-transparent border-transparent shadow-none text-foreground/80",
                   )}
                 >
                   <BruText
@@ -133,7 +132,7 @@ export default function SkillFileBrowser({
                   <div className="mt-1 font-mono text-[0.75rem] leading-snug text-foreground/45 break-all whitespace-normal">
                     {formatDisplayPath(i.path)}
                   </div>
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -148,14 +147,15 @@ export default function SkillFileBrowser({
               </BruText>
             </div>
             {active?.path && (
-              <a
+              <LinkButton
                 href={active.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 border border-border bg-background px-3 py-2 bru-button shadow-rule transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                size="sm"
+                className="shrink-0"
               >
                 Open raw
-              </a>
+              </LinkButton>
             )}
           </div>
           <div className="border-t border-rulesolid px-4 py-4">

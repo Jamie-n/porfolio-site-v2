@@ -1,8 +1,8 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { ExperienceContent } from "../../data/experiences";
-import { BruText } from "../primitives/BruText";
+import { ExperienceContent } from "@/app/data/experiences";
+import { BruText } from "@/app/components/primitives/BruText";
 import Accordion from "./Accordion";
 
 export default function ExperienceAccordion({
