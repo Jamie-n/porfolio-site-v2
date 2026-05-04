@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
-import FirstVisitSplash from "./components/FirstVisitSplash";
+import FirstVisitSplash from "@/app/components/FirstVisitSplash";
 import "./globals.css";
 
 const geistSans = Geist({

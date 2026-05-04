@@ -2,17 +2,17 @@ import ChrisBradbrook from "./projects/ChrisBradbrook";
 import PatientLeafletRepository from "./projects/PatientLeafletRepository";
 import CaseStudyCard, {
   caseStudyLinkButtonClassName,
-} from "../components/CaseStudyCard";
-import CustomAnchor from "../components/display/CustomAnchor";
-import { BruText } from "../components/primitives/BruText";
-import { OpenJourneyOverlayButton } from "../components/JourneyOverlay";
+} from "@/app/components/CaseStudyCard";
+import CustomAnchor from "@/app/components/display/CustomAnchor";
+import { BruText } from "@/app/components/primitives/BruText";
+import { OpenJourneyOverlayButton } from "@/app/components/JourneyOverlay";
 
 export default function Projects() {
   return (
     <>
       <div className="mt-8 mb-10 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          A short list of work I’m happy to stand behind—clear UX, maintainable
+          A short list of work I'm happy to stand behind—clear UX, maintainable
           systems, and delivery I owned end to end. Each card is a quick read on
           outcomes and the decisions that shaped them.
         </BruText>

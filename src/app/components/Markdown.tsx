@@ -40,7 +40,7 @@ const schema = {
 
 export default function Markdown({ children }: { children: string }) {
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4 min-w-0 break-words [overflow-wrap:anywhere]">
       <ReactMarkdown
         disallowedElements={[
           "img",
@@ -58,7 +58,10 @@ export default function Markdown({ children }: { children: string }) {
             <BruText
               as="p"
               variant="prose"
-              className={cn("max-w-[80ch]", className)}
+              className={cn(
+                "max-w-[80ch] break-words [overflow-wrap:anywhere]",
+                className,
+              )}
               {...props}
             />
           ),
@@ -66,7 +69,10 @@ export default function Markdown({ children }: { children: string }) {
             <BruText
               as="li"
               variant="prose"
-              className={cn("max-w-[80ch]", className)}
+              className={cn(
+                "max-w-[80ch] break-words [overflow-wrap:anywhere]",
+                className,
+              )}
               {...props}
             />
           ),
@@ -75,7 +81,7 @@ export default function Markdown({ children }: { children: string }) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="bru-link text-muted hover:text-accent transition-colors duration-200"
+              className="bru-link text-muted hover:text-accent transition-colors duration-200 break-words [overflow-wrap:anywhere]"
               {...props}
             />
           ),
@@ -100,7 +106,7 @@ export default function Markdown({ children }: { children: string }) {
           },
           pre: ({ children, ...props }) => (
             <pre
-              className="overflow-x-auto whitespace-pre border border-rulesolid bg-background/50 px-4 py-3 shadow-rule"
+              className="min-w-0 overflow-x-auto whitespace-pre border border-rulesolid bg-background/50 px-4 py-3 shadow-rule"
               {...props}
             >
               {children}
