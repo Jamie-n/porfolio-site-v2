@@ -325,7 +325,7 @@ export default function StyleguideOverlay({
 
                     <div className="grid gap-1 border-t border-rulesolid pt-6">
                       <div className="bru-label">Metadata / caption</div>
-                      <div className="bru-label">104 High St. W — 2026</div>
+                      <div className="bru-label">104 High St. W - 2026</div>
                     </div>
 
                     <div className="grid gap-2 border-t border-rulesolid pt-6">
@@ -396,7 +396,7 @@ export default function StyleguideOverlay({
                     <span className="text-foreground/80 font-medium">
                       bru-label-compact
                     </span>{" "}
-                    — imprint strips and microcopy in tight rails.
+                    - imprint strips and microcopy in tight rails.
                   </li>
                   <li>
                     <span className="text-foreground/80 font-medium">
@@ -406,7 +406,7 @@ export default function StyleguideOverlay({
                     <span className="text-foreground/80 font-medium">
                       reg-marks
                     </span>{" "}
-                    — texture overlays on the hero portrait card.
+                    - texture overlays on the hero portrait card.
                   </li>
                   <li>
                     Dashed frame:{" "}
@@ -485,7 +485,7 @@ export default function StyleguideOverlay({
                 </p>
               }
               bullets={[
-                "Framed the problem before touching the stack—clear success criteria and rollback.",
+                "Framed the problem before touching the stack-clear success criteria and rollback.",
                 "Cut scope into shippable slices so review stayed honest and timelines stayed credible.",
                 "Chose boring foundations where possible; complexity only where it earned rent.",
               ]}
@@ -671,7 +671,7 @@ export default function StyleguideOverlay({
                       <span className="text-foreground/85 font-medium">
                         strokeWidth 1.5
                       </span>
-                      , round caps/joins — same hover and focus recipes as
+                      , round caps/joins - same hover and focus recipes as
                       bordered buttons.
                     </p>
                   </div>
@@ -679,7 +679,7 @@ export default function StyleguideOverlay({
 
                 <div className="px-6 py-5">
                   <div className="bru-label">
-                    Inline social (16×16, fill) — live site
+                    Inline social (16×16, fill) - live site
                   </div>
                   <p className="mt-3 bru-prose-muted max-w-[80ch] m-0">
                     Sidebar and hero reuse identical GitHub and LinkedIn marks:{" "}
@@ -690,7 +690,7 @@ export default function StyleguideOverlay({
                     <code className="font-mono text-[0.8125rem]">
                       width=&quot;16&quot; height=&quot;16&quot;
                     </code>
-                    , no extra wrapper — hover is{" "}
+                    , no extra wrapper - hover is{" "}
                     <code className="font-mono text-[0.8125rem]">
                       transition-all duration-200 ease-out hover:text-accent
                       hover:-translate-y-[1px]
@@ -747,7 +747,7 @@ export default function StyleguideOverlay({
                     inside ruled cells (see AI workflow flowchart). Hero colour
                     squares beside the monogram are bordered{" "}
                     <code className="font-mono text-[0.8125rem]">span</code>
-                    s, not icon fonts — keep decorative marks in CSS/boxes
+                    s, not icon fonts - keep decorative marks in CSS/boxes
                     unless a glyph needs to scale with user font settings.
                   </p>
                 </div>
@@ -757,7 +757,7 @@ export default function StyleguideOverlay({
 
           <StyleguideSection title="Writing style">
             <p className="mt-4 max-w-[80ch] bru-prose-muted">
-              Voice, structure, and microcopy patterns used across sections —
+              Voice, structure, and microcopy patterns used across sections -
               align new copy with these before inventing a new tone. Cursor
               agents: project skill{" "}
               <code className="font-mono text-[0.8125rem] text-foreground/85">
@@ -802,7 +802,7 @@ export default function StyleguideOverlay({
                     <span>
                       For fixed compounds in UI, prefer a non-breaking hyphen (
                       <code className="font-mono text-[0.8125rem]">‑</code>
-                      U+2011) so lines do not split awkwardly — e.g.{" "}
+                      U+2011) so lines do not split awkwardly - e.g.{" "}
                       <span className="text-foreground/90">
                         full‑stack
                       </span>,{" "}
@@ -833,7 +833,7 @@ export default function StyleguideOverlay({
                     <span>
                       Blurbs and leads stay{" "}
                       <span className="text-foreground/90">first person</span>:
-                      say what shipped, for whom, and the trade-offs—not
+                      say what shipped, for whom, and the trade-offs-not
                       consultancy filler (
                       <span className="text-foreground/90">
                         leveraging, solutions-oriented
@@ -1274,7 +1274,7 @@ export default function StyleguideOverlay({
                 <div className="border border-rulesolid bg-background/55 px-4 py-3 shadow-rule">
                   <div className="bru-label">Revealed block</div>
                   <p className="mt-2 m-0 bru-prose-muted text-sm">
-                    Scroll this drawer until this panel enters view — it uses
+                    Scroll this drawer until this panel enters view - it uses
                     the same Reveal component as the main page sections.
                   </p>
                 </div>
@@ -1305,7 +1305,7 @@ export default function StyleguideOverlay({
               <code className="font-mono text-[0.8125rem]">
                 document.documentElement
               </code>
-              . This control is live — it updates the whole app theme.
+              . This control is live - it updates the whole app theme.
             </p>
             <StyleguidePanel className="mt-4 max-w-md">
               <DarkModeToggle />
@@ -1362,7 +1362,7 @@ export default function StyleguideOverlay({
                   <span className="text-foreground font-medium">
                     CustomAnchor
                   </span>{" "}
-                  — default underline + hover accent (used inside prose and
+                  - default underline + hover accent (used inside prose and
                   case-study CTAs when you need a plain anchor).
                 </p>
                 <p className="m-0">
@@ -1376,7 +1376,7 @@ export default function StyleguideOverlay({
                 </p>
                 <p className="m-0 bru-prose-muted max-w-[80ch] border-t border-rulesolid pt-4">
                   <span className="text-foreground font-medium">bru-link</span>{" "}
-                  — muted inline link pattern (see Components and Markdown
+                  - muted inline link pattern (see Components and Markdown
                   demos).
                 </p>
                 <p className="m-0">
@@ -1399,7 +1399,7 @@ export default function StyleguideOverlay({
                 BrutalScreenshot
               </span>
               : hard black border, offset drop shadow, mono caption bar with
-              swatches — distinct from token-soft{" "}
+              swatches - distinct from token-soft{" "}
               <code className="font-mono text-[0.8125rem]">bru-panel</code>{" "}
               cards.
             </p>
@@ -1538,7 +1538,7 @@ export default function StyleguideOverlay({
                 <code className="font-mono text-[0.8125rem]">bru-label</code>{" "}
                 keys and{" "}
                 <code className="font-mono text-[0.8125rem]">bru-prose</code>{" "}
-                values — same structure as the About section.
+                values - same structure as the About section.
               </p>
               <ul className="mt-4 list-none p-0 m-0 border border-rulesolid bg-background/55 shadow-rule max-w-xl">
                 {[

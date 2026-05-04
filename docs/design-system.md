@@ -1,6 +1,6 @@
-# Design system — minimalist brutalism
+# Design system - minimalist brutalism
 
-**One sentence:** This portfolio uses **print/editorial brutalism** — exposed grids and rules, strong typography, high-contrast neutrals, one red accent, and crisp motion — so every screen reads like part of the same publication.
+**One sentence:** This portfolio uses **print/editorial brutalism** - exposed grids and rules, strong typography, high-contrast neutrals, one red accent, and crisp motion - so every screen reads like part of the same publication.
 
 ---
 
@@ -47,12 +47,12 @@ These paths define what “on-brand” means in code:
 
 We aim for:
 
-- **Structure over decoration:** Borders, grids, and alignment do the heavy lifting — not soft shadows or gradients.
+- **Structure over decoration:** Borders, grids, and alignment do the heavy lifting - not soft shadows or gradients.
 - **Limited palette:** Neutrals plus **one accent** (red). Hierarchy comes from weight, case, tracking, and rules before adding new hues.
 - **Typography as layout:** Labels are tracked and often uppercase; body copy stays readable with editorial line length.
-- **Honest chrome:** Focus rings, dividers, and scrollbars are part of the design — never hidden for aesthetics alone.
+- **Honest chrome:** Focus rings, dividers, and scrollbars are part of the design - never hidden for aesthetics alone.
 
-Reference mood (Swiss / neo-brutalist posters): strong grids, vertical metadata, occasional halftone/grain — implemented subtly so readability stays first.
+Reference mood (Swiss / neo-brutalist posters): strong grids, vertical metadata, occasional halftone/grain - implemented subtly so readability stays first.
 
 ---
 
@@ -61,7 +61,7 @@ Reference mood (Swiss / neo-brutalist posters): strong grids, vertical metadata,
 Use this section as a compact instruction block for automation.
 
 1. **Do not** introduce glass blur, heavy gradients, rounded-pill primary buttons, glossy cards, or rainbow badge strips unless explicitly overridden by a maintainer.
-2. **Do** use theme tokens (`background`, `surface`, `foreground`, `muted`, `border`, `accent`, `ring`) via CSS variables / Tailwind mappings — avoid raw hex for UI chrome.
+2. **Do** use theme tokens (`background`, `surface`, `foreground`, `muted`, `border`, `accent`, `ring`) via CSS variables / Tailwind mappings - avoid raw hex for UI chrome.
 3. **Do** prefer existing **`bru-*`** classes (`bru-panel`, `bru-label`, `bru-h1` …) over ad-hoc font-size/letter-spacing stacks.
 4. **Do** use **`bru-divide-y`** / **`--rule-solid`** for stacked rows on gridded panels (reduces moiré vs translucent borders on grids).
 5. **Do** match hover/focus patterns from [`StyleguideOverlay.tsx`](../src/app/components/StyleguideOverlay.tsx): ~150–200ms `ease-out`, 1px hover nudge where appropriate, visible `:focus-visible` ring.
@@ -75,10 +75,10 @@ Use this section as a compact instruction block for automation.
 ### Motifs (use as structure, not clutter)
 
 - **Rule-first composition:** Hairline borders + labeled headers; separation via rules, not only whitespace.
-- **Grid overlays:** Light 1px grids on panels (`bru-panel`, `grid-overlay`) — low contrast.
-- **Vertical labels / indices:** Sparingly — section index, years, “NOW”, folio-style metadata.
-- **Display type:** Uppercase, tight tracking, high contrast — no gradient text or soft glow.
-- **Echo headline (optional):** Solid + outline + faint repeat — only if documented in the styleguide.
+- **Grid overlays:** Light 1px grids on panels (`bru-panel`, `grid-overlay`) - low contrast.
+- **Vertical labels / indices:** Sparingly - section index, years, “NOW”, folio-style metadata.
+- **Display type:** Uppercase, tight tracking, high contrast - no gradient text or soft glow.
+- **Echo headline (optional):** Solid + outline + faint repeat - only if documented in the styleguide.
 - **Texture:** Global grain is subtle; avoid stacking grain + halftone + dense borders in one small region.
 
 ### Non-negotiables
@@ -176,7 +176,7 @@ Every recipe should show **default, hover, focus** (and disabled when relevant).
 
 ## Ship checklist
 
-- [ ] Tokens only — no stray hex/rgb for theme chrome.
+- [ ] Tokens only - no stray hex/rgb for theme chrome.
 - [ ] Rule-first layout; `bru-divide-y` where stacks sit on grids.
 - [ ] `bru-*` typography (or intentional extension in `globals.css`).
 - [ ] Focus-visible visible; interactive targets usable with keyboard.

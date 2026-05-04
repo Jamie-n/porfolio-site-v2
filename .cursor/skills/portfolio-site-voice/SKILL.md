@@ -13,22 +13,22 @@ disable-model-invocation: true
 
 ## Authority (keep in sync)
 
-1. **`src/app/components/StyleguideOverlay.tsx`** — **Writing style** section: live reference for voice, typography habits, and anti-patterns in UI.
-2. **This skill** — checklist for narrative and data copy the styleguide does not spell out file-by-file.
+1. **`src/app/components/StyleguideOverlay.tsx`** - **Writing style** section: live reference for voice, typography habits, and anti-patterns in UI.
+2. **This skill** - checklist for narrative and data copy the styleguide does not spell out file-by-file.
 
 If guidance diverges, update **both** the styleguide and this skill.
 
 ## Principles
 
 - **First person** for section intros, experience blurbs, project summaries, overlay deck copy, and personal framing in site metadata where it fits.
-- **Concrete over abstract**: what shipped, for whom, constraints, outcomes—not “delivering solutions” or capability lists without context.
+- **Concrete over abstract**: what shipped, for whom, constraints, outcomes - not “delivering solutions” or capability lists without context.
 - **Honest framing**: skills grouped by how often tools show up in real work; exploring called out separately; certifications described as how they support shipping, not generic exam blurbs.
-- **UK English** and typographic habits (e.g. _I’m_, non‑breaking hyphens for compounds like _full‑stack_)—match existing sections and the styleguide **Hyphens & wraps** row.
+- **UK English** and typographic habits (e.g. _I’m_, non‑breaking hyphens for compounds like _full‑stack_) - match existing sections and the styleguide **Hyphens & wraps** row.
 - **Hero / Home** (`Hero.tsx`): preserve its editorial/print tone unless the user explicitly asks to change it.
 
 ## Patterns
 
-- **Section intros:** `BruText` `variant="proseMuted"`, `max-w-[72ch]`; one or two short paragraphs; state scope and why the reader should care—no marketing fluff.
+- **Section intros:** `BruText` `variant="proseMuted"`, `max-w-[72ch]`; one or two short paragraphs; state scope and why the reader should care - no marketing fluff.
 - **Panel headers:** `bru-label` (short category) + `Header` `variant="subheading"` (human-readable title), e.g. _Technical stack_ / _What I build with_; _More background_ / _Community and earlier roles_.
 - **Bullets:** Full sentences; sentence case start, closing period; use **I** when it clarifies ownership (case studies, highlights), otherwise keep tight achievement lines if the blurb already carries voice.
 

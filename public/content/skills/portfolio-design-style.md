@@ -5,7 +5,7 @@ The visual language is **print/editorial brutalism**: structure-first compositio
 ## How I keep it consistent
 
 - I keep a **written spec** (rules, type scale, spacing rhythm) and an **in-app styleguide** (live demos + recipes). The living version wins whenever docs and reality drift.
-- Design tokens cover color, surfaces, borders, accent, and focus rings—and everything maps back to those tokens.
+- Design tokens cover color, surfaces, borders, accent, and focus rings - and everything maps back to those tokens.
 
 ## Components and content blocks
 

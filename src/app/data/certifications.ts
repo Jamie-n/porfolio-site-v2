@@ -12,7 +12,7 @@ const certificationsById = {
     endDate: undefined,
     colour: "bg-blue-500",
     blurb:
-      "Foundational Azure: core services, pricing models, governance, and how the platform fits together—useful context when I design or deploy cloud-backed work.",
+      "Foundational Azure: core services, pricing models, governance, and how the platform fits together - useful context when I design or deploy cloud-backed work.",
     highlights: [] as string[],
   },
 } satisfies Record<CertificationId, ExperienceContent>;

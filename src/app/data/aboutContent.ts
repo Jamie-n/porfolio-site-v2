@@ -15,7 +15,7 @@ export type WorkingStyleRow = {
 const workingStyleById = {
   feedbackLoops: {
     label: "Feedback loops",
-    body: "I prefer small, production‑shaped slices—measurable changes that can be rolled back cleanly.",
+    body: "I prefer small, production‑shaped slices - measurable changes that can be rolled back cleanly.",
   },
   maintainableSystems: {
     label: "Maintainable systems",

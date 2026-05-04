@@ -15,7 +15,7 @@ CI exists to **protect the quality bar** when changes land: it catches obvious b
 ## What CI is not (on purpose)
 
 - It’s not a replacement for **human review** (design, UX, copy, interaction feel).
-- It doesn’t guarantee correctness—only that the agreed checks pass.
+- It doesn’t guarantee correctness - only that the agreed checks pass.
 - For this portfolio, **E2E tests are a local tool first**: run them when interaction changes, but don’t force them into every CI run unless the project needs that cost/complexity.
 
 ## How it fits the build loop

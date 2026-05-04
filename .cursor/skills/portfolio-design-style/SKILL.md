@@ -16,7 +16,7 @@ disable-model-invocation: true
 
 ## Source of truth: the styleguide
 
-**The live styleguide in `src/app/components/StyleguideOverlay.tsx` is the empirical source of truth** for this site: how blocks look, compose, and behave (spacing, type, states, motion). Read `docs/design-system.md` for intent and vocabulary, but **implement and validate against the overlay**. If prose and the overlay disagree, fix the drift (usually by updating the styleguide and/or the doc)—do not ship UI that only exists outside the styleguide.
+**The live styleguide in `src/app/components/StyleguideOverlay.tsx` is the empirical source of truth** for this site: how blocks look, compose, and behave (spacing, type, states, motion). Read `docs/design-system.md` for intent and vocabulary, but **implement and validate against the overlay**. If prose and the overlay disagree, fix the drift (usually by updating the styleguide and/or the doc) - do not ship UI that only exists outside the styleguide.
 
 **Before shipping UI changes, align with the styleguide.** Prefer matching documented recipes over inventing new ones.
 
@@ -24,7 +24,7 @@ disable-model-invocation: true
 
 - **Componentise the system by default:** favor small, reusable **building blocks** (primitives, panels, type bands, metadata rows, cards, section headers, list treatments) over long one-off JSX in section files.
 - **Content blocks** are reusable compositions meant for real page content (not only chrome). Implement them as named components under `src/app/components/` (or shared primitives used by sections) with clear props so the same block can be dropped into multiple contexts.
-- **Extract** repeated markup into components early; if a pattern might be reused, treat it as a block—not a copy-paste variant.
+- **Extract** repeated markup into components early; if a pattern might be reused, treat it as a block - not a copy-paste variant.
 
 ### Authority and source material (do not reinterpret)
 
@@ -35,7 +35,7 @@ disable-model-invocation: true
 ### Don’t guess
 
 - Read **`docs/design-system.md`** and **`StyleguideOverlay.tsx`** before inventing classes or motifs.
-- Find the closest existing component/pattern in `src/app/` and mirror it; if unclear, search the codebase or ask — **do not** fill gaps with generic UI defaults.
+- Find the closest existing component/pattern in `src/app/` and mirror it; if unclear, search the codebase or ask - **do not** fill gaps with generic UI defaults.
 
 ### Gap-filling policy (how we prevent styling drift)
 
@@ -46,26 +46,26 @@ disable-model-invocation: true
 ### Styleguide structure (definitive hierarchy)
 
 - The overlay must stay a **clear, navigable tree**: use **`StyleguideChapter`** → **`StyleguideSection`** so readers scan top-to-bottom from foundations → surfaces/motifs → interaction → patterns → app shell.
-- **New content blocks and new recipes** get their own **`StyleguideSection`** (or a clearly named subsection inside the closest existing section)—do not bury unrelated demos inside an arbitrary panel.
+- **New content blocks and new recipes** get their own **`StyleguideSection`** (or a clearly named subsection inside the closest existing section) - do not bury unrelated demos inside an arbitrary panel.
 - Keep section titles descriptive and stable; match the ordering and grouping spirit of existing chapters when you extend the file.
 
 The overlay documents these areas (read the corresponding sections in code when implementing):
 
-- **Motifs** — grain, grid, halftone, registration marks, background numerals.
-- **Tokens** — CSS variables and how they read in light/dark.
-- **Typography recipes** — `bru-label`, `bru-prose`, accordion title/meta, etc.
-- **Interaction** — focus, hover, disabled patterns.
-- **Typography scale** — heading/body steps used across the site.
-- **Color & contrast** — foreground/muted/accent usage.
-- **Spacing & layout rhythm** — grid alignment and spacing steps.
-- **Navigation states** — sidebar / nav item behavior.
-- **Form controls** — toggles, inputs, accordions as shown.
-- **Panels & elevation** — `bru-panel`, shadows, borders.
-- **Motion** — entrance timing and reduced motion.
-- **Iconography** — stroke weight and sizing.
-- **Content patterns** — lists, links, metadata rows (`Row`-style label/value).
-- **Section break patterns** — spacers, swatches, crosshair, meta lines.
-- **Components** — composed examples.
+- **Motifs** - grain, grid, halftone, registration marks, background numerals.
+- **Tokens** - CSS variables and how they read in light/dark.
+- **Typography recipes** - `bru-label`, `bru-prose`, accordion title/meta, etc.
+- **Interaction** - focus, hover, disabled patterns.
+- **Typography scale** - heading/body steps used across the site.
+- **Color & contrast** - foreground/muted/accent usage.
+- **Spacing & layout rhythm** - grid alignment and spacing steps.
+- **Navigation states** - sidebar / nav item behavior.
+- **Form controls** - toggles, inputs, accordions as shown.
+- **Panels & elevation** - `bru-panel`, shadows, borders.
+- **Motion** - entrance timing and reduced motion.
+- **Iconography** - stroke weight and sizing.
+- **Content patterns** - lists, links, metadata rows (`Row`-style label/value).
+- **Section break patterns** - spacers, swatches, crosshair, meta lines.
+- **Components** - composed examples.
 
 **Primitives used by the styleguide:** section titles use `bru-label`; demo blocks use `StyleguidePanel` → `bru-panel` with consistent padding (`px-6 py-5`). New styleguide-worthy demos should follow the same primitives.
 
@@ -90,10 +90,10 @@ Use these motifs as _structure_, not decoration:
 
 Apply **structure and honesty**, not decoration for its own sake.
 
-- **Exposed structure**: Prefer visible layout logic—borders, grids, clear rectangular regions—over soft “mystery” cards. Sharp or minimally rounded corners unless an existing control family uses otherwise.
+- **Exposed structure**: Prefer visible layout logic - borders, grids, clear rectangular regions - over soft “mystery” cards. Sharp or minimally rounded corners unless an existing control family uses otherwise.
 - **Limited palette**: Neutral foreground/surface/border plus **one accent** (`--accent`, red). Use weight, case, and spacing for hierarchy before adding new hues.
 - **Functional chrome**: Focus rings, scrollbars, and dividers are part of the design; do not hide focus to “clean up” the UI.
-- **Typography as architecture**: Uppercase tracked labels, mono for specs/metadata, strong weight steps—brutalism here is **legibility and rhythm**, not shouty type.
+- **Typography as architecture**: Uppercase tracked labels, mono for specs/metadata, strong weight steps - brutalism here is **legibility and rhythm**, not shouty type.
 - **Restraint on effects**: Grain and grid are atmospheric; use **one** dominant texture per region. Avoid stacking noise + halftone + heavy shadows in the same small panel.
 
 ---
@@ -106,7 +106,7 @@ Treat the page like **print layout** adapted for the web.
 - **Rules and folios**: Think in **hairlines and rules** (`var(--border)`, `--rule-solid`, `bru-divide-y`) for separation. Small meta lines (mono, wide tracking) behave like **folio / slug** lines on a sheet.
 - **Label vs body**: Eyebrows and captions are **caption-sized, tracked, often uppercase**; body copy uses `bru-prose` / `bru-prose-muted` for comfortable measure and line height.
 - **Plate-based sections**: Major blocks read as **plates** (panels, spacers between chapters). Reuse `section-spacer` and panel patterns when adding new chapters so the scroll feels like turning spreads in a single publication.
-- **Background type as form**: Large stroked/ghost numerals (`bg-text`) are **structural graphics**, not competing headlines—keep content hierarchy above them in z-order and contrast.
+- **Background type as form**: Large stroked/ghost numerals (`bg-text`) are **structural graphics**, not competing headlines - keep content hierarchy above them in z-order and contrast.
 
 ---
 

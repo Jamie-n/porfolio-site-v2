@@ -112,7 +112,7 @@ export default function Hero() {
               </Header>
 
               <BruText as="p" variant="proseMuted" className="max-w-[62ch]">
-                I'm Jamie Neighbours — a software engineer who turns messy
+                I'm Jamie Neighbours - a software engineer who turns messy
                 problems into clean systems and crisp interfaces. Fast
                 iteration, strong UX, and details that hold up in production.
               </BruText>
