@@ -2,8 +2,8 @@
 
 This repo uses two layers of automated tests:
 
-- **Unit / component tests** with Vitest + Testing Library (`npm run test`)
-- **End-to-end tests** with Playwright (`npm run test:e2e`)
+- **Unit / component tests** with Vitest + Testing Library
+- **End-to-end tests** with Playwright
 
 ## Vitest guidelines
 
@@ -29,6 +29,6 @@ This repo uses two layers of automated tests:
 
 ## Debug workflow for failures
 
-1. Run the narrowest command (Vitest pattern or Playwright filter).
+1. Run the narrowest scope (a single test file, a filtered test, or a single spec).
 2. Identify if it's an environment/setup issue, flaky timing, or a real regression.
 3. Fix by making the app behavior deterministic; only then adjust tests.

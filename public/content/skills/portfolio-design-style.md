@@ -4,22 +4,21 @@ The visual language is **print/editorial brutalism**: structure-first compositio
 
 ## How I keep it consistent
 
-- The **written spec** lives in `docs/design-system.md`.
-- The **empirical source of truth** is the in-app styleguide: `src/app/components/StyleguideOverlay.tsx` — live demos, hierarchy (`StyleguideChapter` → `StyleguideSection`), and recipes beat ad-hoc markup.
-- Tokens (`--background`, `--foreground`, `--surface`, `--muted`, `--border`, `--accent`, `--accent-weak`, `--ring`) are defined in `src/app/globals.css` and mapped via Tailwind.
+- I keep a **written spec** (rules, type scale, spacing rhythm) and an **in-app styleguide** (live demos + recipes). The living version wins whenever docs and reality drift.
+- Design tokens cover color, surfaces, borders, accent, and focus rings—and everything maps back to those tokens.
 
 ## Components and content blocks
 
-- **Componentise:** build UI from reusable **building blocks** and **content blocks** (named components in `src/app/components/` or shared primitives), not one-off copies in sections.
+- **Componentise:** build UI from reusable **building blocks** and **content blocks** (named components or shared primitives), not one-off copies in sections.
 - **New content blocks** ship with a **styleguide recipe** in the same change: add a section (or clear subsection) in the overlay so the catalog stays ordered and discoverable.
 
 ## Working rules
 
 - Build hierarchy with **type, rules, and spacing** before adding new colors.
-- Reuse `bru-*` typography utilities and `bru-panel` for surfaces.
-- Use `bru-divide-y` / `--rule-solid` for stacked rows on gridded panels.
+- Reuse the site’s existing typography and surface patterns instead of inventing one-offs.
+- Use hairline rules to separate stacked rows on gridded panels.
 - Hover is a **1px nudge** plus border/accent emphasis (no heavy fades).
-- Always preserve a visible `:focus-visible` ring; respect `prefers-reduced-motion`.
+- Always preserve a visible focus ring; respect reduced-motion preferences.
 
 ## Don't accidentally break the look
 

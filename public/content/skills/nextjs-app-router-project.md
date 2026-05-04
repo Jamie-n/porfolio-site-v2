@@ -4,15 +4,12 @@ This repo is a **Next.js 15 App Router** project with a section-based single-pag
 
 ## What to know in this codebase
 
-- Main entry route is a **catch-all**: `src/app/[[...slug]]/page.tsx`
-  - `/`, `/about`, `/projects`, etc. render the same page layout.
+- The main route is a **catch-all** so `/`, `/about`, `/projects`, etc. render the same page layout.
   - Navigation is section-based (sidebar/anchors), not separate pages by default.
-- Sections live in `src/app/sections/`
-- Shared UI components live in `src/app/components/`
-- Hooks/utilities/data live under `src/app/` (`hooks/`, `utilities/`, `data/`)
+- Sections, shared UI components, and utilities are separated so the layout stays simple and features stay modular.
 
 ## How I keep changes consistent
 
-- Read `docs/design-system.md` and align with the in-app styleguide: `src/app/components/StyleguideOverlay.tsx`
+- Align with the written design spec and the in-app styleguide
 - Extend existing patterns before inventing new ones
 - Prefer server components by default; only add client components when state/effects/events are required

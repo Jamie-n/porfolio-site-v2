@@ -9,7 +9,7 @@ CI exists to **protect the quality bar** when changes land: it catches obvious b
   - linting
   - typechecking (where applicable)
   - unit/component tests
-  - build validation (`next build`)
+  - build validation (a production build)
 - **Consistency** across machines (the same checks run the same way for every change).
 
 ## What CI is not (on purpose)
