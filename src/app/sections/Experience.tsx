@@ -2,21 +2,25 @@ import ExperienceAccordion from "@/app/components/accordion/ExperienceAccordion"
 import Header from "@/app/components/Header";
 import { BruText } from "@/app/components/primitives/BruText";
 import { Panel } from "@/app/components/primitives/Panel";
-import { experiences, otherExperiences } from "@/app/data/experiences";
+import {
+  EXPERIENCE_IDS,
+  OTHER_EXPERIENCE_IDS,
+  experienceList,
+  otherExperienceList,
+} from "@/app/data/experiences";
+import { sectionIntros } from "@/app/data/sectionIntros";
 
 export default function Experience() {
   return (
     <>
       <div className="mt-8 mb-10 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          Roles where I've shipped production features, tightened UX, and
-          improved reliability. I gravitate toward work that pairs product
-          judgment with solid engineering—not either one in isolation.
+          {sectionIntros.experience}
         </BruText>
       </div>
 
-      {Object.values(experiences).map((ex, idx) => (
-        <ExperienceAccordion key={idx} {...ex} />
+      {experienceList.map((ex, idx) => (
+        <ExperienceAccordion key={EXPERIENCE_IDS[idx]} {...ex} />
       ))}
 
       <Panel padding="sm" className="mt-14 mb-6">
@@ -24,8 +28,8 @@ export default function Experience() {
         <Header variant="subheading">Community and earlier roles</Header>
       </Panel>
 
-      {Object.values(otherExperiences).map((ex, idx) => (
-        <ExperienceAccordion key={idx} {...ex}>
+      {otherExperienceList.map((ex, idx) => (
+        <ExperienceAccordion key={OTHER_EXPERIENCE_IDS[idx]} {...ex}>
           <BruText variant="proseMuted">
             I haven't added screenshots for this entry to the repo yet.
           </BruText>

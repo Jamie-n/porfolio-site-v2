@@ -4,6 +4,7 @@ import SkillCategoryUsageGroups, {
 import { BruText } from "@/app/components/primitives/BruText";
 import { Panel, PanelHeader } from "@/app/components/primitives/Panel";
 import { skillCategories } from "@/app/data/skills";
+import { sectionIntros } from "@/app/data/sectionIntros";
 import { flattenSkillCategories } from "@/lib/skillUtils";
 
 export default function Skills() {
@@ -15,13 +16,7 @@ export default function Skills() {
     <>
       <div className="mt-8 mb-8 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
-          I adapt to whatever stack a project needs, but these are the
-          technologies I'm strongest with and feel most at home using. The
-          languages, frameworks, and tools I draw on in real projects. I group
-          them by how often each one shows up in my work—roughly daily, regular,
-          or occasional—so this reads as an honest stack snapshot, not a keyword
-          list. Anything I'm still mostly experimenting with is listed
-          separately at the bottom.
+          {sectionIntros.skills}
         </BruText>
       </div>
 
