@@ -19,6 +19,6 @@ Used well, it’s a **force multiplier**, not a replacement.
 
 ## Automated backstop
 
-CI is the safety net for the basics (format, lint, tests):
+CI is the safety net for the basics (format, lint, tests). I keep the public narrative here (what it protects, what it doesn’t, and how it fits the loop):
 
-- `portfolio-website/.github/workflows/ci.yml`
+- [How I use CI](/content/ci/how-we-use-ci.md)
