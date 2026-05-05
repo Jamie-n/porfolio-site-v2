@@ -423,6 +423,16 @@
     letter-spacing: -0.06em;
     line-height: 0.9;
     text-transform: uppercase;
+    /* Allow emergency wrapping without ugly mid-word breaks unless needed. */
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Used on section headers: mobile-safe size, desktop matches .bru-h1. */
+  .bru-section-title {
+    /* Single clamp avoids duplicating the lg breakpoint in CSS + JS. */
+    font-size: clamp(2.1rem, 6vw, 5.25rem);
+    line-height: 0.95;
   }
 
   .bru-h2 {
@@ -431,6 +441,8 @@
     letter-spacing: -0.04em;
     line-height: 1.05;
     text-transform: uppercase;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   /* Panel + nav title */
@@ -680,7 +692,16 @@
   /* Extend visual chrome into scrollbar area without changing layout width. */
   --scrollbar-comp: calc(100vw - 100%);
   --scrollbar-comp-neg: calc(-1 * var(--scrollbar-comp));
+  /* Reserve space so meta text doesn't wrap under swatches. */
+  --section-spacer-swatch-reserve: 6.25rem;
   background-color: transparent;
+}
+
+@media (max-width: 639px) {
+  .section-spacer {
+    /* Give the meta row room to wrap without colliding with swatches. */
+    height: 5.25rem;
+  }
 }
 
 @supports (width: 1svw) {
@@ -759,6 +780,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 1.25rem;
+  /* Keep wrapped meta from running under the swatches block. */
+  max-width: calc(100% - var(--section-spacer-swatch-reserve));
   font-family:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, "Liberation Mono", "Courier New", monospace;

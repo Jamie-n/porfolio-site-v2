@@ -9,7 +9,11 @@ export function handleScrollLinkClick(
   onClick?.(e);
   if (e.defaultPrevented) return;
   e.preventDefault();
-  void scrollToHref(href);
+  // Defer scrolling until after any UI state updates triggered by `onClick`
+  // (e.g. closing a mobile drawer that temporarily locks document scroll).
+  window.setTimeout(() => {
+    void scrollToHref(href);
+  }, 0);
 }
 
 export function useScrollLinkClickHandler(

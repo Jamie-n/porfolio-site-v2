@@ -15,7 +15,7 @@ export type WorkingStyleRow = {
 const workingStyleById = {
   feedbackLoops: {
     label: "Feedback loops",
-    body: "I prefer small, production‑shaped slices - measurable changes that can be rolled back cleanly.",
+    body: "I prefer small, production-shaped slices - measurable changes that can be rolled back cleanly.",
   },
   maintainableSystems: {
     label: "Maintainable systems",
@@ -42,7 +42,7 @@ export const workingStyleChips = [
 ] as const;
 
 export const aboutIntro = {
-  lead: "I'm a pragmatic full‑stack engineer focused on turning messy, real‑world constraints into clean systems and crisp interfaces. I care about fast feedback loops, maintainable code, and UI details that hold up in production.",
+  lead: "I'm a pragmatic full-stack engineer focused on turning messy, real-world constraints into clean systems and crisp interfaces. I care about fast feedback loops, maintainable code, and UI details that hold up in production.",
   codeLine: {
     before: "Code and experiments live on ",
     linkText: "GitHub",

@@ -23,21 +23,21 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Jamie Neighbours - Portfolio",
   description:
-    "Jamie Neighbours - full‑stack engineer. Selected projects, experience, skills, and certifications.",
+    "Jamie Neighbours - full-stack engineer. Selected projects, experience, skills, and certifications.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
   openGraph: {
     title: "Jamie Neighbours - Portfolio",
     description:
-      "Full‑stack engineer. Selected projects, experience, skills, and certifications.",
+      "Full-stack engineer. Selected projects, experience, skills, and certifications.",
     type: "website",
   },
   twitter: {
     card: "summary",
     title: "Jamie Neighbours - Portfolio",
     description:
-      "Full‑stack engineer. Selected projects, experience, skills, and certifications.",
+      "Full-stack engineer. Selected projects, experience, skills, and certifications.",
   },
 };
 

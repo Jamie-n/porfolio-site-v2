@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -41,6 +41,8 @@ describe("NavItem", () => {
 
     const link = screen.getByRole("link");
     await user.click(link);
-    expect(scrollToHref).toHaveBeenCalledWith("/projects");
+    await waitFor(() => {
+      expect(scrollToHref).toHaveBeenCalledWith("/projects");
+    });
   });
 });

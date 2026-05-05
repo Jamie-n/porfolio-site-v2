@@ -30,15 +30,15 @@ const caseStudyCopy = {
     title: "This portfolio",
     meta: "Personal project · 2025",
     chips: [
-      "end‑to‑end rebuild",
+      "end-to-end rebuild",
       "Next.js + design system",
-      "AI‑assisted · human‑owned",
+      "AI-assisted · human-owned",
     ],
     summary:
-      "I reimagined my Laravel portfolio in Next.js - same intent, clearer architecture and craft, with an editorial design system and AI‑assisted delivery kept under human direction, taste, and review.",
+      "I reimagined my Laravel portfolio in Next.js - same intent, clearer architecture and craft, with an editorial design system and AI-assisted delivery kept under human direction, taste, and review.",
     bullets: [
       "I moved requirements, IA, and the front end together - not a reskin on old foundations.",
-      "Print/editorial brutalism lives in tokens and components so the look scales without one‑offs.",
+      "Print/editorial brutalism lives in tokens and components so the look scales without one-offs.",
       "Plan → build → test → refine, with guardrails so generated work stays shippable and maintainable.",
     ],
   },
@@ -46,16 +46,16 @@ const caseStudyCopy = {
     title: "Commercial WordPress site",
     meta: "Chris Bradbrook · 2025",
     chips: [
-      "end‑to‑end delivery",
+      "end-to-end delivery",
       "WordPress + custom theme",
       "Figma → build → deploy",
     ],
     summary:
-      "I took a celebrant site from brief through Figma, custom WordPress theme, deployment, and handoff - responsive, production‑ready, and owned end to end.",
+      "I took a celebrant site from brief through Figma, custom WordPress theme, deployment, and handoff - responsive, production-ready, and owned end to end.",
     bullets: [
       "I turned the brief and constraints into IA and a visual system before writing theme code.",
       "Responsive layouts and clear component boundaries - customisation only where it paid off.",
-      "Tight client loops through launch: predictable milestones, steady go‑live, no last‑minute surprises.",
+      "Tight client loops through launch: predictable milestones, steady go-live, no last-minute surprises.",
     ],
   },
   "patient-leaflet-repository": {
@@ -67,11 +67,11 @@ const caseStudyCopy = {
       "staff + public access",
     ],
     summary:
-      "I helped build and evolve a Trust-wide platform to store, search, and maintain patient information leaflets. The hard part was a **rebuild and migration**: clearer architecture and a safer content lifecycle without losing day‑to‑day usability for clinicians or the public site.",
+      "I helped build and evolve a Trust-wide platform to store, search, and maintain patient information leaflets. The hard part was a **rebuild and migration**: clearer architecture and a safer content lifecycle without losing day-to-day usability for clinicians or the public site.",
     bullets: [
       "I followed a migration path: inventory legacy content, normalise structure, and cut over with rollback in mind.",
       "Single place for governed leaflets - upload, versioning, and discovery so departments stay aligned.",
-      "Dual audience: staff workflows for upkeep and a public‑facing surface that stays readable and trustworthy.",
+      "Dual audience: staff workflows for upkeep and a public-facing surface that stays readable and trustworthy.",
     ],
   },
 } satisfies Record<CaseStudyId, CaseStudyFields>;
