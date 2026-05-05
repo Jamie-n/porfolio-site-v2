@@ -80,5 +80,5 @@ Otherwise:
 ## Styling
 
 - Follow **[`docs/design-system.md`](docs/design-system.md)** and the **`portfolio-design-style`** skill for brutalist UI rules; implement against recipes in `StyleguideOverlay.tsx`.
-- Prefer Tailwind utilities in components (mapped tokens from `tailwind.config.ts`).
+- Prefer Tailwind utilities in components (mapped tokens from `tailwind.config.mjs`).
 - Keep `globals.css` for base styles, tokens, and shared utilities (`bru-*`).

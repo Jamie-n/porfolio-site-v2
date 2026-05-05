@@ -36,10 +36,10 @@ These paths define what “on-brand” means in code:
 | --------------------------------- | ----------------------------------------------------------------------------------------- |
 | Live demos + recipes              | [`src/app/components/StyleguideOverlay.tsx`](../src/app/components/StyleguideOverlay.tsx) |
 | CSS variables + `bru-*` utilities | [`src/app/globals.css`](../src/app/globals.css)                                           |
-| Tailwind ↔ token mapping         | [`tailwind.config.ts`](../tailwind.config.ts)                                             |
+| Tailwind ↔ token mapping         | [`tailwind.config.mjs`](../tailwind.config.mjs)                                           |
 | Written spec (this doc)           | [`docs/design-system.md`](design-system.md)                                               |
 
-**Order of authority when implementing:** Styleguide overlay (behavior + composition) → `globals.css` / `tailwind.config.ts` → this document for intent and process.
+**Order of authority when implementing:** Styleguide overlay (behavior + composition) → `globals.css` / `tailwind.config.mjs` → this document for intent and process.
 
 ---
 
@@ -96,7 +96,7 @@ Use this section as a compact instruction block for automation.
 
 ## Tokens
 
-Defined in `:root` / `.dark` in [`globals.css`](../src/app/globals.css), exposed to Tailwind via [`tailwind.config.ts`](../tailwind.config.ts).
+Defined in `:root` / `.dark` in [`globals.css`](../src/app/globals.css), exposed to Tailwind via [`tailwind.config.mjs`](../tailwind.config.mjs).
 
 **Core**
 

@@ -1,5 +1,4 @@
-import type { Config } from "tailwindcss";
-
+/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -17,7 +16,6 @@ export default {
         accent: "var(--accent)",
         "accent-weak": "var(--accent-weak)",
         ring: "var(--ring)",
-        /** Opaque rules for tables / stacks on gridded panels (`globals.css` --rule-solid) */
         rulesolid: "var(--rule-solid)",
       },
       fontFamily: {
@@ -29,4 +27,5 @@ export default {
     },
   },
   plugins: [],
-} satisfies Config;
+};
+
