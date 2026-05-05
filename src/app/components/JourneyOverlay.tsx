@@ -312,11 +312,6 @@ export default function JourneyOverlay({
                                 {img.caption}
                               </BruText>
                             </div>
-                            <div className="px-4 py-2">
-                              <BruText as="span" variant="label">
-                                Credit: add source here
-                              </BruText>
-                            </div>
                           </figcaption>
                         </figure>
                       ))}
