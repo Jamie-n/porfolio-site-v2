@@ -98,22 +98,19 @@ export default function Hero() {
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <span className="h-3 w-[1px] bg-border" />
-                  UI obsessed
-                </span>
-                <span className="inline-flex items-center gap-2">
-                  <span className="h-3 w-[1px] bg-border" />
                   UK / Remote
                 </span>
               </BruText>
 
               <Header variant="title" className="text-balance">
-                I build sharp, print-influenced web products that ship.
+                I build sharp web products that ship.
               </Header>
 
               <BruText as="p" variant="proseMuted" className="max-w-[62ch]">
-                I'm Jamie Neighbours - a software engineer who turns messy
-                problems into clean systems and crisp interfaces. Fast
-                iteration, strong UX, and details that hold up in production.
+                I'm <span className="font-semibold text-accent">Jamie</span> - a
+                software engineer who turns messy problems into clean systems
+                and crisp interfaces. Fast iteration, strong UX, and details
+                that hold up in production.
               </BruText>
             </div>
           </div>
