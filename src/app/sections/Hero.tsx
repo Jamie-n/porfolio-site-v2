@@ -11,7 +11,7 @@ export default function Hero() {
       <div className="relative grid w-full gap-10 sm:gap-14 lg:flex lg:items-center lg:gap-16">
         {/* Dashed ring uses padding (no negative inset) so section overflow does not clip it. */}
         <div className="relative mx-auto w-full max-w-[min(17rem,78svw)] animate-enter transition-all duration-200 ease-out sm:max-w-[18rem] lg:mx-0 lg:w-auto lg:max-w-none lg:shrink-0">
-          <div className="group border-2 border-dashed border-border p-2.5 shadow-rule transition-transform duration-200 ease-out hover:rotate-1 sm:p-3 lg:border lg:p-3">
+          <div className="group border-2 border-dashed border-border p-2.5 shadow-none transition-transform duration-200 ease-out hover:rotate-1 sm:p-3 sm:shadow-rule lg:border lg:p-3">
             <div
               aria-label="Profile"
               className="relative aspect-square w-full bg-surface border border-border shadow-rule overflow-hidden lg:aspect-auto lg:h-80 lg:w-80"
