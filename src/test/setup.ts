@@ -14,3 +14,9 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: () => false,
   }),
 });
+
+// JSDOM doesn't implement scrolling APIs used by scroll locking.
+Object.defineProperty(window, "scrollTo", {
+  writable: true,
+  value: () => {},
+});
