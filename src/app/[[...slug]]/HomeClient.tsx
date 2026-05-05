@@ -13,6 +13,9 @@ import Skills from "../sections/Skills";
 import { Fragment } from "react";
 
 export default function HomeClient() {
+  const mainTopPaddingClassName =
+    "pt-[calc(max(1rem,env(safe-area-inset-top))+3.75rem)]";
+
   const sections: SectionItem[] = [
     { title: "Home", showTitle: false, Component: Hero, href: "/" },
     { title: "About", Component: About, href: "/about" },
@@ -27,7 +30,9 @@ export default function HomeClient() {
   ];
 
   return (
-    <main className="min-w-0 overflow-x-clip pt-14 lg:pt-0">
+    <main
+      className={`min-w-0 overflow-x-clip ${mainTopPaddingClassName} lg:pt-0`}
+    >
       <Sidebar sections={sections} />
       {sections.map(({ Component, href, title, showTitle }, idx) => (
         <Fragment key={href}>

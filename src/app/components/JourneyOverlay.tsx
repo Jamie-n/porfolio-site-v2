@@ -8,14 +8,16 @@ import {
   useRef,
   useState,
 } from "react";
+import { cn } from "@/lib/cn";
 import Header from "./Header";
 import AiLoopFlowchart from "./AiLoopFlowchart";
 import Markdown from "./Markdown";
 import { BruText } from "./primitives/BruText";
-import { Button } from "./primitives/Button";
 import SkillFileBrowser, { type SkillFileItem } from "./SkillFileBrowser";
 import { Offcanvas } from "./overlay/Offcanvas";
+import { OverlayStickyHeader } from "./overlay/OverlayStickyHeader";
 import { OverlayTriggerCard } from "./overlay/OverlayTriggerCard";
+import { fetchText } from "@/lib/fetchText";
 
 const panelTransitionMs = 360;
 
@@ -26,6 +28,12 @@ export const OPEN_JOURNEY_OVERLAY_EVENT = "open-journey-overlay";
 type OpenJourneyOverlayDetail = {
   tab?: JourneyTab;
 };
+
+function isOpenJourneyOverlayEvent(
+  e: Event,
+): e is CustomEvent<OpenJourneyOverlayDetail> {
+  return e instanceof CustomEvent && e.type === OPEN_JOURNEY_OVERLAY_EVENT;
+}
 
 function emitOpenJourneyOverlay(detail?: OpenJourneyOverlayDetail) {
   if (typeof window === "undefined") return;
@@ -50,14 +58,6 @@ export function OpenJourneyOverlayButton({
       {children}
     </button>
   );
-}
-
-async function fetchText(path: string) {
-  // Static markdown lives under `public/content/` - avoid stale HTTP cache and
-  // stale React state so edits show up without a hard reload.
-  const res = await fetch(path, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to load content: ${path}`);
-  return await res.text();
 }
 
 function splitMarkdownSection(markdown: string, heading: string) {
@@ -93,14 +93,14 @@ function TabButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={[
+      className={cn(
         "border border-border bg-background px-4 py-2 bru-button shadow-rule transition-all duration-200 ease-out",
         "hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         active
           ? "text-accent border-accent/50 bg-accent-weak"
           : "text-foreground/75",
-      ].join(" ")}
+      )}
     >
       {label}
     </button>
@@ -140,18 +140,12 @@ export default function JourneyOverlay({
   useEffect(() => {
     if (typeof window === "undefined") return;
     const handler = (e: Event) => {
-      const detail = (e as CustomEvent<OpenJourneyOverlayDetail>).detail;
-      openOverlay(detail?.tab);
+      if (!isOpenJourneyOverlayEvent(e)) return;
+      openOverlay(e.detail?.tab);
     };
-    window.addEventListener(
-      OPEN_JOURNEY_OVERLAY_EVENT,
-      handler as EventListener,
-    );
+    window.addEventListener(OPEN_JOURNEY_OVERLAY_EVENT, handler);
     return () =>
-      window.removeEventListener(
-        OPEN_JOURNEY_OVERLAY_EVENT,
-        handler as EventListener,
-      );
+      window.removeEventListener(OPEN_JOURNEY_OVERLAY_EVENT, handler);
   }, [openOverlay]);
 
   useEffect(() => {
@@ -187,6 +181,11 @@ export default function JourneyOverlay({
     return aiMd;
   }, [aiMd, inspirationMd, journeyMd, tab]);
 
+  const aiLoopSections = useMemo(() => {
+    if (tab !== "ai") return null;
+    return splitMarkdownSection(activeMarkdown, "The loop I use");
+  }, [activeMarkdown, tab]);
+
   return (
     <>
       <OverlayTriggerCard
@@ -205,189 +204,166 @@ export default function JourneyOverlay({
         panelClassName="sm:max-w-[880px]"
         testId="journey-overlay"
       >
-        <div className="p-6 sm:p-8 pb-10">
-          <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-            <div className="min-w-0">
-              <BruText as="p" id={titleId} variant="label">
-                Build notes
-              </BruText>
-              <BruText as="h1" variant="displayH2" className="mt-2">
-                Portfolio journey
-              </BruText>
-              <BruText
-                as="p"
-                variant="proseMuted"
-                className="mt-3 max-w-[72ch]"
-              >
-                Why I rebuilt the site, what guided the visual direction, and
-                how I use AI to move faster without handing off taste or
-                accountability.
-              </BruText>
+        <div className="flex h-dvh flex-col">
+          <OverlayStickyHeader
+            labelledBy={titleId}
+            label="Build notes"
+            title="Portfolio journey"
+            description="Why I rebuilt the site, what guided the visual direction, and how I use AI to move faster without handing off taste or accountability."
+            closeButtonRef={closeButtonRef}
+            onClose={requestClose}
+          />
+
+          <div className="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain px-6 sm:px-8 pb-10 pt-6">
+            <div className="flex flex-wrap gap-3">
+              <TabButton
+                label="Journey"
+                active={tab === "journey"}
+                onClick={() => setTab("journey")}
+              />
+              <TabButton
+                label="Inspiration"
+                active={tab === "inspiration"}
+                onClick={() => setTab("inspiration")}
+              />
+              <TabButton
+                label="AI workflow"
+                active={tab === "ai"}
+                onClick={() => setTab("ai")}
+              />
             </div>
 
-            <Button
-              ref={closeButtonRef}
-              variant="surface"
-              size="compact"
-              onClick={requestClose}
-              className="shrink-0 self-start"
-            >
-              Close
-            </Button>
-          </header>
-
-          <div className="mt-6 flex flex-wrap gap-3 border-t border-rulesolid pt-6">
-            <TabButton
-              label="Journey"
-              active={tab === "journey"}
-              onClick={() => setTab("journey")}
-            />
-            <TabButton
-              label="Inspiration"
-              active={tab === "inspiration"}
-              onClick={() => setTab("inspiration")}
-            />
-            <TabButton
-              label="AI workflow"
-              active={tab === "ai"}
-              onClick={() => setTab("ai")}
-            />
-          </div>
-
-          {loadingError ? (
-            <div className="mt-6 border border-rulesolid bg-background/55 shadow-rule px-5 py-4">
-              <BruText variant="label">Error</BruText>
-              <BruText as="p" variant="proseMuted" className="mt-2">
-                {loadingError}
-              </BruText>
-            </div>
-          ) : (
-            <>
-              <div className="mt-6 bru-panel px-6 py-5">
-                <BruText variant="label">Notes</BruText>
-                <div className="mt-4">
-                  {tab === "ai" ? (
-                    <>
-                      {(() => {
-                        const { before, after } = splitMarkdownSection(
-                          activeMarkdown,
-                          "The loop I use",
-                        );
-                        return (
-                          <div className="grid gap-6">
-                            {before ? <Markdown>{before}</Markdown> : null}
-                            <AiLoopFlowchart title="Plan → Execute → Test → Refine" />
-                            {after ? <Markdown>{after}</Markdown> : null}
-                          </div>
-                        );
-                      })()}
-                    </>
-                  ) : (
-                    <Markdown>{activeMarkdown}</Markdown>
-                  )}
-                </div>
+            {loadingError ? (
+              <div className="mt-6 border border-rulesolid bg-background/55 shadow-rule px-5 py-4">
+                <BruText variant="label">Error</BruText>
+                <BruText as="p" variant="proseMuted" className="mt-2">
+                  {loadingError}
+                </BruText>
               </div>
-
-              {tab === "inspiration" && (
+            ) : (
+              <>
                 <div className="mt-6 bru-panel px-6 py-5">
-                  <BruText variant="label">Inspiration gallery</BruText>
-                  <Header variant="subheading">References</Header>
-                  <BruText
-                    as="p"
-                    variant="proseMuted"
-                    className="mt-3 max-w-[72ch]"
-                  >
-                    Drop original reference images in{" "}
-                    <span className="font-mono text-[0.8125rem] text-foreground/70">
-                      public/inspiration/
-                    </span>{" "}
-                    to populate this gallery.
-                  </BruText>
-                  <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                    {[
-                      {
-                        src: "/inspiration/placeholder-grid.svg",
-                        title: "Grid + rules",
-                        caption:
-                          "Structure-first composition and hairline rules.",
-                      },
-                      {
-                        src: "/inspiration/placeholder-type.svg",
-                        title: "Type-first hierarchy",
-                        caption:
-                          "Bold display type, tracked labels, minimal palette.",
-                      },
-                    ].map((img) => (
-                      <figure
-                        key={img.src}
-                        className="border border-rulesolid bg-background/55 shadow-rule overflow-hidden flex h-full flex-col"
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={img.src}
-                          alt={img.title}
-                          className="block w-full h-auto aspect-[5/3] object-cover"
-                        />
-                        <figcaption className="bru-divide-y flex flex-1 flex-col">
-                          <div className="px-4 py-3 flex-1">
-                            <BruText variant="accTitle">{img.title}</BruText>
-                            <BruText
-                              as="p"
-                              variant="proseMuted"
-                              className="mt-1"
-                            >
-                              {img.caption}
-                            </BruText>
-                          </div>
-                          <div className="px-4 py-2">
-                            <BruText as="span" variant="label">
-                              Credit: add source here
-                            </BruText>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    ))}
+                  <BruText variant="label">Notes</BruText>
+                  <div className="mt-4">
+                    {tab === "ai" ? (
+                      <div className="grid gap-6">
+                        {aiLoopSections?.before ? (
+                          <Markdown>{aiLoopSections.before}</Markdown>
+                        ) : null}
+                        <AiLoopFlowchart title="Plan → Execute → Test → Refine" />
+                        {aiLoopSections?.after ? (
+                          <Markdown>{aiLoopSections.after}</Markdown>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <Markdown>{activeMarkdown}</Markdown>
+                    )}
                   </div>
                 </div>
-              )}
 
-              {tab === "ai" && (
-                <div className="mt-6 bru-panel px-6 py-5">
-                  <BruText variant="label">Workflow + skills (browse)</BruText>
-                  <Header variant="subheading">File browser</Header>
-                  <BruText
-                    as="p"
-                    variant="proseMuted"
-                    className="mt-3 max-w-[72ch]"
-                  >
-                    Browse the workflow notes and the supporting skill summaries
-                    I used while building and refining this site.
-                  </BruText>
-                  <div className="mt-5">
-                    <SkillFileBrowser items={skills} />
-                  </div>
-                  <div className="mt-6 border-t border-rulesolid pt-4">
-                    <a
-                      href="https://github.com/Jamie-n"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bru-link text-muted hover:text-accent transition-colors duration-200"
+                {tab === "inspiration" && (
+                  <div className="mt-6 bru-panel px-6 py-5">
+                    <BruText variant="label">Inspiration gallery</BruText>
+                    <Header variant="subheading">References</Header>
+                    <BruText
+                      as="p"
+                      variant="proseMuted"
+                      className="mt-3 max-w-[72ch]"
                     >
-                      View source on GitHub
-                    </a>
+                      Drop original reference images in{" "}
+                      <span className="font-mono text-[0.8125rem] text-foreground/70">
+                        public/inspiration/
+                      </span>{" "}
+                      to populate this gallery.
+                    </BruText>
+                    <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                      {[
+                        {
+                          src: "/inspiration/placeholder-grid.svg",
+                          title: "Grid + rules",
+                          caption:
+                            "Structure-first composition and hairline rules.",
+                        },
+                        {
+                          src: "/inspiration/placeholder-type.svg",
+                          title: "Type-first hierarchy",
+                          caption:
+                            "Bold display type, tracked labels, minimal palette.",
+                        },
+                      ].map((img) => (
+                        <figure
+                          key={img.src}
+                          className="border border-rulesolid bg-background/55 shadow-rule overflow-hidden flex h-full flex-col"
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={img.src}
+                            alt={img.title}
+                            className="block w-full h-auto aspect-[5/3] object-cover"
+                          />
+                          <figcaption className="bru-divide-y flex flex-1 flex-col">
+                            <div className="px-4 py-3 flex-1">
+                              <BruText variant="accTitle">{img.title}</BruText>
+                              <BruText
+                                as="p"
+                                variant="proseMuted"
+                                className="mt-1"
+                              >
+                                {img.caption}
+                              </BruText>
+                            </div>
+                            <div className="px-4 py-2">
+                              <BruText as="span" variant="label">
+                                Credit: add source here
+                              </BruText>
+                            </div>
+                          </figcaption>
+                        </figure>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-            </>
-          )}
+                )}
 
-          <footer className="mt-12 border-t border-rulesolid pt-6">
-            <BruText as="p" variant="bodyMuted">
-              Tip: Press{" "}
-              <span className="text-foreground font-semibold">Esc</span> to
-              close.
-            </BruText>
-          </footer>
+                {tab === "ai" && (
+                  <div className="mt-6 bru-panel px-6 py-5">
+                    <BruText variant="label">
+                      Workflow + skills (browse)
+                    </BruText>
+                    <Header variant="subheading">File browser</Header>
+                    <BruText
+                      as="p"
+                      variant="proseMuted"
+                      className="mt-3 max-w-[72ch]"
+                    >
+                      Browse the workflow notes and the supporting skill
+                      summaries I used while building and refining this site.
+                    </BruText>
+                    <div className="mt-5">
+                      <SkillFileBrowser items={skills} />
+                    </div>
+                    <div className="mt-6 border-t border-rulesolid pt-4">
+                      <a
+                        href="https://github.com/Jamie-n"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bru-link text-muted hover:text-accent transition-colors duration-200"
+                      >
+                        View source on GitHub
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+
+            <footer className="mt-12 border-t border-rulesolid pt-6">
+              <BruText as="p" variant="bodyMuted">
+                Tip: Press{" "}
+                <span className="text-foreground font-semibold">Esc</span> to
+                close.
+              </BruText>
+            </footer>
+          </div>
         </div>
       </Offcanvas>
     </>

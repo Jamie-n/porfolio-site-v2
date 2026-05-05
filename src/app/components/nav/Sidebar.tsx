@@ -10,8 +10,10 @@ import { BruText } from "@/app/components/primitives/BruText";
 import NavItem from "./NavItem";
 import { SocialLinks } from "@/app/components/SocialLinks";
 import { cn } from "@/lib/cn";
+import { lockDocumentScroll } from "@/lib/lockDocumentScroll";
 import { useEffect, useId, useState } from "react";
-import { BACKDROP_BASE_CLASSNAME } from "@/app/components/overlay/backdrop";
+import { backdropClassName } from "@/app/components/overlay/backdrop";
+import { useEscapeKey } from "@/app/hooks/useEscapeKey";
 
 /** Matches Tailwind default `lg` breakpoint */
 const LG_MIN_WIDTH = 1024;
@@ -34,27 +36,15 @@ export default function Sidebar({ sections }: SidebarProps) {
     return () => mql.removeEventListener("change", sync);
   }, []);
 
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [mobileOpen]);
+  useEscapeKey(mobileOpen, () => setMobileOpen(false));
 
   useEffect(() => {
     if (!mobileOpen) return;
     if (window.matchMedia(`(min-width: ${LG_MIN_WIDTH}px)`).matches) return;
-
-    const previousHtmlOverflow = document.documentElement.style.overflow;
-    const previousBodyOverflow = document.body.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    const unlockScroll = lockDocumentScroll();
 
     return () => {
-      document.documentElement.style.overflow = previousHtmlOverflow;
-      document.body.style.overflow = previousBodyOverflow;
+      unlockScroll();
     };
   }, [mobileOpen]);
 
@@ -121,8 +111,9 @@ export default function Sidebar({ sections }: SidebarProps) {
       <button
         type="button"
         className={cn(
-          `fixed inset-0 z-[45] ${BACKDROP_BASE_CLASSNAME} duration-200 lg:hidden`,
-          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0",
+          backdropClassName({ entered: mobileOpen, positioning: "fixed" }),
+          "fixed z-[45] duration-200 lg:hidden",
+          !mobileOpen && "pointer-events-none",
         )}
         aria-hidden={!mobileOpen}
         tabIndex={-1}

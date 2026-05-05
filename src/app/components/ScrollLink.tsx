@@ -1,8 +1,8 @@
 "use client";
 
 import Link, { type LinkProps } from "next/link";
-import type { ComponentPropsWithoutRef, MouseEvent } from "react";
-import { scrollToHref } from "@/lib/utils";
+import type { ComponentPropsWithoutRef } from "react";
+import { useScrollLinkClickHandler } from "@/lib/scrollLinks";
 
 export type ScrollLinkProps = Omit<ComponentPropsWithoutRef<"a">, "href"> &
   LinkProps;
@@ -13,12 +13,7 @@ export function ScrollLink({
   children,
   ...props
 }: ScrollLinkProps) {
-  const handleClick = async (e: MouseEvent<HTMLAnchorElement>) => {
-    onClick?.(e);
-    if (e.defaultPrevented) return;
-    e.preventDefault();
-    await scrollToHref(String(href));
-  };
+  const handleClick = useScrollLinkClickHandler(String(href), onClick);
 
   return (
     <Link href={href} onClick={handleClick} {...props}>

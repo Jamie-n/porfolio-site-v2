@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { cn } from "@/lib/cn";
 
 type RevealProps = PropsWithChildren<
   {
@@ -62,10 +63,10 @@ export default function Reveal({
   return (
     <div ref={ref} className={className} {...rest}>
       <div
-        className={[
+        className={cn(
           "transition-opacity transition-transform duration-[680ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
           visible ? "opacity-100" : "opacity-0 translate-y-5",
-        ].join(" ")}
+        )}
         style={{
           ...style,
           transitionDelay: visible ? `${delayMs}ms` : "0ms",

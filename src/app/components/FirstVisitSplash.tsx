@@ -7,6 +7,7 @@
  */
 
 import { cn } from "@/lib/cn";
+import { lockDocumentScroll } from "@/lib/lockDocumentScroll";
 import {
   useCallback,
   useEffect,
@@ -15,17 +16,13 @@ import {
   useState,
 } from "react";
 
-function removeStub(): void {
-  document.getElementById("jn-splash-stub")?.remove();
-}
-
 export default function FirstVisitSplash() {
   const [visible, setVisible] = useState(false);
   const [exiting, setExiting] = useState(false);
   const prefersReducedMotionRef = useRef(false);
 
   const finish = useCallback(() => {
-    removeStub();
+    document.getElementById("jn-splash-stub")?.remove();
     setVisible(false);
     setExiting(false);
   }, []);
@@ -34,26 +31,13 @@ export default function FirstVisitSplash() {
     prefersReducedMotionRef.current = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    queueMicrotask(() => {
-      setVisible(true);
-    });
+    queueMicrotask(() => setVisible(true));
   }, []);
 
   useLayoutEffect(() => {
     if (!visible) return;
-    removeStub();
-    const html = document.documentElement;
-    const body = document.body;
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = body.style.overflow;
-
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
-
-    return () => {
-      html.style.overflow = prevHtmlOverflow;
-      body.style.overflow = prevBodyOverflow;
-    };
+    document.getElementById("jn-splash-stub")?.remove();
+    return lockDocumentScroll();
   }, [visible]);
 
   useEffect(() => {
@@ -79,10 +63,13 @@ export default function FirstVisitSplash() {
 
   if (!visible) return null;
 
+  const cornersBaseClassName =
+    "first-visit-splash__corners pointer-events-none absolute inset-[-1.25rem] sm:inset-[-1.75rem]";
+
   return (
     <div
       className={cn(
-        "first-visit-splash fixed inset-0 z-[2147483647] flex items-center justify-center",
+        "first-visit-splash fixed inset-0 z-[2147483647] flex items-center justify-center overflow-hidden",
         exiting && "first-visit-splash--exiting",
       )}
       role="presentation"
@@ -100,7 +87,17 @@ export default function FirstVisitSplash() {
 
       <div className="first-visit-splash__frame relative flex flex-col items-center gap-8 px-8">
         <div
-          className="first-visit-splash__corners pointer-events-none absolute inset-[-1.25rem] sm:inset-[-1.75rem]"
+          className={cn(
+            cornersBaseClassName,
+            "first-visit-splash__corners--top",
+          )}
+          aria-hidden="true"
+        />
+        <div
+          className={cn(
+            cornersBaseClassName,
+            "first-visit-splash__corners--bottom",
+          )}
           aria-hidden="true"
         />
 
