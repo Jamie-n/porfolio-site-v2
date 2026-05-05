@@ -138,7 +138,7 @@ export default function Sidebar({ sections }: SidebarProps) {
               Jamie.
             </BruText>
             <BruText as="p" variant="label" className="mt-2">
-              Full‑stack engineer · UI focused
+              Full-stack engineer · UI focused
             </BruText>
           </div>
 

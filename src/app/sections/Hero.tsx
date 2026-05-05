@@ -94,7 +94,7 @@ export default function Hero() {
               >
                 <span className="inline-flex items-center gap-2">
                   <span className="h-3 w-[1px] bg-border" />
-                  Full‑stack engineer
+                  Full-stack engineer
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <span className="h-3 w-[1px] bg-border" />
@@ -107,7 +107,7 @@ export default function Hero() {
               </BruText>
 
               <Header variant="title" className="text-balance">
-                I build sharp, print‑influenced web products that ship.
+                I build sharp, print-influenced web products that ship.
               </Header>
 
               <BruText as="p" variant="proseMuted" className="max-w-[62ch]">
@@ -131,12 +131,6 @@ export default function Hero() {
             >
               See experience
             </ScrollLink>
-            <a
-              href="mailto:jamie.neighbours@outlook.com"
-              className="px-2 py-3 bru-link text-foreground/72 transition-colors duration-200 ease-out hover:text-accent"
-            >
-              Email
-            </a>
           </div>
 
           <SocialLinks />
