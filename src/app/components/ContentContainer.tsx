@@ -12,7 +12,7 @@ export default function ContentContainer({
     <div
       {...rest}
       className={cn(
-        "px-6 sm:px-10 lg:px-16 xl:px-24 2xl:px-32 py-10 sm:py-12",
+        "px-6 sm:px-10 lg:px-16 xl:px-24 2xl:px-32 py-8 sm:py-10",
         className,
       )}
     >

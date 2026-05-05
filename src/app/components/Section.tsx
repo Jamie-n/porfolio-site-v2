@@ -40,16 +40,14 @@ export default function Section({
         rest.className,
       )}
     >
-      <ContentContainer className="grid gap-8">
+      <ContentContainer className="grid gap-5">
         {title && (
           <Reveal>
-            <div className="grid gap-6">
-              <div className="bru-panel px-4 py-3">
-                <BruText variant="label">Section</BruText>
-                <Header variant="title" className="bru-section-title">
-                  {title}
-                </Header>
-              </div>
+            <div className="bru-panel px-4 py-2 sm:px-5">
+              <BruText variant="label">Section</BruText>
+              <Header variant="title" className="bru-section-title">
+                {title}
+              </Header>
             </div>
           </Reveal>
         )}

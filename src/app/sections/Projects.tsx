@@ -11,7 +11,7 @@ import { sectionIntros } from "@/app/data/sectionIntros";
 export default function Projects() {
   return (
     <>
-      <div className="mt-8 mb-10 max-w-[72ch]">
+      <div className="mt-5 mb-10 max-w-[72ch]">
         <BruText as="p" variant="proseMuted" className="max-w-[72ch]">
           {sectionIntros.projects}
         </BruText>
