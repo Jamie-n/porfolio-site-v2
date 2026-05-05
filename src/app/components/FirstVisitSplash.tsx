@@ -2,8 +2,8 @@
 
 /**
  * Full-document load intro. The root layout does not remount on client navigations,
- * so this only runs the sequence on real page loads. Pairs with the server-rendered
- * `#jn-splash-stub` in `layout.tsx` so the first paint is never uncovered content.
+ * so this only runs the sequence on real page loads. Pairs with `SplashGate`'s
+ * `#jn-splash-stub` so the first paint is never uncovered content.
  */
 
 import { cn } from "@/lib/cn";
@@ -16,16 +16,20 @@ import {
   useState,
 } from "react";
 
-export default function FirstVisitSplash() {
+export default function FirstVisitSplash({
+  dismissStub,
+}: {
+  dismissStub: () => void;
+}) {
   const [visible, setVisible] = useState(false);
   const [exiting, setExiting] = useState(false);
   const prefersReducedMotionRef = useRef(false);
 
   const finish = useCallback(() => {
-    document.getElementById("jn-splash-stub")?.remove();
+    dismissStub();
     setVisible(false);
     setExiting(false);
-  }, []);
+  }, [dismissStub]);
 
   useLayoutEffect(() => {
     prefersReducedMotionRef.current = window.matchMedia(
@@ -36,9 +40,9 @@ export default function FirstVisitSplash() {
 
   useLayoutEffect(() => {
     if (!visible) return;
-    document.getElementById("jn-splash-stub")?.remove();
+    dismissStub();
     return lockDocumentScroll();
-  }, [visible]);
+  }, [visible, dismissStub]);
 
   useEffect(() => {
     if (!visible) return;

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
-import FirstVisitSplash from "@/app/components/FirstVisitSplash";
+import { SplashGate } from "@/app/components/SplashGate";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -51,19 +51,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased grain min-w-0`}
       >
-        {/* Solid cover until the client splash mounts; removed in `FirstVisitSplash`. */}
-        <div
-          id="jn-splash-stub"
-          aria-hidden
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 2147483646,
-            background: "var(--background, #fff)",
-          }}
-        />
-        {children}
-        <FirstVisitSplash />
+        <SplashGate>{children}</SplashGate>
       </body>
     </html>
   );
