@@ -50,7 +50,6 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased grain min-w-0`}
-        style={{ overflow: "hidden" }}
       >
         {/* Solid cover until the client splash mounts; removed in `FirstVisitSplash`. */}
         <div
