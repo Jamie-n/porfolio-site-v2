@@ -283,6 +283,19 @@
     pointer-events: none;
   }
 
+  .first-visit-splash__frame {
+    /* Keep the corner frame square, sized off the limiting viewport dimension. */
+    width: min(28rem, 86vmin);
+    aspect-ratio: 1 / 1;
+    justify-content: center;
+  }
+
+  @supports (height: 1svh) and (width: 1svw) {
+    .first-visit-splash__frame {
+      width: min(28rem, min(86svw, 86svh));
+    }
+  }
+
   .first-visit-splash__letter {
     display: inline-block;
     animation: first-visit-splash-letter 0.72s cubic-bezier(0.22, 1, 0.36, 1)
