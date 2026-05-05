@@ -17,26 +17,27 @@ function readSavedDarkMode(): boolean | null {
 
 export default function DarkModeToggle() {
   // Start with a deterministic value to avoid SSR hydration mismatches.
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(() => {
+    const saved = readSavedDarkMode();
+    if (saved !== null) return saved;
+    if (typeof window === "undefined") return false;
+    return (
+      window.matchMedia?.("(prefers-color-scheme: dark)")?.matches ?? false
+    );
+  });
 
   // Sync from saved preference/system on mount (and respond to OS changes if no saved pref).
   useEffect(() => {
-    let raf = 0;
     const saved = readSavedDarkMode();
     if (saved !== null) {
-      raf = requestAnimationFrame(() => setDark(saved));
-      return () => cancelAnimationFrame(raf);
+      return;
     }
 
     const mq = window.matchMedia?.("(prefers-color-scheme: dark)");
-    const apply = () => setDark(mq?.matches ?? false);
-    raf = requestAnimationFrame(apply);
-
     if (!mq) return;
-    const onChange = () => apply();
+    const onChange = () => setDark(mq.matches);
     mq.addEventListener?.("change", onChange);
     return () => {
-      cancelAnimationFrame(raf);
       mq.removeEventListener?.("change", onChange);
     };
   }, []);

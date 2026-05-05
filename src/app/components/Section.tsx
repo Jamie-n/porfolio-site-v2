@@ -9,8 +9,7 @@ import Reveal from "./Reveal";
 import { cn } from "@/lib/cn";
 
 interface SectionProps
-  extends PropsWithChildren,
-    ComponentPropsWithoutRef<"div"> {
+  extends PropsWithChildren, ComponentPropsWithoutRef<"div"> {
   href: string;
   data?: string;
   title?: string;

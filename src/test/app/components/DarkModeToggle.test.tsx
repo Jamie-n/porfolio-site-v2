@@ -12,10 +12,11 @@ describe("DarkModeToggle", () => {
   it("uses saved preference from localStorage", async () => {
     localStorage.setItem("dark-mode", "true");
     render(<DarkModeToggle />);
-    await waitFor(() =>
-      expect(document.documentElement.classList.contains("dark")).toBe(true),
-    );
-    await waitFor(() => expect(screen.getByRole("checkbox")).toBeChecked());
+    const checkbox = await screen.findByRole("checkbox");
+    await waitFor(() => {
+      expect(checkbox).toBeChecked();
+      expect(document.documentElement.classList.contains("dark")).toBe(true);
+    });
   });
 
   it("falls back to prefers-color-scheme when no saved preference", async () => {
@@ -33,12 +34,16 @@ describe("DarkModeToggle", () => {
         }) satisfies MediaQueryList,
     );
 
-    render(<DarkModeToggle />);
-    await waitFor(() => expect(screen.getByRole("checkbox")).toBeChecked());
-    await waitFor(() =>
-      expect(document.documentElement.classList.contains("dark")).toBe(true),
-    );
-    mm.mockRestore();
+    try {
+      render(<DarkModeToggle />);
+      const checkbox = await screen.findByRole("checkbox");
+      await waitFor(() => {
+        expect(checkbox).toBeChecked();
+        expect(document.documentElement.classList.contains("dark")).toBe(true);
+      });
+    } finally {
+      mm.mockRestore();
+    }
   });
 
   it("toggles class and persists to localStorage", async () => {
@@ -49,13 +54,17 @@ describe("DarkModeToggle", () => {
     expect(checkbox).not.toBeChecked();
 
     await user.click(checkbox);
-    expect(checkbox).toBeChecked();
-    expect(document.documentElement.classList.contains("dark")).toBe(true);
-    expect(localStorage.getItem("dark-mode")).toBe("true");
+    await waitFor(() => {
+      expect(checkbox).toBeChecked();
+      expect(document.documentElement.classList.contains("dark")).toBe(true);
+      expect(localStorage.getItem("dark-mode")).toBe("true");
+    });
 
     await user.click(checkbox);
-    expect(checkbox).not.toBeChecked();
-    expect(document.documentElement.classList.contains("dark")).toBe(false);
-    expect(localStorage.getItem("dark-mode")).toBe("false");
+    await waitFor(() => {
+      expect(checkbox).not.toBeChecked();
+      expect(document.documentElement.classList.contains("dark")).toBe(false);
+      expect(localStorage.getItem("dark-mode")).toBe("false");
+    });
   });
 });
