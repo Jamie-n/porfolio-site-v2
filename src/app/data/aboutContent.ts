@@ -5,9 +5,9 @@ export const WORKING_STYLE_IDS = [
   "reliability",
 ] as const;
 
-export type WorkingStyleId = (typeof WORKING_STYLE_IDS)[number];
+type WorkingStyleId = (typeof WORKING_STYLE_IDS)[number];
 
-export type WorkingStyleRow = {
+type WorkingStyleRow = {
   label: string;
   body: string;
 };

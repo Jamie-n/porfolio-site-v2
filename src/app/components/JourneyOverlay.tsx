@@ -21,7 +21,7 @@ import { fetchText } from "@/lib/fetchText";
 
 const panelTransitionMs = 360;
 
-export type JourneyTab = "journey" | "inspiration" | "ai";
+type JourneyTab = "journey" | "inspiration" | "ai";
 
 export const OPEN_JOURNEY_OVERLAY_EVENT = "open-journey-overlay";
 

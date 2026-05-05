@@ -8,13 +8,6 @@ export const SkillUsages = [
 
 export type SkillUsage = (typeof SkillUsages)[number];
 
-export const skillUsageOrder: Record<SkillUsage, number> = {
-  Daily: 3,
-  Regular: 2,
-  Occasional: 1,
-  Exploring: 0,
-};
-
 export interface Skill {
   name: string;
   usage: SkillUsage;

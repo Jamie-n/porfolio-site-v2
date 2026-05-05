@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
 
-export const BACKDROP_BASE_CLASSNAME =
+const BACKDROP_BASE_CLASSNAME =
   "bg-background/55 backdrop-blur-[1px] transition-opacity ease-out";
 
 /**

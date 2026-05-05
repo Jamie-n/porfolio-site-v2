@@ -13,9 +13,9 @@ export const CASE_STUDY_IDS = [
   "patient-leaflet-repository",
 ] as const;
 
-export type CaseStudyId = (typeof CASE_STUDY_IDS)[number];
+type CaseStudyId = (typeof CASE_STUDY_IDS)[number];
 
-export type CaseStudyFields = {
+type CaseStudyFields = {
   title: string;
   meta: string;
   chips: readonly string[];
@@ -23,7 +23,7 @@ export type CaseStudyFields = {
   bullets: readonly string[];
 };
 
-export type CaseStudyContent = { id: CaseStudyId } & CaseStudyFields;
+type CaseStudyContent = { id: CaseStudyId } & CaseStudyFields;
 
 const caseStudyCopy = {
   portfolio: {

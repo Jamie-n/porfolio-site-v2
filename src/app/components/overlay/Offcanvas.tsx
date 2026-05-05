@@ -26,7 +26,7 @@ function getFocusableElements(root: HTMLElement) {
   );
 }
 
-export type OffcanvasSide = "left" | "right";
+type OffcanvasSide = "left" | "right";
 
 export function Offcanvas({
   open,

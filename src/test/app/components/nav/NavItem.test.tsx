@@ -33,9 +33,6 @@ describe("NavItem", () => {
 
   it("smooth-scrolls and updates URL without navigation", async () => {
     const user = userEvent.setup();
-    const section = document.createElement("div");
-    section.id = "/projects";
-    document.body.appendChild(section);
 
     render(<NavItem linkText="03. Projects" href="/projects" />);
 

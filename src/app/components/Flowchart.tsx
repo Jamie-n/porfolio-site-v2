@@ -4,12 +4,12 @@ import { formatTwoDigits } from "@/lib/utils";
 import { BruText } from "./primitives/BruText";
 import { RuledFigure } from "./primitives/RuledFigure";
 
-export type FlowchartStep = {
+type FlowchartStep = {
   id: string;
   label: string;
 };
 
-export type FlowchartSummaryRow = {
+type FlowchartSummaryRow = {
   eyebrow: string;
   title: string;
   meta?: string;
@@ -21,9 +21,9 @@ const COLUMN_LAYOUT = {
   4: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3",
 } as const;
 
-export type FlowchartColumnLayout = keyof typeof COLUMN_LAYOUT;
+type FlowchartColumnLayout = keyof typeof COLUMN_LAYOUT;
 
-export type FlowchartProps = {
+type FlowchartProps = {
   /** Main title in the figure header (accent title style). */
   title: ReactNode;
   /** Uppercase tracked label above the title (default: "Flow"). */

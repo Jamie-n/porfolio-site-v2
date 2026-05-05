@@ -2,6 +2,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import nextPlugin from "@next/eslint-plugin-next";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+import unusedImports from "eslint-plugin-unused-imports";
 import prettier from "eslint-config-prettier/flat";
 import tsParser from "@typescript-eslint/parser";
 import eslint from "@eslint/js";
@@ -30,11 +31,27 @@ export default defineConfig([
       "@next/next": nextPlugin,
       "@typescript-eslint": tsPlugin,
       "react-hooks": reactHooksPlugin,
+      "unused-imports": unusedImports,
     },
 
     rules: {
       ...reactHooksPlugin.configs.recommended.rules,
       ...nextPlugin.configs.recommended.rules,
+
+      // Prefer deterministic failures for dead code.
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+        "error",
+        {
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
     },
   },
 

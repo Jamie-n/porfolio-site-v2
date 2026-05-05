@@ -5,7 +5,7 @@ export const SECTION_INTRO_KEYS = [
   "certifications",
 ] as const;
 
-export type SectionIntroKey = (typeof SECTION_INTRO_KEYS)[number];
+type SectionIntroKey = (typeof SECTION_INTRO_KEYS)[number];
 
 export const sectionIntros = {
   projects:

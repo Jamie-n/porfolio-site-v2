@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { cn } from "@/lib/cn";
 import { BruText } from "@/app/components/primitives/BruText";
 
-export type OverlayTriggerCardProps = {
+type OverlayTriggerCardProps = {
   eyebrow: string;
   title: string;
   onOpen: (openedByKeyboard: boolean) => void;
