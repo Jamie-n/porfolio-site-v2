@@ -7,23 +7,6 @@ export const aiWorkflowFiles: SkillFileItem[] = [
     path: "/content/ai-workflow/workflow.md",
   },
 
-  // Plans (what we decided to build)
-  {
-    id: "plan-journey-ai",
-    title: "Plan: Journey + AI workflow section",
-    path: "/api/raw/.cursor/plans/journey_+_ai_workflow_section_a4c04479.plan.md",
-  },
-  {
-    id: "plan-roadmap-2026",
-    title: "Plan: Portfolio site roadmap 2026",
-    path: "/api/raw/.cursor/plans/portfolio_site_roadmap_2026_5434d5fd.plan.md",
-  },
-  {
-    id: "plan-premium-ui-polish",
-    title: "Plan: Premium UI styling polish",
-    path: "/api/raw/.cursor/plans/premium_ui_styling_polish_e66ae2b2.plan.md",
-  },
-
   // Skills (human-readable summaries)
   {
     id: "skill-nextjs-app-router-project",
