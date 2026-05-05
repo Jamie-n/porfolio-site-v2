@@ -358,7 +358,7 @@
     pointer-events: none;
   }
 
-  .first-visit-splash__corners::before {
+  .first-visit-splash__corners--top::before {
     inset: 0 auto auto 0;
     width: 2.25rem;
     height: 2.25rem;
@@ -369,13 +369,35 @@
       0.12s both;
   }
 
-  .first-visit-splash__corners::after {
+  .first-visit-splash__corners--top::after {
     inset: 0 0 auto auto;
     width: 2.25rem;
     height: 2.25rem;
     border-width: 2px 2px 0 0;
     border-style: solid;
     transform-origin: top right;
+    animation: first-visit-splash-corner 0.55s cubic-bezier(0.22, 1, 0.36, 1)
+      0.12s both;
+  }
+
+  .first-visit-splash__corners--bottom::before {
+    inset: auto auto 0 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-width: 0 0 2px 2px;
+    border-style: solid;
+    transform-origin: bottom left;
+    animation: first-visit-splash-corner 0.55s cubic-bezier(0.22, 1, 0.36, 1)
+      0.12s both;
+  }
+
+  .first-visit-splash__corners--bottom::after {
+    inset: auto 0 0 auto;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    transform-origin: bottom right;
     animation: first-visit-splash-corner 0.55s cubic-bezier(0.22, 1, 0.36, 1)
       0.12s both;
   }
@@ -655,8 +677,16 @@
 .section-spacer {
   position: relative;
   height: 4.25rem;
-  border-bottom: 1px solid var(--border);
-  background-color: color-mix(in oklab, var(--surface) 55%, transparent);
+  /* Extend visual chrome into scrollbar area without changing layout width. */
+  --scrollbar-comp: calc(100vw - 100%);
+  --scrollbar-comp-neg: calc(-1 * var(--scrollbar-comp));
+  background-color: transparent;
+}
+
+@supports (width: 1svw) {
+  .section-spacer {
+    --scrollbar-comp: calc(100svw - 100%);
+  }
 }
 
 .styleguide .section-spacer {
@@ -666,11 +696,15 @@
 .section-spacer::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: var(--scrollbar-comp-neg);
   pointer-events: none;
   user-select: none;
   opacity: 0.9;
   z-index: 0;
+  background-color: color-mix(in oklab, var(--surface) 55%, transparent);
   background-image:
     linear-gradient(
       to right,
@@ -702,6 +736,19 @@
     0 0,
     0 0,
     0 0;
+}
+
+.section-spacer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: var(--scrollbar-comp-neg);
+  bottom: 0;
+  height: 1px;
+  background: var(--border);
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
 }
 
 .section-spacer__meta {

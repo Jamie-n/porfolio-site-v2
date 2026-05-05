@@ -8,10 +8,9 @@ import { ScrollLink } from "@/app/components/ScrollLink";
 export default function Hero() {
   return (
     <div className="relative flex min-h-screen w-full flex-col justify-center max-lg:min-h-0 max-lg:justify-start">
-      {/* `lg:flex-1` + `lg:items-center` so the imprint column can sit on the true vertical midline of the home section (absolute card does not set parent height). */}
-      <div className="relative grid w-full gap-10 sm:gap-14 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:gap-16">
+      <div className="relative grid w-full gap-10 sm:gap-14 lg:flex lg:items-center lg:gap-16">
         {/* Dashed ring uses padding (no negative inset) so section overflow does not clip it. */}
-        <div className="relative mx-auto w-full max-w-[min(17rem,78svw)] animate-enter transition-all duration-200 ease-out sm:max-w-[18rem] lg:absolute lg:left-0 lg:top-1/2 lg:mx-0 lg:w-auto lg:max-w-none lg:-translate-y-1/2">
+        <div className="relative mx-auto w-full max-w-[min(17rem,78svw)] animate-enter transition-all duration-200 ease-out sm:max-w-[18rem] lg:mx-0 lg:w-auto lg:max-w-none lg:shrink-0">
           <div className="group border-2 border-dashed border-border p-2.5 shadow-rule transition-transform duration-200 ease-out hover:rotate-1 sm:p-3 lg:border lg:p-3">
             <div
               aria-label="Profile"
@@ -43,7 +42,7 @@ export default function Hero() {
                 <div className="flex flex-col items-center gap-3 text-center">
                   <div className="flex flex-col items-center gap-2 text-5xl font-bold leading-none tracking-[-0.08em] text-foreground sm:text-6xl md:text-7xl">
                     <div
-                      className="portfolio-mark__swatches translate-x-[0.04em]"
+                      className="portfolio-mark__swatches translate-x-0 sm:translate-x-[0.04em]"
                       aria-hidden="true"
                     >
                       <span />
@@ -86,7 +85,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="grid gap-8 animate-enter animate-enter-delay-1 lg:pl-[24rem]">
+        <div className="grid gap-8 animate-enter animate-enter-delay-1 lg:flex-1">
           <div className="grid gap-4">
             <div className="grid gap-3">
               <BruText

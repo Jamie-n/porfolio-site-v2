@@ -15,17 +15,13 @@ import {
   useState,
 } from "react";
 
-function removeStub(): void {
-  document.getElementById("jn-splash-stub")?.remove();
-}
-
 export default function FirstVisitSplash() {
   const [visible, setVisible] = useState(false);
   const [exiting, setExiting] = useState(false);
   const prefersReducedMotionRef = useRef(false);
 
   const finish = useCallback(() => {
-    removeStub();
+    document.getElementById("jn-splash-stub")?.remove();
     setVisible(false);
     setExiting(false);
   }, []);
@@ -39,20 +35,32 @@ export default function FirstVisitSplash() {
     });
   }, []);
 
+  // Hide page scrollbar while splash is visible, but keep layout width stable by
+  // compensating for the removed scrollbar width.
   useLayoutEffect(() => {
     if (!visible) return;
-    removeStub();
+    document.getElementById("jn-splash-stub")?.remove();
+
     const html = document.documentElement;
     const body = document.body;
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = html.style.overflow;
+    const previousHtmlOverscroll = html.style.overscrollBehavior;
+    const previousBodyOverflow = body.style.overflow;
+    const previousBodyPaddingRight = body.style.paddingRight;
 
+    const scrollbarWidth = window.innerWidth - html.clientWidth;
     html.style.overflow = "hidden";
+    html.style.overscrollBehavior = "none";
     body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) {
+      body.style.paddingRight = `${scrollbarWidth}px`;
+    }
 
     return () => {
-      html.style.overflow = prevHtmlOverflow;
-      body.style.overflow = prevBodyOverflow;
+      html.style.overflow = previousHtmlOverflow;
+      html.style.overscrollBehavior = previousHtmlOverscroll;
+      body.style.overflow = previousBodyOverflow;
+      body.style.paddingRight = previousBodyPaddingRight;
     };
   }, [visible]);
 
@@ -79,10 +87,13 @@ export default function FirstVisitSplash() {
 
   if (!visible) return null;
 
+  const cornersBaseClassName =
+    "first-visit-splash__corners pointer-events-none absolute inset-[-1.25rem] sm:inset-[-1.75rem]";
+
   return (
     <div
       className={cn(
-        "first-visit-splash fixed inset-0 z-[2147483647] flex items-center justify-center",
+        "first-visit-splash fixed inset-0 z-[2147483647] flex items-center justify-center overflow-hidden",
         exiting && "first-visit-splash--exiting",
       )}
       role="presentation"
@@ -100,7 +111,17 @@ export default function FirstVisitSplash() {
 
       <div className="first-visit-splash__frame relative flex flex-col items-center gap-8 px-8">
         <div
-          className="first-visit-splash__corners pointer-events-none absolute inset-[-1.25rem] sm:inset-[-1.75rem]"
+          className={cn(
+            cornersBaseClassName,
+            "first-visit-splash__corners--top",
+          )}
+          aria-hidden="true"
+        />
+        <div
+          className={cn(
+            cornersBaseClassName,
+            "first-visit-splash__corners--bottom",
+          )}
           aria-hidden="true"
         />
 

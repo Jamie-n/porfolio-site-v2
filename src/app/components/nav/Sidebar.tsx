@@ -10,6 +10,7 @@ import { BruText } from "@/app/components/primitives/BruText";
 import NavItem from "./NavItem";
 import { SocialLinks } from "@/app/components/SocialLinks";
 import { cn } from "@/lib/cn";
+import { lockDocumentScroll } from "@/lib/lockDocumentScroll";
 import { useEffect, useId, useState } from "react";
 import { BACKDROP_BASE_CLASSNAME } from "@/app/components/overlay/backdrop";
 
@@ -46,15 +47,10 @@ export default function Sidebar({ sections }: SidebarProps) {
   useEffect(() => {
     if (!mobileOpen) return;
     if (window.matchMedia(`(min-width: ${LG_MIN_WIDTH}px)`).matches) return;
-
-    const previousHtmlOverflow = document.documentElement.style.overflow;
-    const previousBodyOverflow = document.body.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    const unlockScroll = lockDocumentScroll();
 
     return () => {
-      document.documentElement.style.overflow = previousHtmlOverflow;
-      document.body.style.overflow = previousBodyOverflow;
+      unlockScroll();
     };
   }, [mobileOpen]);
 

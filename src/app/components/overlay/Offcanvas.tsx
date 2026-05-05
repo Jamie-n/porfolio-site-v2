@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 import { BACKDROP_BASE_CLASSNAME } from "./backdrop";
+import { lockDocumentScroll } from "@/lib/lockDocumentScroll";
 
 const DEFAULT_TRANSITION_MS = 360;
 
@@ -97,32 +98,7 @@ export function Offcanvas({
   // Scroll lock + focus trap + Esc.
   useEffect(() => {
     if (!mounted) return;
-
-    const previousBodyOverflow = document.body.style.overflow;
-    const previousBodyPaddingRight = document.body.style.paddingRight;
-    const previousBodyPosition = document.body.style.position;
-    const previousBodyTop = document.body.style.top;
-    const previousBodyWidth = document.body.style.width;
-    const previousHtmlOverflow = document.documentElement.style.overflow;
-    const previousHtmlOverscroll =
-      document.documentElement.style.overscrollBehavior;
-    const previousHtmlScrollBehavior =
-      document.documentElement.style.scrollBehavior;
-
-    const scrollY = window.scrollY;
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    document.documentElement.style.overflow = "hidden";
-    document.documentElement.style.overscrollBehavior = "none";
-
-    // Freeze page scroll position (prevents background content from moving).
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
-    document.body.style.overflow = "hidden";
-    if (scrollbarWidth > 0) {
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    }
+    const unlockScroll = lockDocumentScroll();
 
     const previouslyFocused = document.activeElement as HTMLElement | null;
     initialFocusRef?.current?.focus?.();
@@ -153,22 +129,7 @@ export function Offcanvas({
     return () => {
       closingRef.current = false;
       window.removeEventListener("keydown", onKeyDown);
-
-      document.documentElement.style.overflow = previousHtmlOverflow;
-      document.documentElement.style.overscrollBehavior =
-        previousHtmlOverscroll;
-
-      document.body.style.position = previousBodyPosition;
-      document.body.style.top = previousBodyTop;
-      document.body.style.width = previousBodyWidth;
-      document.body.style.overflow = previousBodyOverflow;
-      document.body.style.paddingRight = previousBodyPaddingRight;
-
-      // Avoid animated "re-scroll" due to global `scroll-behavior: smooth`.
-      document.documentElement.style.scrollBehavior = "auto";
-      window.scrollTo(0, scrollY);
-      document.documentElement.style.scrollBehavior =
-        previousHtmlScrollBehavior;
+      unlockScroll();
 
       if (restoreFocus) {
         previouslyFocused?.focus?.();
@@ -202,7 +163,7 @@ export function Offcanvas({
 
       <div
         className={cn(
-          "absolute top-0 h-dvh w-full bg-background text-foreground border-border shadow-rule grain overflow-y-auto overflow-x-hidden overscroll-contain",
+          "absolute top-0 h-dvh w-full bg-background text-foreground border-border shadow-rule grain overflow-hidden flex flex-col",
           side === "right" ? "right-0 border-l" : "left-0 border-r",
           "transform-gpu transition-transform ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
           panelTranslateClass,
