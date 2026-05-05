@@ -6,7 +6,7 @@ description: >-
   source of truth. Enforces componentised building blocks and content blocks,
   mandatory styleguide recipes for new blocks, and a clear chapter/section
   hierarchy. Use when styling UI in `src/app/`, changing `globals.css` or
-  `tailwind.config.ts`, polishing sections/components, or when the user
+  `tailwind.config.mjs`, polishing sections/components, or when the user
   mentions the styleguide, design system, content blocks, brutalist style,
   print design, or visual consistency.
 disable-model-invocation: true
@@ -112,7 +112,7 @@ Treat the page like **print layout** adapted for the web.
 
 ## Theme and implementation (summary)
 
-- **Theme-first**: Color from `:root` / `.dark` variables; Tailwind colors in `tailwind.config.ts` map to those tokens.
+- **Theme-first**: Color from `:root` / `.dark` variables; Tailwind colors in `tailwind.config.mjs` map to those tokens.
 - **Surfaces**: `bru-panel` (48px grid, border, rule shadow); `bru-divide-y` on stacks over grids; page `grain` on `body`.
 - **Motion**: `animate-enter` / delays in `globals.css`; always respect **`prefers-reduced-motion`**.
 - **New tokens**: extend `globals.css`, then Tailwind if needed; prefer **`color-mix(in oklab, var(--foreground) …)`** for translucent UI.

@@ -39,7 +39,7 @@ isProject: false
 ## What I found (current styling architecture)
 
 - Styling is **Tailwind-first** plus a small amount of global CSS.
-- Global tokens exist via CSS variables `--background` / `--foreground` in `[src/app/globals.css](src/app/globals.css)` and are wired into Tailwind as `colors.background`/`colors.foreground` in `[tailwind.config.ts](tailwind.config.ts)`.
+- Global tokens exist via CSS variables `--background` / `--foreground` in `[src/app/globals.css](src/app/globals.css)` and are wired into Tailwind as `colors.background`/`colors.foreground` in `[tailwind.config.mjs](tailwind.config.mjs)`.
 - Fonts are currently **inconsistent**: `[src/app/layout.tsx](src/app/layout.tsx)` loads **Geist** via `next/font`, but `[src/app/globals.css](src/app/globals.css)` imports **Roboto** from Google and forces `font-family: "Roboto"`.
 - Accent color is hard-coded throughout as `red-500` (you chose to keep red).
 - Notable styling hot-spots:
@@ -157,7 +157,7 @@ I’ll implement a small set of **design tokens** (CSS variables) in `globals.cs
 
 ### 2) Tailwind theme extensions to use tokens
 
-- Update `[tailwind.config.ts](tailwind.config.ts)`:
+- Update `[tailwind.config.mjs](tailwind.config.mjs)`:
   - Extend colors to include `surface`, `muted`, `border`, `accent` (all pointing at CSS vars).
   - Extend `fontFamily` to reference `var(--font-geist-sans)`.
   - Optionally add a small `boxShadow` set that maps to tokenized shadows.
@@ -209,7 +209,7 @@ I’ll implement a small set of **design tokens** (CSS variables) in `globals.cs
 ## Files I expect to touch
 
 - `[src/app/globals.css](src/app/globals.css)`
-- `[tailwind.config.ts](tailwind.config.ts)`
+- `[tailwind.config.mjs](tailwind.config.mjs)`
 - `[src/app/layout.tsx](src/app/layout.tsx)` (only if needed to finalize font application; likely no change)
 - `[src/app/components/ContentContainer.tsx](src/app/components/ContentContainer.tsx)`
 - `[src/app/components/Header.tsx](src/app/components/Header.tsx)`
