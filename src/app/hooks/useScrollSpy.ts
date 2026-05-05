@@ -16,7 +16,7 @@ export default function useScrollSpy(
         if (entry.isIntersecting) {
           const next = new URL(href, window.location.href);
           if (next.href !== window.location.href) {
-            window.history.replaceState(null, "", next.href);
+            window.history.replaceState(null, "", href);
           }
         }
       },

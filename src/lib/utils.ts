@@ -1,5 +1,3 @@
-import type { MouseEvent } from "react";
-
 export function slugify(str: string) {
   return str
     .trim()
@@ -14,6 +12,11 @@ export function scrollToElement(
   threshold = 0.5,
 ): Promise<void> {
   return new Promise((resolve) => {
+    if (typeof el.scrollIntoView !== "function") {
+      resolve();
+      return;
+    }
+
     let frames = 0;
     const maxFrames = 240;
 
@@ -55,19 +58,8 @@ export async function scrollToHref(
   await scrollToElement(target, options?.threshold);
   const next = new URL(href, window.location.href);
   if (next.href !== window.location.href) {
-    window.history.replaceState(null, "", next.href);
+    window.history.replaceState(null, "", href);
   }
-}
-
-export function handleScrollLinkClick(
-  e: MouseEvent<HTMLAnchorElement>,
-  href: string,
-  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void,
-) {
-  onClick?.(e);
-  if (e.defaultPrevented) return;
-  e.preventDefault();
-  void scrollToHref(href);
 }
 
 export function formatIndex(index: number): string {

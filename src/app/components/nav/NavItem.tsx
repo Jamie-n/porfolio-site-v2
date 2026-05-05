@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { ComponentPropsWithoutRef, CSSProperties, MouseEvent } from "react";
-import { handleScrollLinkClick } from "@/lib/utils";
+import { ComponentPropsWithoutRef, CSSProperties } from "react";
+import { useScrollLinkClickHandler } from "@/lib/scrollLinks";
 import { cn } from "@/lib/cn";
 import { BruText } from "@/app/components/primitives/BruText";
 
@@ -26,8 +26,7 @@ export default function NavItem({
   const pathname = usePathname();
   const isActive = pathname === href;
 
-  const handleClick = (e: MouseEvent<HTMLAnchorElement>) =>
-    handleScrollLinkClick(e, href, onClick);
+  const handleClick = useScrollLinkClickHandler(href, onClick);
 
   return (
     <div
