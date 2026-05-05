@@ -23,12 +23,59 @@ export default function FirstVisitSplash() {
   const [visible, setVisible] = useState(false);
   const [exiting, setExiting] = useState(false);
   const prefersReducedMotionRef = useRef(false);
+  const prevHtmlOverflowRef = useRef<string | null>(null);
+  const prevBodyOverflowRef = useRef<string | null>(null);
+  const prevBodyPaddingRightRef = useRef<string | null>(null);
+  const scrollBarGapRef = useRef<number>(0);
+
+  const lockScroll = useCallback(() => {
+    if (typeof window === "undefined") return;
+
+    const html = document.documentElement;
+    const body = document.body;
+
+    if (prevHtmlOverflowRef.current === null) {
+      prevHtmlOverflowRef.current = html.style.overflow;
+    }
+    if (prevBodyOverflowRef.current === null) {
+      prevBodyOverflowRef.current = body.style.overflow;
+    }
+    if (prevBodyPaddingRightRef.current === null) {
+      prevBodyPaddingRightRef.current = body.style.paddingRight;
+    }
+
+    // Keep layout stable when the scrollbar disappears.
+    const gap = window.innerWidth - html.clientWidth;
+    scrollBarGapRef.current = gap > 0 ? gap : 0;
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+
+    if (scrollBarGapRef.current > 0) {
+      body.style.paddingRight = `${scrollBarGapRef.current}px`;
+    }
+  }, []);
+
+  const unlockScroll = useCallback(() => {
+    const html = document.documentElement;
+    const body = document.body;
+
+    html.style.overflow = prevHtmlOverflowRef.current ?? "";
+    body.style.overflow = prevBodyOverflowRef.current ?? "";
+    body.style.paddingRight = prevBodyPaddingRightRef.current ?? "";
+
+    prevHtmlOverflowRef.current = null;
+    prevBodyOverflowRef.current = null;
+    prevBodyPaddingRightRef.current = null;
+    scrollBarGapRef.current = 0;
+  }, []);
 
   const finish = useCallback(() => {
     removeStub();
     setVisible(false);
     setExiting(false);
-  }, []);
+    unlockScroll();
+  }, [unlockScroll]);
 
   useLayoutEffect(() => {
     prefersReducedMotionRef.current = window.matchMedia(
@@ -42,7 +89,9 @@ export default function FirstVisitSplash() {
   useLayoutEffect(() => {
     if (!visible) return;
     removeStub();
-  }, [visible]);
+    lockScroll();
+    return () => unlockScroll();
+  }, [visible, lockScroll, unlockScroll]);
 
   useEffect(() => {
     if (!visible) return;
