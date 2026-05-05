@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { BruText } from "./BruText";
 
-export type RuledListProps = {
+type RuledListProps = {
   children: ReactNode;
   className?: string;
 };
@@ -20,7 +20,7 @@ export function RuledList({ children, className }: RuledListProps) {
   );
 }
 
-export type RuledListItemProps = {
+type RuledListItemProps = {
   children: ReactNode;
   className?: string;
 };
@@ -33,7 +33,7 @@ export function RuledListItem({ children, className }: RuledListItemProps) {
   );
 }
 
-export type KeyValueListItemProps = {
+type KeyValueListItemProps = {
   label: string;
   children: ReactNode;
   className?: string;

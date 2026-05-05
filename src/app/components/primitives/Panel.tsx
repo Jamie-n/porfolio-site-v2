@@ -11,7 +11,7 @@ const PADDING_CLASS: Record<PanelPadding, string> = {
   md: "px-6 py-5",
 };
 
-export type PanelProps = {
+type PanelProps = {
   children: ReactNode;
   className?: string;
   padding?: PanelPadding;
@@ -25,7 +25,7 @@ export function Panel({ children, className, padding = "md" }: PanelProps) {
   );
 }
 
-export type PanelHeaderProps = {
+type PanelHeaderProps = {
   eyebrow: string;
   title?: ReactNode;
   children?: ReactNode;

@@ -1,9 +1,9 @@
 import type { Skill, SkillCategory, SkillUsage } from "@/app/data/skills";
 import { SkillUsages } from "@/app/data/skills";
 
-export type SkillsUsageGroup = { usage: SkillUsage; skills: Skill[] };
+type SkillsUsageGroup = { usage: SkillUsage; skills: Skill[] };
 
-export type CategorizedSkill = Skill & { categoryTitle: string };
+type CategorizedSkill = Skill & { categoryTitle: string };
 
 /** Flatten category panels into one list while keeping domain labels. */
 export function flattenSkillCategories(

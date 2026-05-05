@@ -1,7 +1,7 @@
 import { useCallback, type MouseEvent } from "react";
 import { scrollToHref } from "@/lib/utils";
 
-export function handleScrollLinkClick(
+function handleScrollLinkClick(
   e: MouseEvent<HTMLAnchorElement>,
   href: string,
   onClick?: (e: MouseEvent<HTMLAnchorElement>) => void,

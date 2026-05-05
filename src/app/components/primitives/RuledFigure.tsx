@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { BruText } from "./BruText";
 
-export type RuledFigureProps = {
+type RuledFigureProps = {
   headerEyebrow: ReactNode;
   headerTitle: ReactNode;
   children: ReactNode;

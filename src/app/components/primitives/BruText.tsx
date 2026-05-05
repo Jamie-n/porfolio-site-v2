@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
  * Portfolio typography tokens (`bru-label`, `bru-h1`, `bru-prose`, …).
  * Switch roles via `variant` (and optional `className` for layout/spacing).
  */
-export type BruTextVariant =
+type BruTextVariant =
   | "label"
   | "labelCompact"
   | "accTitle"
@@ -43,7 +43,7 @@ type BruTextOwnProps<T extends ElementType> = {
   children?: ReactNode;
 };
 
-export type BruTextProps<T extends ElementType = "div"> = BruTextOwnProps<T> &
+type BruTextProps<T extends ElementType = "div"> = BruTextOwnProps<T> &
   Omit<ComponentPropsWithoutRef<T>, keyof BruTextOwnProps<T>>;
 
 export function BruText<T extends ElementType = "div">({

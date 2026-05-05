@@ -2,7 +2,7 @@ import type { ExperienceContent } from "@/app/data/experiences";
 
 export const CERTIFICATION_IDS = ["az-900"] as const;
 
-export type CertificationId = (typeof CERTIFICATION_IDS)[number];
+type CertificationId = (typeof CERTIFICATION_IDS)[number];
 
 const certificationsById = {
   "az-900": {

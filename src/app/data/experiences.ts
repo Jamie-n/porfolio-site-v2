@@ -8,12 +8,8 @@ export type ExperienceContent = {
   highlights: string[];
 };
 
-export type Experiences =
-  | "the-curve"
-  | "chft"
-  | "apple-designs"
-  | "js-wetherspoon";
-export type OtherExperiences = "media-and-merch";
+type Experiences = "the-curve" | "chft" | "apple-designs" | "js-wetherspoon";
+type OtherExperiences = "media-and-merch";
 
 /** Display order for the Experience section. */
 export const EXPERIENCE_IDS = [
@@ -27,7 +23,7 @@ export const OTHER_EXPERIENCE_IDS = [
   "media-and-merch",
 ] as const satisfies readonly OtherExperiences[];
 
-export const experiences: Record<Experiences, ExperienceContent> = {
+const experiences: Record<Experiences, ExperienceContent> = {
   "the-curve": {
     title: "Software Engineer",
     company: "The Curve",
@@ -88,7 +84,7 @@ export const experiences: Record<Experiences, ExperienceContent> = {
   },
 };
 
-export const otherExperiences: Record<OtherExperiences, ExperienceContent> = {
+const otherExperiences: Record<OtherExperiences, ExperienceContent> = {
   "media-and-merch": {
     title: "Media and Merchandise Secretary",
     company: "Huddersfield University Snowsports Society",

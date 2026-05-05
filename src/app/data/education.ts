@@ -2,7 +2,7 @@ import type { ExperienceContent } from "@/app/data/experiences";
 
 export const EDUCATION_IDS = ["msc", "bsc"] as const;
 
-export type EducationId = (typeof EDUCATION_IDS)[number];
+type EducationId = (typeof EDUCATION_IDS)[number];
 
 const educationById = {
   msc: {

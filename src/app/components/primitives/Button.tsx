@@ -20,13 +20,13 @@ const SIZE_CLASS: Record<ButtonSize, string> = {
   md: "px-4 py-3",
 };
 
-export const BASE_BUTTON_CLASS =
+const BASE_BUTTON_CLASS =
   "border border-border bru-button shadow-rule transition-all duration-200 ease-out " +
   "hover:-translate-y-[1px] hover:border-accent/40 " +
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring " +
   "focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
-export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
+type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
 };
@@ -54,7 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   },
 );
 
-export type LinkButtonProps = ComponentPropsWithoutRef<"a"> & {
+type LinkButtonProps = ComponentPropsWithoutRef<"a"> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
   children: ReactNode;
