@@ -11,8 +11,7 @@ import {
 import { cn } from "@/lib/cn";
 
 interface AccordionProps
-  extends PropsWithChildren,
-    ComponentPropsWithoutRef<"div"> {
+  extends PropsWithChildren, ComponentPropsWithoutRef<"div"> {
   header: ReactNode;
   defaultOpen?: boolean;
   open?: boolean;

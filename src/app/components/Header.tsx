@@ -2,8 +2,7 @@ import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 import { cn } from "@/lib/cn";
 
 interface HeaderProps
-  extends PropsWithChildren,
-    Omit<ComponentPropsWithoutRef<"h2">, "children"> {
+  extends PropsWithChildren, Omit<ComponentPropsWithoutRef<"h2">, "children"> {
   variant: "title" | "subheading";
 }
 
