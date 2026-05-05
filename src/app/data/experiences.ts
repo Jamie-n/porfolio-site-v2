@@ -8,19 +8,29 @@ export type ExperienceContent = {
   highlights: string[];
 };
 
-type Experiences = "the-curve" | "chft" | "apple-designs" | "js-wetherspoon";
-type OtherExperiences = "media-and-merch";
+type Experiences = "the-curve" | "chft" | "apple-designs";
+type OtherExperiences = "media-and-merch" | "jd-wetherspoon";
 
-/** Display order for the Experience section. */
-export const EXPERIENCE_IDS = [
+/** Sort by newest `startDate` first; ties broken by id for stable output. */
+function sortExperienceIdsByStartDateDesc<T extends string>(
+  ids: readonly T[],
+  record: Record<T, ExperienceContent>,
+): readonly T[] {
+  return [...ids].sort((a, b) => {
+    const delta = record[b].startDate - record[a].startDate;
+    return delta !== 0 ? delta : a.localeCompare(b);
+  });
+}
+
+const MAIN_IDS_UNORDERED = [
   "the-curve",
   "chft",
   "apple-designs",
-  "js-wetherspoon",
 ] as const satisfies readonly Experiences[];
 
-export const OTHER_EXPERIENCE_IDS = [
+const OTHER_IDS_UNORDERED = [
   "media-and-merch",
+  "jd-wetherspoon",
 ] as const satisfies readonly OtherExperiences[];
 
 const experiences: Record<Experiences, ExperienceContent> = {
@@ -69,7 +79,24 @@ const experiences: Record<Experiences, ExperienceContent> = {
       "Ran requirements, client communication, and sequencing so releases stayed manageable.",
     ],
   },
-  "js-wetherspoon": {
+};
+
+const otherExperiences: Record<OtherExperiences, ExperienceContent> = {
+  "media-and-merch": {
+    title: "Media and Merchandise Secretary",
+    company: "Huddersfield University Snowsports Society",
+    startDate: 2023,
+    endDate: 2024,
+    colour: "bg-blue-500",
+    blurb:
+      "Volunteered as media and merchandise secretary - keeping social channels cohesive, working with brand partners on kit and promo, and making sure what we published actually looked like the same club.",
+    highlights: [
+      "Maintained a consistent visual identity across social channels.",
+      "Collaborated with sponsors on squad uniforms, club merchandise, and promotional drops.",
+      "Ran campaigns that lifted engagement and made the society easier to recognise on campus.",
+    ],
+  },
+  "jd-wetherspoon": {
     title: "Shift Leader",
     company: "JD Wetherspoon",
     startDate: 2017,
@@ -84,23 +111,15 @@ const experiences: Record<Experiences, ExperienceContent> = {
   },
 };
 
-const otherExperiences: Record<OtherExperiences, ExperienceContent> = {
-  "media-and-merch": {
-    title: "Media and Merchandise Secretary",
-    company: "Huddersfield University Snowsports Society",
-    startDate: 2023,
-    endDate: 2024,
-    colour: "bg-blue-500",
-    blurb:
-      "Volunteered as media and merchandise secretary - keeping social channels cohesive, working with brand partners on kit and promo, and making sure what we published actually looked like the same club.",
+export const EXPERIENCE_IDS = sortExperienceIdsByStartDateDesc(
+  MAIN_IDS_UNORDERED,
+  experiences,
+);
 
-    highlights: [
-      "Maintained a consistent visual identity across social channels.",
-      "Collaborated with sponsors on squad uniforms, club merchandise, and promotional drops.",
-      "Ran campaigns that lifted engagement and made the society easier to recognise on campus.",
-    ],
-  },
-};
+export const OTHER_EXPERIENCE_IDS = sortExperienceIdsByStartDateDesc(
+  OTHER_IDS_UNORDERED,
+  otherExperiences,
+);
 
 export const experienceList: readonly ExperienceContent[] = EXPERIENCE_IDS.map(
   (id) => experiences[id],
