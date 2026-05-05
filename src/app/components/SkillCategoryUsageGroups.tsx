@@ -47,8 +47,10 @@ export function ExploringSkillsList({
 
 export default function SkillCategoryUsageGroups({
   skills,
+  tierCountAriaNoun = "tools",
 }: {
   skills: Skill[];
+  tierCountAriaNoun?: string;
 }) {
   const groups = skillsGroupedByUsage(skills);
 
@@ -76,7 +78,7 @@ export default function SkillCategoryUsageGroups({
                 <BruText
                   variant="accMeta"
                   className="tabular-nums text-foreground/40 sm:ps-3.5"
-                  aria-label={`${count} tools`}
+                  aria-label={`${count} ${tierCountAriaNoun}`}
                 >
                   {formatTwoDigits(count)}
                 </BruText>

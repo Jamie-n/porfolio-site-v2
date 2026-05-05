@@ -3,14 +3,21 @@ import { SkillUsages } from "@/app/data/skills";
 
 type SkillsUsageGroup = { usage: SkillUsage; skills: Skill[] };
 
-type CategorizedSkill = Skill & { categoryTitle: string };
+export type CategorizedSkill = Skill & {
+  categoryTitle: string;
+  section?: "practice";
+};
 
 /** Flatten category panels into one list while keeping domain labels. */
 export function flattenSkillCategories(
   categories: SkillCategory[],
 ): CategorizedSkill[] {
   return categories.flatMap((c) =>
-    c.skills.map((skill) => ({ ...skill, categoryTitle: c.title })),
+    c.skills.map((skill) => ({
+      ...skill,
+      categoryTitle: c.title,
+      ...(c.section === "practice" ? { section: "practice" as const } : {}),
+    })),
   );
 }
 

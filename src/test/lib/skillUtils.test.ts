@@ -53,4 +53,24 @@ describe("flattenSkillCategories", () => {
       { name: "Z", usage: "Exploring", categoryTitle: "B" },
     ]);
   });
+
+  it("tags practice section on flattened skills", () => {
+    const categories: SkillCategory[] = [
+      { title: "Langs", skills: [{ name: "TS", usage: "Daily" }] },
+      {
+        title: "Leadership",
+        section: "practice",
+        skills: [{ name: "Mentoring", usage: "Daily" }],
+      },
+    ];
+    expect(flattenSkillCategories(categories)).toEqual([
+      { name: "TS", usage: "Daily", categoryTitle: "Langs" },
+      {
+        name: "Mentoring",
+        usage: "Daily",
+        categoryTitle: "Leadership",
+        section: "practice",
+      },
+    ]);
+  });
 });

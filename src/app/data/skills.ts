@@ -11,13 +11,13 @@ export type SkillUsage = (typeof SkillUsages)[number];
 export interface Skill {
   name: string;
   usage: SkillUsage;
-  /** Override Simple Icons slug when `name` does not map cleanly. */
-  iconSlug?: string;
 }
 
 export interface SkillCategory {
   title: string;
   skills: Skill[];
+  /** `practice` = habits, collaboration, leadership (shown in its own panel). Omitted = technical stack. */
+  section?: "practice";
 }
 
 export const skillCategories: SkillCategory[] = [
@@ -26,46 +26,52 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: "HTML", usage: "Daily" },
       { name: "CSS", usage: "Daily" },
-      { name: "PHP", usage: "Regular" },
+      { name: "PHP", usage: "Daily" },
       { name: "TypeScript", usage: "Daily" },
-      { name: "C#", usage: "Regular" },
+      { name: "C#", usage: "Daily" },
+      { name: "AL (Business Central)", usage: "Regular" },
+      { name: "Ruby", usage: "Occasional" },
     ],
   },
   {
     title: "Frameworks & Libraries",
     skills: [
-      { name: "Bootstrap", usage: "Regular" },
+      { name: "Bootstrap", usage: "Daily" },
       { name: "React", usage: "Daily" },
-      { name: "React Native (Expo)", usage: "Occasional" },
-      { name: "Tailwind", usage: "Regular" },
-      { name: ".NET", usage: "Regular" },
-      { name: "Laravel", usage: "Regular" },
-      { name: "Entity Framework", usage: "Regular" },
-      { name: "Wordpress", usage: "Occasional" },
+      { name: "React Native", usage: "Exploring" },
+      { name: "Tailwind", usage: "Occasional" },
+      { name: ".NET", usage: "Daily" },
+      { name: "Laravel", usage: "Daily" },
+      { name: "Entity Framework", usage: "Daily" },
+      { name: "WordPress", usage: "Occasional" },
+      { name: "Next.js", usage: "Exploring" },
+      { name: "Ruby on Rails", usage: "Occasional" },
     ],
   },
 
   {
     title: "Testing Frameworks",
     skills: [
-      { name: "XUnit", usage: "Regular" },
-      { name: "Jest", usage: "Regular" },
+      { name: "XUnit", usage: "Daily" },
+      { name: "Jest", usage: "Daily" },
     ],
   },
   {
     title: "Databases",
     skills: [
-      { name: "MySQL", usage: "Occasional" },
+      { name: "MySQL", usage: "Daily" },
       { name: "PostgreSQL", usage: "Occasional" },
-      { name: "MS SQL", usage: "Occasional" },
+      { name: "MS SQL", usage: "Daily" },
     ],
   },
   {
     title: "DevOps & Tools",
     skills: [
-      { name: "Git & Hooks", usage: "Daily" },
-      { name: "Docker", usage: "Occasional" },
-      { name: "CI/CD", usage: "Occasional" },
+      { name: "Git", usage: "Daily" },
+      { name: "Git Hooks", usage: "Regular" },
+      { name: "Docker", usage: "Daily" },
+      { name: "Terraform", usage: "Occasional" },
+      { name: "CI/CD", usage: "Regular" },
     ],
   },
   {
@@ -79,7 +85,31 @@ export const skillCategories: SkillCategory[] = [
     title: "Cloud / Hosting",
     skills: [
       { name: "Azure", usage: "Exploring" },
-      { name: "Digital Ocean", usage: "Exploring" },
+      { name: "Digital Ocean", usage: "Regular" },
+      { name: "AWS", usage: "Occasional" },
+    ],
+  },
+  {
+    title: "Engineering Practice",
+    section: "practice",
+    skills: [
+      { name: "Code Reviews", usage: "Daily" },
+      { name: "Refactoring", usage: "Daily" },
+      { name: "Systems Migration", usage: "Daily" },
+      { name: "API Design", usage: "Regular" },
+      { name: "Accessibility (WCAG/ARIA)", usage: "Regular" },
+    ],
+  },
+  {
+    title: "Team Leadership",
+    section: "practice",
+    skills: [
+      { name: "Leading & Supporting Engineers", usage: "Daily" },
+      { name: "Mentoring & Onboarding", usage: "Daily" },
+      { name: "Agile / Scrum Delivery", usage: "Regular" },
+      { name: "Stakeholder Alignment", usage: "Regular" },
+      { name: "Backlog, Tickets & Scoping", usage: "Regular" },
+      { name: "Incident Leadership", usage: "Regular" },
     ],
   },
 ];
