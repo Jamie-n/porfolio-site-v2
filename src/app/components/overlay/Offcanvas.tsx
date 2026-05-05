@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
-import { BACKDROP_BASE_CLASSNAME } from "./backdrop";
+import { backdropClassName } from "./backdrop";
 import { lockDocumentScroll } from "@/lib/lockDocumentScroll";
+import { useEscapeKey } from "@/app/hooks/useEscapeKey";
 
 const DEFAULT_TRANSITION_MS = 360;
 
@@ -58,26 +59,27 @@ export function Offcanvas({
 
   const canPortal = typeof document !== "undefined";
 
-  const panelTranslateClass = useMemo(() => {
-    if (side === "right") return entered ? "translate-x-0" : "translate-x-full";
-    return entered ? "translate-x-0" : "-translate-x-full";
-  }, [entered, side]);
+  const panelTranslateClass =
+    side === "right"
+      ? entered
+        ? "translate-x-0"
+        : "translate-x-full"
+      : entered
+        ? "translate-x-0"
+        : "-translate-x-full";
 
   // Mount/unmount + enter/exit animation.
   useEffect(() => {
     if (open) {
       closingRef.current = false;
-      // Reset animation state synchronously before mounting so the panel starts off-screen.
-      // React 18 batches these together; the separate RAF effect then triggers the enter transition.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setEntered(false);
-      setMounted(true);
+      queueMicrotask(() => setEntered(false));
+      queueMicrotask(() => setMounted(true));
       return;
     }
 
     if (!mounted) return;
     closingRef.current = true;
-    setEntered(false);
+    queueMicrotask(() => setEntered(false));
 
     const id = window.setTimeout(() => {
       if (!closingRef.current) return;
@@ -104,8 +106,6 @@ export function Offcanvas({
     initialFocusRef?.current?.focus?.();
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onOpenChange(false);
-
       if (e.key !== "Tab") return;
       const root = dialogRef.current;
       if (!root) return;
@@ -139,6 +139,8 @@ export function Offcanvas({
     };
   }, [mounted, onOpenChange, initialFocusRef, restoreFocus]);
 
+  useEscapeKey(mounted, () => onOpenChange(false));
+
   if (!canPortal || !mounted) return null;
 
   return createPortal(
@@ -151,11 +153,7 @@ export function Offcanvas({
       data-testid={testId}
     >
       <div
-        className={cn(
-          "absolute inset-0",
-          BACKDROP_BASE_CLASSNAME,
-          entered ? "opacity-100" : "opacity-0",
-        )}
+        className={cn(backdropClassName({ entered, positioning: "absolute" }))}
         style={{ transitionDuration: `${Math.min(280, transitionMs)}ms` }}
         onClick={() => onOpenChange(false)}
         aria-hidden="true"

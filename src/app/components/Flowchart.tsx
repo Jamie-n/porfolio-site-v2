@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { formatTwoDigits } from "@/lib/utils";
 import { BruText } from "./primitives/BruText";
 import { RuledFigure } from "./primitives/RuledFigure";
 
@@ -42,8 +43,7 @@ export type FlowchartProps = {
   className?: string;
 };
 
-const defaultFormatStepIndex = (n: number) =>
-  `Step ${String(n).padStart(2, "0")}`;
+const defaultFormatStepIndex = (n: number) => `Step ${formatTwoDigits(n)}`;
 
 export const AI_LOOP_FLOWCHART_PRESET = {
   headerEyebrow: "Flow",

@@ -7,6 +7,7 @@
  */
 
 import { cn } from "@/lib/cn";
+import { lockDocumentScroll } from "@/lib/lockDocumentScroll";
 import {
   useCallback,
   useEffect,
@@ -30,38 +31,13 @@ export default function FirstVisitSplash() {
     prefersReducedMotionRef.current = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    queueMicrotask(() => {
-      setVisible(true);
-    });
+    queueMicrotask(() => setVisible(true));
   }, []);
 
-  // Hide page scrollbar while splash is visible, but keep layout width stable by
-  // compensating for the removed scrollbar width.
   useLayoutEffect(() => {
     if (!visible) return;
     document.getElementById("jn-splash-stub")?.remove();
-
-    const html = document.documentElement;
-    const body = document.body;
-    const previousHtmlOverflow = html.style.overflow;
-    const previousHtmlOverscroll = html.style.overscrollBehavior;
-    const previousBodyOverflow = body.style.overflow;
-    const previousBodyPaddingRight = body.style.paddingRight;
-
-    const scrollbarWidth = window.innerWidth - html.clientWidth;
-    html.style.overflow = "hidden";
-    html.style.overscrollBehavior = "none";
-    body.style.overflow = "hidden";
-    if (scrollbarWidth > 0) {
-      body.style.paddingRight = `${scrollbarWidth}px`;
-    }
-
-    return () => {
-      html.style.overflow = previousHtmlOverflow;
-      html.style.overscrollBehavior = previousHtmlOverscroll;
-      body.style.overflow = previousBodyOverflow;
-      body.style.paddingRight = previousBodyPaddingRight;
-    };
+    return lockDocumentScroll();
   }, [visible]);
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { cn } from "@/lib/cn";
 import Header from "./Header";
 import AiLoopFlowchart from "./AiLoopFlowchart";
 import Markdown from "./Markdown";
@@ -16,6 +17,7 @@ import SkillFileBrowser, { type SkillFileItem } from "./SkillFileBrowser";
 import { Offcanvas } from "./overlay/Offcanvas";
 import { OverlayStickyHeader } from "./overlay/OverlayStickyHeader";
 import { OverlayTriggerCard } from "./overlay/OverlayTriggerCard";
+import { fetchText } from "@/lib/fetchText";
 
 const panelTransitionMs = 360;
 
@@ -26,6 +28,12 @@ export const OPEN_JOURNEY_OVERLAY_EVENT = "open-journey-overlay";
 type OpenJourneyOverlayDetail = {
   tab?: JourneyTab;
 };
+
+function isOpenJourneyOverlayEvent(
+  e: Event,
+): e is CustomEvent<OpenJourneyOverlayDetail> {
+  return e instanceof CustomEvent && e.type === OPEN_JOURNEY_OVERLAY_EVENT;
+}
 
 function emitOpenJourneyOverlay(detail?: OpenJourneyOverlayDetail) {
   if (typeof window === "undefined") return;
@@ -50,14 +58,6 @@ export function OpenJourneyOverlayButton({
       {children}
     </button>
   );
-}
-
-async function fetchText(path: string) {
-  // Static markdown lives under `public/content/` - avoid stale HTTP cache and
-  // stale React state so edits show up without a hard reload.
-  const res = await fetch(path, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to load content: ${path}`);
-  return await res.text();
 }
 
 function splitMarkdownSection(markdown: string, heading: string) {
@@ -93,14 +93,14 @@ function TabButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={[
+      className={cn(
         "border border-border bg-background px-4 py-2 bru-button shadow-rule transition-all duration-200 ease-out",
         "hover:-translate-y-[1px] hover:border-accent/40 hover:text-accent",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         active
           ? "text-accent border-accent/50 bg-accent-weak"
           : "text-foreground/75",
-      ].join(" ")}
+      )}
     >
       {label}
     </button>
@@ -140,18 +140,12 @@ export default function JourneyOverlay({
   useEffect(() => {
     if (typeof window === "undefined") return;
     const handler = (e: Event) => {
-      const detail = (e as CustomEvent<OpenJourneyOverlayDetail>).detail;
-      openOverlay(detail?.tab);
+      if (!isOpenJourneyOverlayEvent(e)) return;
+      openOverlay(e.detail?.tab);
     };
-    window.addEventListener(
-      OPEN_JOURNEY_OVERLAY_EVENT,
-      handler as EventListener,
-    );
+    window.addEventListener(OPEN_JOURNEY_OVERLAY_EVENT, handler);
     return () =>
-      window.removeEventListener(
-        OPEN_JOURNEY_OVERLAY_EVENT,
-        handler as EventListener,
-      );
+      window.removeEventListener(OPEN_JOURNEY_OVERLAY_EVENT, handler);
   }, [openOverlay]);
 
   useEffect(() => {
@@ -186,6 +180,11 @@ export default function JourneyOverlay({
     if (tab === "inspiration") return inspirationMd;
     return aiMd;
   }, [aiMd, inspirationMd, journeyMd, tab]);
+
+  const aiLoopSections = useMemo(() => {
+    if (tab !== "ai") return null;
+    return splitMarkdownSection(activeMarkdown, "The loop I use");
+  }, [activeMarkdown, tab]);
 
   return (
     <>
@@ -247,21 +246,15 @@ export default function JourneyOverlay({
                   <BruText variant="label">Notes</BruText>
                   <div className="mt-4">
                     {tab === "ai" ? (
-                      <>
-                        {(() => {
-                          const { before, after } = splitMarkdownSection(
-                            activeMarkdown,
-                            "The loop I use",
-                          );
-                          return (
-                            <div className="grid gap-6">
-                              {before ? <Markdown>{before}</Markdown> : null}
-                              <AiLoopFlowchart title="Plan → Execute → Test → Refine" />
-                              {after ? <Markdown>{after}</Markdown> : null}
-                            </div>
-                          );
-                        })()}
-                      </>
+                      <div className="grid gap-6">
+                        {aiLoopSections?.before ? (
+                          <Markdown>{aiLoopSections.before}</Markdown>
+                        ) : null}
+                        <AiLoopFlowchart title="Plan → Execute → Test → Refine" />
+                        {aiLoopSections?.after ? (
+                          <Markdown>{aiLoopSections.after}</Markdown>
+                        ) : null}
+                      </div>
                     ) : (
                       <Markdown>{activeMarkdown}</Markdown>
                     )}

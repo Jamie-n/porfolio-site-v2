@@ -6,6 +6,8 @@ import { BruText } from "./primitives/BruText";
 import { Button, LinkButton } from "./primitives/Button";
 import { cn } from "@/lib/cn";
 import LazyPrism from "./syntax/LazyPrism";
+import { fetchText } from "@/lib/fetchText";
+import { formatTwoDigits } from "@/lib/utils";
 
 export type SkillFileItem = {
   id: string;
@@ -13,17 +15,10 @@ export type SkillFileItem = {
   path: string;
 };
 
-async function fetchText(path: string) {
-  const res = await fetch(path, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to load content: ${path}`);
-  return await res.text();
-}
-
-type LoadedDoc = {
-  path: string;
-  content: string;
-  error: string | null;
-};
+type DocState =
+  | { status: "idle" | "loading"; path: string }
+  | { status: "success"; path: string; content: string }
+  | { status: "error"; path: string; error: string };
 
 function formatDisplayPath(rawPath: string) {
   if (rawPath.startsWith("/content/")) return rawPath.replace("/content/", "");
@@ -57,21 +52,27 @@ export default function SkillFileBrowser({
     () => items.find((i) => i.id === activeId) ?? items[0],
     [activeId, items],
   );
-  const [doc, setDoc] = useState<LoadedDoc | null>(null);
+  const [state, setState] = useState<DocState>(() => ({
+    status: "idle",
+    path: active?.path ?? "",
+  }));
 
   useEffect(() => {
     if (!active) return;
+    const path = active.path;
+    queueMicrotask(() => setState({ status: "loading", path }));
+
     let cancelled = false;
     void (async () => {
       try {
-        const text = await fetchText(active.path);
+        const text = await fetchText(path);
         if (cancelled) return;
-        setDoc({ path: active.path, content: text, error: null });
+        setState({ status: "success", path, content: text });
       } catch (err) {
         if (cancelled) return;
-        setDoc({
-          path: active.path,
-          content: "",
+        setState({
+          status: "error",
+          path,
           error: err instanceof Error ? err.message : "Failed to load file.",
         });
       }
@@ -81,9 +82,11 @@ export default function SkillFileBrowser({
     };
   }, [active]);
 
-  const isLoading = !doc || doc.path !== active?.path;
-  const content = !isLoading ? (doc?.content ?? "") : "";
-  const error = !isLoading ? (doc?.error ?? null) : null;
+  const isStale = Boolean(active?.path) && state.path !== active?.path;
+  const isLoading =
+    isStale || state.status === "idle" || state.status === "loading";
+  const content = !isLoading && state.status === "success" ? state.content : "";
+  const error = !isLoading && state.status === "error" ? state.error : null;
   const isMarkdown = Boolean(active?.path?.toLowerCase().endsWith(".md"));
   const codeLanguage = active?.path ? languageFromPath(active.path) : "";
 
@@ -105,7 +108,7 @@ export default function SkillFileBrowser({
           <div className="px-4 py-3 flex items-center justify-between">
             <BruText variant="label">Files</BruText>
             <div className="font-mono text-[0.75rem] text-foreground/45">
-              {String(items.length).padStart(2, "0")}
+              {formatTwoDigits(items.length)}
             </div>
           </div>
           <div className="border-t border-rulesolid">

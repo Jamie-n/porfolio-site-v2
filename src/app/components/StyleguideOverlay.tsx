@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useMemo, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import Homepage from "@/assets/chris-bradbrook/hero.png";
 import Accordion from "./accordion/Accordion";
@@ -56,6 +56,17 @@ const ok = true;
 interface StyleguideOverlayProps {
   triggerLabel?: string;
 }
+
+const styleguideTokens = [
+  { name: "background", css: "--background", previewClass: "bg-background" },
+  { name: "surface", css: "--surface", previewClass: "bg-surface" },
+  { name: "foreground", css: "--foreground", previewClass: "bg-foreground" },
+  { name: "muted", css: "--muted", previewClass: "bg-muted" },
+  { name: "border", css: "--border", previewClass: "bg-border" },
+  { name: "accent", css: "--accent", previewClass: "bg-accent" },
+  { name: "accent weak", css: "--accent-weak", previewClass: "bg-accent-weak" },
+  { name: "ring", css: "--ring", previewClass: "bg-ring" },
+];
 
 function StyleguideSection({
   title,
@@ -154,32 +165,6 @@ export default function StyleguideOverlay({
 
   const requestClose = () => setOpen(false);
 
-  const tokens = useMemo(
-    () => [
-      {
-        name: "background",
-        css: "--background",
-        previewClass: "bg-background",
-      },
-      { name: "surface", css: "--surface", previewClass: "bg-surface" },
-      {
-        name: "foreground",
-        css: "--foreground",
-        previewClass: "bg-foreground",
-      },
-      { name: "muted", css: "--muted", previewClass: "bg-muted" },
-      { name: "border", css: "--border", previewClass: "bg-border" },
-      { name: "accent", css: "--accent", previewClass: "bg-accent" },
-      {
-        name: "accent weak",
-        css: "--accent-weak",
-        previewClass: "bg-accent-weak",
-      },
-      { name: "ring", css: "--ring", previewClass: "bg-ring" },
-    ],
-    [],
-  );
-
   return (
     <>
       <OverlayTriggerCard
@@ -217,7 +202,7 @@ export default function StyleguideOverlay({
             <StyleguideSection title="Tokens">
               <StyleguidePanel className="py-0 px-0">
                 <div className="bru-divide-y">
-                  {tokens.map((t) => (
+                  {styleguideTokens.map((t) => (
                     <div
                       key={t.css}
                       className="grid grid-cols-1 gap-3 px-6 py-3 sm:grid-cols-[minmax(0,10rem)_1fr] sm:gap-6 sm:items-center"
@@ -225,10 +210,10 @@ export default function StyleguideOverlay({
                       <div className="bru-label sm:pt-0.5">{t.name}</div>
                       <div className="flex flex-wrap items-center gap-4">
                         <div
-                          className={[
+                          className={cn(
                             "h-6 w-10 shrink-0 border border-border",
                             t.previewClass,
-                          ].join(" ")}
+                          )}
                         />
                         <div className="font-mono text-[0.8125rem] text-foreground/68">
                           {t.css}

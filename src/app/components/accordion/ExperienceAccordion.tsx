@@ -4,6 +4,7 @@ import { PropsWithChildren } from "react";
 import { ExperienceContent } from "@/app/data/experiences";
 import { BruText } from "@/app/components/primitives/BruText";
 import Accordion from "./Accordion";
+import { formatIndex, formatTwoDigits } from "@/lib/utils";
 
 export default function ExperienceAccordion({
   title,
@@ -70,7 +71,7 @@ function StyledContent({
                     className="text-foreground/50"
                     aria-hidden="true"
                   >
-                    {String(total).padStart(2, "0")}
+                    {formatTwoDigits(total)}
                   </BruText>
                 </div>
 
@@ -87,7 +88,7 @@ function StyledContent({
                         variant="accMeta"
                         className="flex items-start justify-center bg-background/35 px-2 py-3 text-foreground/45"
                       >
-                        {String(idx + 1).padStart(2, "0")}
+                        {formatIndex(idx)}
                       </BruText>
                       <BruText
                         as="p"

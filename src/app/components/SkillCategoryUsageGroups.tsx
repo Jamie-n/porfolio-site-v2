@@ -1,6 +1,7 @@
 import type { Skill } from "../data/skills";
 import { skillUsagePresentation } from "../data/skillUsagePresentation";
 import { skillsGroupedByUsage } from "@/lib/skillUtils";
+import { formatTwoDigits } from "@/lib/utils";
 import { BruText } from "./primitives/BruText";
 import { cn } from "@/lib/cn";
 
@@ -77,7 +78,7 @@ export default function SkillCategoryUsageGroups({
                   className="tabular-nums text-foreground/40 sm:ps-3.5"
                   aria-label={`${count} tools`}
                 >
-                  {String(count).padStart(2, "0")}
+                  {formatTwoDigits(count)}
                 </BruText>
               </div>
               <ul
