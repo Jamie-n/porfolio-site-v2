@@ -9,12 +9,14 @@ function SkillPill({ skill }: { skill: Skill }) {
   return (
     <span
       className={cn(
-        "inline-flex max-w-full min-w-0 items-center border border-rulesolid border-foreground/18",
+        "inline-flex max-w-full min-w-0 items-center justify-center border border-rulesolid border-foreground/18",
         "bg-background/50 px-2.5 py-1 font-mono text-[0.6875rem] font-bold leading-[1.2]",
         "text-foreground/90",
       )}
     >
-      <span className="min-w-0 truncate">{skill.name}</span>
+      <span className="min-w-0 whitespace-normal break-words text-center">
+        {skill.name}
+      </span>
     </span>
   );
 }
