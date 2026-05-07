@@ -1110,6 +1110,7 @@ export default function StyleguideOverlay({
                   <div className="bru-label">Toggle</div>
                   <div className="mt-4">
                     <Toggle
+                      disabled={true}
                       checked={demoChecked}
                       onCheckedChange={(next) => setDemoChecked(next)}
                       labels={{ left: "Off", right: "On" }}
