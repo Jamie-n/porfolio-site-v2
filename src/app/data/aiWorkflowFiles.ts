@@ -29,8 +29,8 @@ export const aiWorkflowFiles: SkillFileItem[] = [
     path: "/content/skills/nextjs-performance-a11y.md",
   },
   {
-    id: "skill-repo-tooling-hygiene",
-    title: "Repo tooling + hygiene",
-    path: "/content/skills/repo-tooling-hygiene.md",
+    id: "skill-repo-housekeeping-git",
+    title: "Repo housekeeping + git",
+    path: "/content/skills/repo-housekeeping-git.md",
   },
 ];

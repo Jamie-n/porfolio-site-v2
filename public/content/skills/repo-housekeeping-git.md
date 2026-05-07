@@ -1,4 +1,4 @@
-# Repo tooling + hygiene
+# Repo housekeeping + git
 
 The goal is simple: **keep the repo easy to work in and hard to break**. Tooling is there to catch basics early (formatting, lint, tests) and keep changes consistent.
 
