@@ -10,7 +10,7 @@ function SkillPill({ skill }: { skill: Skill }) {
     <span
       className={cn(
         "inline-flex max-w-full min-w-0 items-center border border-rulesolid border-foreground/18",
-        "bg-background/50 px-2.5 py-1 font-mono text-[0.6875rem] font-bold leading-none",
+        "bg-background/50 px-2.5 py-1 font-mono text-[0.6875rem] font-bold leading-[1.2]",
         "text-foreground/90",
       )}
     >
