@@ -714,6 +714,7 @@
   .section-spacer {
     /* Give the meta row room to wrap without colliding with swatches. */
     height: 5.25rem;
+    --section-spacer-swatch-reserve: 9rem;
   }
 }
 
