@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
+import CookieConsentGate from "@/app/components/CookieConsentGate";
 import { SplashGate } from "@/app/components/SplashGate";
+import GoogleAnalyticsTracker from "@/app/components/GoogleAnalyticsTracker";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -51,6 +53,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased grain min-w-0`}
       >
+        <Suspense fallback={null}>
+          <CookieConsentGate>
+            <GoogleAnalyticsTracker />
+          </CookieConsentGate>
+        </Suspense>
         <SplashGate>{children}</SplashGate>
       </body>
     </html>
